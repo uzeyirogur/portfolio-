@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root { color-scheme: light; }
+  html { scroll-behavior: smooth; }
+  body {
+    @apply antialiased bg-white text-slate-900;
+    font-family: var(--font-display), system-ui, sans-serif;
+  }
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: #f1f5f9; }
+  ::-webkit-scrollbar-thumb { background: #6366f1; border-radius: 2px; }
+  ::selection { background: rgba(99,102,241,0.15); color: #4f46e5; }
+}
+
+@layer utilities {
+  .section-y { @apply py-24 lg:py-32; }
+  .container-xl { @apply max-w-7xl mx-auto px-6 sm:px-8 lg:px-12; }
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%  { transform: translate(40px, -30px) scale(1.05); }
+  66%  { transform: translate(-20px, 20px) scale(0.97); }
+}
+@keyframes float-slow2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%  { transform: translate(-50px, 30px) scale(1.03); }
+  66%  { transform: translate(30px, -20px) scale(0.98); }
+}
+@keyframes float-slow3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%  { transform: translate(20px, 40px) scale(1.04); }
+}
+.animate-float-slow  { animation: float-slow  10s ease-in-out infinite; }
+.animate-float-slow2 { animation: float-slow2 13s ease-in-out infinite; }
+.animate-float-slow3 { animation: float-slow3  8s ease-in-out infinite; }
+
+@keyframes spin-slow { to { transform: rotate(360deg); } }
+.animate-spin-slow { animation: spin-slow 12s linear infinite; }
