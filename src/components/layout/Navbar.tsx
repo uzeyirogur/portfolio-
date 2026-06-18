@@ -70,21 +70,34 @@ export default function Navbar() {
           </div>
         </div>
 
-        {mobileOpen && (
-          <div className="md:hidden py-3 pb-5 border-t border-slate-100">
+      </nav>
+
+      {mobileOpen && (
+        <div className="md:hidden absolute inset-x-0 top-16 bg-white border-b border-slate-200 shadow-lg z-50">
+          <div className="px-4 py-3 space-y-1">
             {navLinks.map((link) => (
               <a key={link.href} href={link.href} onClick={() => setMobileOpen(false)}
-                className="flex items-center px-3 py-3 text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-xl transition-all">
+                className="flex items-center px-4 py-3 text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-xl transition-all">
                 {link.label}
               </a>
             ))}
-            <a href={profile.cvUrl} download
-              className="mt-3 mx-2 flex items-center justify-center gap-2 py-3 text-sm font-bold rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 text-white">
-              <Download size={14} /> CV İndir
-            </a>
+            <div className="pt-2 pb-1 flex items-center gap-3 px-2">
+              <a href={socials.github} target="_blank" rel="noopener noreferrer"
+                className="w-9 h-9 rounded-xl border border-slate-200 flex items-center justify-center text-slate-400 hover:text-slate-800 hover:bg-slate-50 transition-all">
+                <Github size={16} />
+              </a>
+              <a href={socials.linkedin} target="_blank" rel="noopener noreferrer"
+                className="w-9 h-9 rounded-xl border border-slate-200 flex items-center justify-center text-slate-400 hover:text-blue-600 hover:bg-blue-50 transition-all">
+                <Linkedin size={16} />
+              </a>
+              <a href={profile.cvUrl} download
+                className="flex-1 flex items-center justify-center gap-2 py-2.5 text-sm font-bold rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-md">
+                <Download size={14} /> CV İndir
+              </a>
+            </div>
           </div>
-        )}
-      </nav>
+        </div>
+      )}
     </header>
   )
 }
