@@ -7,10 +7,13 @@ import Projects from '@/components/sections/Projects'
 import Experience from '@/components/sections/Experience'
 import Education from '@/components/sections/Education'
 import Contact from '@/components/sections/Contact'
+import CursorGlow from '@/components/ui/CursorGlow'
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-white text-slate-900 overflow-x-hidden">
+    <div className="min-h-screen overflow-x-hidden" style={{ backgroundColor: 'var(--bg-base)' }}>
+      <div className="noise-overlay" aria-hidden />
+      <CursorGlow />
       <Navbar />
       <main>
         <Hero />
