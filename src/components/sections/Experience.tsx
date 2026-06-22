@@ -1,174 +1,112 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { MapPin, Calendar, CheckCircle2, Building2, Zap } from 'lucide-react'
 import { experiences } from '@/data/experiences'
+import { education } from '@/data/education'
 
-const ease = [0.16, 1, 0.3, 1] as const
+const E = [0.16, 1, 0.3, 1] as const
 
 export default function Experience() {
   return (
-    <section
-      id="experience"
-      className="relative section-y overflow-hidden"
-      style={{ backgroundColor: 'var(--bg-base)' }}
-    >
-      <div
-        className="absolute top-0 left-0 w-[500px] h-[500px] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at top left, rgba(34,211,238,0.03) 0%, transparent 65%)' }}
-      />
-
-      <div className="container-xl relative">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, ease }}
-          className="mb-16"
+    <section id="experience" className="section-y" style={{ backgroundColor: 'var(--bg)' }}>
+      <div className="container-xl">
+        <motion.p
+          initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="section-label" style={{ display: 'block', marginBottom: '3rem' }}
         >
-          <span className="section-label mb-4 block">
-            <span className="accent-line" /> 04 &mdash; Experience
-          </span>
-          <div className="overflow-hidden">
-            <motion.h2
-              className="heading-lg"
-              style={{ color: 'var(--text-1)' }}
-              initial={{ y: '100%' }}
-              whileInView={{ y: '0%' }}
-              viewport={{ once: true }}
-              transition={{ duration: 1, ease }}
-            >
-              Çalışma{' '}
-              <span className="gradient-text-cyan">Geçmişim</span>
-            </motion.h2>
-          </div>
-        </motion.div>
+          // Çalışma Geçmişi
+        </motion.p>
 
-        {/* Timeline */}
-        <div className="max-w-3xl">
-          {experiences.map((exp, idx) => (
+        <div style={{ maxWidth: '44rem', display: 'flex', flexDirection: 'column', gap: '3.5rem' }}>
+          {experiences.map((exp, i) => (
             <motion.div
-              key={`${exp.company}-${idx}`}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: '-40px' }}
-              transition={{ duration: 0.7, delay: idx * 0.1, ease }}
-              className="relative flex gap-6 pb-2"
+              key={exp.company}
+              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: i * 0.1, ease: E }}
             >
-              {/* Connector line */}
-              {idx < experiences.length - 1 && (
-                <div
-                  className="absolute left-5 top-14 bottom-0 w-px"
-                  style={{ background: 'linear-gradient(to bottom, rgba(34,211,238,0.2), transparent)' }}
-                />
-              )}
+              {/* Log header */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', borderBottom: '1px solid var(--border)', paddingBottom: '0.75rem', marginBottom: '1.5rem' }}>
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.58rem', letterSpacing: '0.2em', color: 'var(--accent)', textTransform: 'uppercase' }}>
+                  DEPLOY LOG #{String(i + 1).padStart(2, '0')}
+                </span>
+                <div style={{ flex: 1, height: 1, backgroundColor: 'rgba(34,211,238,0.1)' }} />
+              </div>
 
-              {/* Icon */}
-              <div className="flex-shrink-0 flex flex-col items-center pt-1">
-                <div
-                  className="relative w-10 h-10 rounded-xl flex items-center justify-center border transition-all duration-300"
-                  style={exp.isCurrent ? {
-                    backgroundColor: 'rgba(34,211,238,0.08)',
-                    borderColor: 'rgba(34,211,238,0.3)',
-                    boxShadow: '0 0 20px rgba(34,211,238,0.12)',
-                  } : {
-                    backgroundColor: 'var(--bg-elevated)',
-                    borderColor: 'var(--border)',
-                  }}
-                >
-                  <Building2
-                    size={18}
-                    style={{ color: exp.isCurrent ? 'var(--accent)' : 'var(--text-3)' }}
-                  />
-                  {exp.isCurrent && (
-                    <span className="absolute -top-1 -right-1 flex h-3 w-3">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-60" style={{ backgroundColor: 'var(--accent)' }} />
-                      <span className="relative inline-flex h-3 w-3 rounded-full" style={{ backgroundColor: 'var(--accent)' }} />
-                    </span>
-                  )}
+              {/* Company + role */}
+              <div style={{ marginBottom: '1.25rem' }}>
+                <p style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.1rem, 2.5vw, 1.6rem)', fontWeight: 800, color: 'var(--text-1)', margin: 0, letterSpacing: '-0.02em' }}>
+                  {exp.company}
+                </p>
+                <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.72rem', color: 'var(--text-2)', margin: '0.35rem 0 0' }}>
+                  {exp.role}
+                </p>
+              </div>
+
+              {/* Meta row */}
+              <div style={{ display: 'flex', gap: '2rem', marginBottom: '1.25rem', flexWrap: 'wrap' }}>
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: 'var(--text-3)' }}>
+                  {exp.startDate} – {exp.endDate}
+                </span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                  <span style={{ position: 'relative', display: 'inline-flex', width: 6, height: 6 }}>
+                    {exp.isCurrent && (
+                      <span className="animate-ping" style={{ position: 'absolute', inset: 0, borderRadius: '50%', backgroundColor: '#34D399', opacity: 0.5 }} />
+                    )}
+                    <span style={{ position: 'relative', width: 6, height: 6, borderRadius: '50%', backgroundColor: exp.isCurrent ? '#34D399' : 'var(--text-3)' }} />
+                  </span>
+                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.62rem', color: exp.isCurrent ? '#34D399' : 'var(--text-3)' }}>
+                    {exp.isCurrent ? 'ACTIVE' : 'COMPLETED'}
+                  </span>
                 </div>
               </div>
 
-              {/* Card */}
-              <div className="flex-1 pb-12">
-                <div className="glass-card p-6 group">
-                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-4">
-                    <div>
-                      <div className="flex items-center gap-2 mb-1">
-                        <h3 className="text-base font-black" style={{ color: 'var(--text-1)' }}>{exp.role}</h3>
-                        {exp.isCurrent && (
-                          <span
-                            className="flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold"
-                            style={{
-                              color: 'var(--accent)',
-                              backgroundColor: 'rgba(34,211,238,0.08)',
-                              border: '1px solid rgba(34,211,238,0.2)',
-                            }}
-                          >
-                            <Zap size={9} /> Aktif
-                          </span>
-                        )}
-                      </div>
-                      <p className="text-sm font-bold" style={{ color: 'var(--accent)' }}>
-                        {exp.companyShort ?? exp.company}
-                      </p>
-                    </div>
-                    <div className="flex flex-col gap-1.5 sm:items-end flex-shrink-0">
-                      <div className="flex items-center gap-1.5 text-xs" style={{ color: 'var(--text-3)' }}>
-                        <Calendar size={11} />
-                        <span style={{ fontFamily: 'var(--font-mono)' }}>{exp.startDate} — {exp.endDate}</span>
-                      </div>
-                      <div className="flex items-center gap-1.5 text-xs" style={{ color: 'var(--text-3)' }}>
-                        <MapPin size={11} /><span>{exp.location}</span>
-                      </div>
-                    </div>
+              {/* Highlights */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem', marginBottom: '1.25rem' }}>
+                {exp.highlights.map((h, j) => (
+                  <div key={j} style={{ display: 'flex', gap: '0.65rem', alignItems: 'flex-start' }}>
+                    <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: '#34D399', flexShrink: 0 }}>[✓]</span>
+                    <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.68rem', color: 'var(--text-2)', lineHeight: 1.6 }}>{h}</span>
                   </div>
+                ))}
+              </div>
 
-                  <p className="text-sm leading-[1.85] mb-5" style={{ color: 'var(--text-2)' }}>
-                    {exp.description}
-                  </p>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-5">
-                    {exp.highlights.map((point) => (
-                      <div key={point} className="flex items-start gap-2.5">
-                        <CheckCircle2 size={13} className="mt-0.5 flex-shrink-0" style={{ color: 'var(--accent)' }} />
-                        <span className="text-xs leading-snug" style={{ color: 'var(--text-3)' }}>{point}</span>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div
-                    className="flex flex-wrap gap-1.5 pt-4"
-                    style={{ borderTop: '1px solid var(--border)' }}
-                  >
-                    {exp.technologies.map((tech) => (
-                      <span
-                        key={tech}
-                        className="px-2.5 py-1 text-[10px] rounded-lg transition-all duration-200 cursor-default"
-                        style={{
-                          fontFamily: 'var(--font-mono)',
-                          color: 'var(--text-3)',
-                          backgroundColor: 'var(--bg-elevated)',
-                          border: '1px solid var(--border)',
-                        }}
-                        onMouseEnter={e => {
-                          e.currentTarget.style.color = 'var(--accent)'
-                          e.currentTarget.style.borderColor = 'rgba(34,211,238,0.25)'
-                        }}
-                        onMouseLeave={e => {
-                          e.currentTarget.style.color = 'var(--text-3)'
-                          e.currentTarget.style.borderColor = 'var(--border)'
-                        }}
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+              {/* Stack */}
+              <div style={{ borderTop: '1px solid var(--border)', paddingTop: '0.9rem' }}>
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6rem', color: 'var(--text-3)' }}>
+                  Stack: {exp.technologies.join(' · ')}
+                </span>
               </div>
             </motion.div>
           ))}
+
+          {/* Education */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }} transition={{ duration: 0.6, ease: E }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', borderBottom: '1px solid var(--border)', paddingBottom: '0.75rem', marginBottom: '1.5rem' }}>
+              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.58rem', letterSpacing: '0.2em', color: 'var(--text-3)', textTransform: 'uppercase' }}>
+                EDUCATION LOG
+              </span>
+              <div style={{ flex: 1, height: 1, backgroundColor: 'var(--border)' }} />
+            </div>
+
+            {education.map((edu, i) => (
+              <div key={edu.institution} style={{ marginBottom: i < education.length - 1 ? '1.5rem' : 0 }}>
+                <p style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1rem, 2vw, 1.4rem)', fontWeight: 800, color: 'var(--text-1)', margin: 0, letterSpacing: '-0.02em' }}>
+                  {edu.institution}
+                </p>
+                <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: 'var(--text-2)', margin: '0.3rem 0 0.2rem' }}>
+                  {edu.degree} — {edu.field}
+                </p>
+                <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.62rem', color: 'var(--text-3)', margin: 0 }}>
+                  {edu.startYear} – {edu.endYear} · Mezun
+                </p>
+              </div>
+            ))}
+          </motion.div>
         </div>
       </div>
     </section>

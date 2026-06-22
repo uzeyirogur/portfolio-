@@ -1,367 +1,353 @@
 'use client'
 
-import { useState, useRef, useEffect, useCallback } from 'react'
-import Image from 'next/image'
-import { motion, useMotionValue, animate, useInView, type PanInfo } from 'framer-motion'
-import { ExternalLink, Github } from 'lucide-react'
+import { useState, useRef } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { MOCKUPS } from '@/components/ui/ProjectMockup'
 import { projects } from '@/data/projects'
 
-// ─── Per-project accent colours (light-theme safe) ─────────────────────────────
-const ACCENT: Record<string, string> = {
-  'paramnet':           '#0284C7',
-  'anka-sports':        '#6D28D9',
-  'gold-price-tracker': '#B45309',
-  'vehicle-inventory':  '#047857',
-  'ticket-system':      '#BE185D',
-  'portfolyox':         '#C2410C',
+const E = [0.16, 1, 0.3, 1] as const
+
+const DISPLAY_PROJECTS = projects.filter((p) => p.status !== 'Fikir')
+
+const PROJECT_META: Record<string, { category: string; stack: string; accent: string }> = {
+  paramnet:           { category: 'Finance Dashboard',     stack: '.NET / SQL / EF Core',  accent: '#22D3EE' },
+  'anka-sports':      { category: 'Management System',     stack: 'ASP.NET Core / MVC',    accent: '#818CF8' },
+  'gold-price-tracker': { category: 'Data Dashboard',      stack: 'Web API / Scraper',     accent: '#F59E0B' },
+  'vehicle-inventory':  { category: 'Operations Tool',     stack: 'EF Core / SQL Server',  accent: '#34D399' },
+  'ticket-system':      { category: 'Support System',      stack: '.NET 8 / JWT / N-Tier', accent: '#60A5FA' },
 }
 
-const ease = [0.16, 1, 0.3, 1] as const
-const GAP  = 20
-
-// ─── Project image with fallback gradient ──────────────────────────────────────
-function ProjectImg({ src, alt, accent }: { src: string; alt: string; accent: string }) {
-  const [err, setErr] = useState(false)
-  if (err || !src) {
-    return (
-      <div
-        style={{
-          width: '100%', height: '100%',
-          background: `linear-gradient(135deg, ${accent}22, ${accent}08)`,
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-        }}
-      >
-        <div
-          style={{
-            width: 56, height: 56, borderRadius: 14,
-            background: `${accent}18`,
-            border: `1px solid ${accent}30`,
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            fontSize: 22, color: accent,
-          }}
-        >
-          {'</>'}
-        </div>
-      </div>
-    )
-  }
-  return (
-    <Image
-      src={src}
-      alt={alt}
-      fill
-      className="object-cover"
-      onError={() => setErr(true)}
-      draggable={false}
-    />
-  )
-}
-
-// ─── Single carousel card ───────────────────────────────────────────────────────
-function ProjectCard({
-  project: p,
-  isActive,
-}: {
-  project: typeof projects[0]
-  isActive: boolean
-}) {
-  const accent = ACCENT[p.slug] ?? '#0284C7'
-
-  return (
-    <motion.div
-      animate={{
-        scale:   isActive ? 1 : 0.92,
-        opacity: isActive ? 1 : 0.5,
-        y:       isActive ? 0 : 12,
-      }}
-      transition={{ duration: 0.4, ease }}
-      style={{
-        height: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        background: 'white',
-        borderRadius: 20,
-        overflow: 'hidden',
-        border: '1px solid rgba(0,0,0,0.07)',
-        boxShadow: isActive
-          ? '0 28px 80px rgba(0,0,0,0.14), 0 4px 20px rgba(0,0,0,0.08)'
-          : '0 6px 20px rgba(0,0,0,0.05)',
-        cursor: isActive ? 'grab' : 'pointer',
-        userSelect: 'none',
-      }}
-    >
-      {/* Image */}
-      <div style={{ height: 220, position: 'relative', flexShrink: 0, overflow: 'hidden' }}>
-        <ProjectImg src={p.image} alt={p.title} accent={accent} />
-        {/* Bottom gradient on image */}
-        <div
-          style={{
-            position: 'absolute', inset: 0,
-            background: 'linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 55%)',
-          }}
-        />
-        {/* Badges on image */}
-        <div style={{ position: 'absolute', bottom: 14, left: 16, display: 'flex', gap: 7 }}>
-          <span
-            style={{
-              fontSize: 9, fontWeight: 700, color: 'white',
-              textTransform: 'uppercase', letterSpacing: '0.14em',
-              fontFamily: 'var(--font-mono)',
-              background: accent, padding: '3px 9px', borderRadius: 6,
-            }}
-          >
-            {p.category[0]}
-          </span>
-          <span
-            style={{
-              fontSize: 9, color: 'rgba(255,255,255,0.85)',
-              textTransform: 'uppercase', letterSpacing: '0.1em',
-              fontFamily: 'var(--font-mono)',
-              background: 'rgba(0,0,0,0.35)',
-              backdropFilter: 'blur(8px)',
-              padding: '3px 9px', borderRadius: 6,
-            }}
-          >
-            {p.status}
-          </span>
-        </div>
-      </div>
-
-      {/* Info */}
-      <div style={{ padding: '18px 20px 20px', display: 'flex', flexDirection: 'column', gap: 9, flex: 1 }}>
-        <h3
-          style={{
-            fontFamily: 'var(--font-display)',
-            fontSize: 20, fontWeight: 700,
-            letterSpacing: '-0.03em',
-            color: 'var(--text-1)',
-            lineHeight: 1.15,
-          }}
-        >
-          {p.title}
-        </h3>
-
-        <p
-          className="line-clamp-3"
-          style={{ fontSize: 13, lineHeight: 1.7, color: 'var(--text-2)', flex: 1 }}
-        >
-          {p.description}
-        </p>
-
-        {/* Tech chips */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5, marginTop: 4 }}>
-          {p.technologies.slice(0, 4).map(t => (
-            <span
-              key={t}
-              style={{
-                fontSize: 10, padding: '3px 8px', borderRadius: 6,
-                background: 'var(--bg-elevated)',
-                color: 'var(--text-3)',
-                fontFamily: 'var(--font-mono)',
-                border: '1px solid var(--border)',
-              }}
-            >
-              {t}
-            </span>
-          ))}
-        </div>
-
-        {/* Links */}
-        {(p.demoUrl || p.githubUrl) && (
-          <div style={{ display: 'flex', gap: 14, paddingTop: 2 }}>
-            {p.demoUrl && (
-              <a
-                href={p.demoUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ display:'flex', alignItems:'center', gap:5, fontSize:12, fontWeight:600, color:accent }}
-                onClick={e => e.stopPropagation()}
-              >
-                <ExternalLink size={12} /> Demo
-              </a>
-            )}
-            {p.githubUrl && (
-              <a
-                href={p.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ display:'flex', alignItems:'center', gap:5, fontSize:12, color:'var(--text-3)' }}
-                onClick={e => e.stopPropagation()}
-              >
-                <Github size={12} /> Kaynak
-              </a>
-            )}
-          </div>
-        )}
-      </div>
-    </motion.div>
-  )
-}
-
-// ─── Main section ───────────────────────────────────────────────────────────────
 export default function Projects() {
-  const [active,     setActive]     = useState(0)
-  const [containerW, setContainerW] = useState(1100)
-  const [isHovering, setIsHovering] = useState(false)
-  const [isDragging, setIsDragging] = useState(false)
+  const [openIdx, setOpenIdx] = useState<number | null>(null)
+  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null)
+  const cursorRef = useRef<HTMLDivElement>(null)
 
-  const containerRef = useRef<HTMLDivElement>(null)
-  const headerRef    = useRef<HTMLDivElement>(null)
-  const headerInView = useInView(headerRef, { once: true })
-
-  const x = useMotionValue(0)
-
-  // Responsive card width: show ~1.3 cards at once so next card peeks
-  const CARD_W  = Math.min(containerW * 0.78, 500)
-  const PADDING = (containerW - CARD_W) / 2
-
-  // Animate track to center card at `index`
-  const goTo = useCallback(
-    (index: number) => {
-      const clamped = ((index % projects.length) + projects.length) % projects.length
-      setActive(clamped)
-      animate(x, PADDING - clamped * (CARD_W + GAP), {
-        type: 'spring', stiffness: 260, damping: 26, mass: 0.65,
-      })
-    },
-    [x, CARD_W, PADDING],
-  )
-
-  // Sync position when container width changes
-  useEffect(() => {
-    x.set(PADDING - active * (CARD_W + GAP))
-  }, [containerW]) // eslint-disable-line
-
-  // Observe container width
-  useEffect(() => {
-    if (!containerRef.current) return
-    const ro = new ResizeObserver(() => {
-      setContainerW(containerRef.current?.offsetWidth ?? 1100)
-    })
-    ro.observe(containerRef.current)
-    setContainerW(containerRef.current.offsetWidth)
-    return () => ro.disconnect()
-  }, [])
-
-  // Auto-advance (pauses on hover or drag)
-  useEffect(() => {
-    if (isHovering || isDragging) return
-    const t = setTimeout(() => goTo(active + 1), 5000)
-    return () => clearTimeout(t)
-  }, [active, isHovering, isDragging, goTo])
-
-  // Drag end — decide which card to land on
-  const handleDragEnd = (_: unknown, info: PanInfo) => {
-    setIsDragging(false)
-    const threshold = CARD_W * 0.18
-    const fast      = Math.abs(info.velocity.x) > 350
-    if (info.offset.x < -threshold || (fast && info.velocity.x < 0)) goTo(active + 1)
-    else if (info.offset.x > threshold || (fast && info.velocity.x > 0)) goTo(active - 1)
-    else animate(x, PADDING - active * (CARD_W + GAP), { type: 'spring', stiffness: 300, damping: 28 })
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (cursorRef.current) {
+      cursorRef.current.style.transform = `translate(${e.clientX + 16}px, ${e.clientY - 30}px)`
+    }
   }
 
   return (
     <section
       id="projects"
-      style={{ backgroundColor: 'var(--bg-surface)', paddingTop:'6rem', paddingBottom:'6rem', overflow:'hidden' }}
+      className="section-y"
+      style={{ backgroundColor: 'var(--bg)' }}
+      onMouseMove={handleMouseMove}
     >
-      {/* Header */}
-      <div className="container-xl" ref={headerRef}>
-        <motion.div
-          initial={{ opacity:0, y:24 }}
-          animate={headerInView ? { opacity:1, y:0 } : {}}
-          transition={{ duration:0.7, ease }}
-          className="mb-12"
-        >
-          <span className="section-label mb-4 block">
-            <span className="accent-line" /> 03 &mdash; Projects
-          </span>
-          <div className="overflow-hidden mb-3">
-            <motion.h2
-              className="heading-lg"
-              style={{ color:'var(--text-1)' }}
-              initial={{ y:'100%' }}
-              animate={headerInView ? { y:'0%' } : {}}
-              transition={{ duration:1, ease }}
-            >
-              Tüm{' '}
-              <span className="gradient-text-cyan">Projeler</span>
-            </motion.h2>
-          </div>
-          <p className="text-[14px]" style={{ color:'var(--text-3)' }}>
-            Sürükleyin &mdash; otomatik geçiş yapar.
-          </p>
-        </motion.div>
-      </div>
-
-      {/* ── Draggable track ── */}
+      {/* Custom cursor label for project hover */}
       <div
-        ref={containerRef}
-        style={{ overflow:'hidden', paddingBottom:6 }}
-        onMouseEnter={() => setIsHovering(true)}
-        onMouseLeave={() => setIsHovering(false)}
+        ref={cursorRef}
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          zIndex: 9000,
+          pointerEvents: 'none',
+          opacity: hoveredIdx !== null && openIdx === null ? 1 : 0,
+          transition: 'opacity 0.15s',
+          fontFamily: 'var(--font-mono)',
+          fontSize: '0.58rem',
+          color: 'var(--accent)',
+          letterSpacing: '0.1em',
+          backgroundColor: 'rgba(8,8,8,0.85)',
+          padding: '0.3rem 0.6rem',
+          border: '1px solid var(--border)',
+          borderRadius: 3,
+          whiteSpace: 'nowrap',
+          willChange: 'transform',
+        }}
       >
-        <motion.div
-          style={{ x, display:'flex', gap:GAP }}
-          drag="x"
-          dragConstraints={{
-            left:  PADDING - (projects.length - 1) * (CARD_W + GAP),
-            right: PADDING,
-          }}
-          dragElastic={0.05}
-          onDragStart={() => setIsDragging(true)}
-          onDragEnd={handleDragEnd}
-          whileDrag={{ cursor:'grabbing' }}
-        >
-          {projects.map((p, i) => (
-            <div
-              key={p.slug}
-              style={{ width:CARD_W, minWidth:CARD_W, height:470 }}
-              onClick={() => !isDragging && i !== active && goTo(i)}
-            >
-              <ProjectCard project={p} isActive={i === active} />
-            </div>
-          ))}
-        </motion.div>
+        EXPAND →
       </div>
 
-      {/* ── Progress + dots ── */}
-      <div className="container-xl mt-8">
-        {/* Auto-advance progress bar */}
-        <div style={{ height:2, background:'rgba(0,0,0,0.08)', borderRadius:1, marginBottom:14, overflow:'hidden' }}>
-          <motion.div
-            key={`${active}-${isHovering}-${isDragging}`}
-            initial={{ scaleX:0 }}
-            animate={{ scaleX: isHovering || isDragging ? 0 : 1 }}
-            transition={{ duration: isHovering || isDragging ? 0 : 5, ease:'linear' }}
-            style={{ height:'100%', background:'var(--accent)', transformOrigin:'left', borderRadius:1 }}
-          />
-        </div>
-
-        {/* Dots + counter */}
-        <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between' }}>
-          <div style={{ display:'flex', gap:7, alignItems:'center' }}>
-            {projects.map((_, i) => (
-              <motion.div
-                key={i}
-                animate={{
-                  width:      i === active ? 28 : 8,
-                  background: i === active ? 'var(--accent)' : 'rgba(0,0,0,0.15)',
-                }}
-                transition={{ duration:0.3 }}
-                onClick={() => goTo(i)}
-                style={{ height:8, borderRadius:4, cursor:'pointer' }}
-              />
-            ))}
-          </div>
-          <span
+      <div className="container-xl">
+        {/* Section header */}
+        <div style={{ marginBottom: 'clamp(2.5rem, 5vw, 4rem)' }}>
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="section-label"
+            style={{ display: 'block', marginBottom: '1.25rem' }}
+          >
+            // Selected Systems
+          </motion.p>
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: E }}
             style={{
-              fontSize:11, fontFamily:'var(--font-mono)',
-              color:'var(--text-3)',
+              fontFamily: 'var(--font-sans)',
+              fontSize: 'clamp(0.85rem, 1.4vw, 0.95rem)',
+              color: 'var(--text-3)',
+              maxWidth: '38rem',
+              lineHeight: 1.7,
+              margin: 0,
             }}
           >
-            {String(active+1).padStart(2,'0')} / {String(projects.length).padStart(2,'0')}
-          </span>
+            .NET, SQL ve AI destekli geliştirme süreçleriyle inşa edilmiş dashboardlar, yönetim panelleri ve iş odaklı sistemler.
+          </motion.p>
+        </div>
+
+        {/* Project list */}
+        <div style={{ borderTop: '1px solid var(--border)' }}>
+          {DISPLAY_PROJECTS.map((project, idx) => {
+            const meta = PROJECT_META[project.slug] ?? { category: project.category[0] ?? '', stack: project.technologies.slice(0, 3).join(' / '), accent: '#22D3EE' }
+            const isOpen = openIdx === idx
+            const Mockup = MOCKUPS[project.slug]
+            const num = String(idx + 1).padStart(2, '0')
+
+            return (
+              <motion.div
+                key={project.slug}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: idx * 0.07, ease: E }}
+              >
+                {/* Row */}
+                <div
+                  className={`project-row${isOpen ? ' active' : ''}`}
+                  style={{ cursor: 'pointer' }}
+                  onClick={() => setOpenIdx(isOpen ? null : idx)}
+                  onMouseEnter={() => setHoveredIdx(idx)}
+                  onMouseLeave={() => setHoveredIdx(null)}
+                >
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 'clamp(1rem, 3vw, 2.5rem)',
+                      padding: 'clamp(1rem, 2.5vw, 1.5rem) 1rem',
+                      transition: 'opacity 0.2s',
+                      opacity: openIdx !== null && !isOpen ? 0.35 : 1,
+                    }}
+                  >
+                    {/* Number */}
+                    <span
+                      style={{
+                        fontFamily: 'var(--font-mono)',
+                        fontSize: '0.62rem',
+                        color: isOpen ? meta.accent : 'var(--text-3)',
+                        flexShrink: 0,
+                        minWidth: '1.8rem',
+                        transition: 'color 0.2s',
+                      }}
+                    >
+                      {num}
+                    </span>
+
+                    {/* Project name */}
+                    <span
+                      style={{
+                        fontFamily: 'var(--font-display)',
+                        fontSize: 'clamp(1.25rem, 3.5vw, 2.75rem)',
+                        fontWeight: 800,
+                        color: isOpen ? meta.accent : 'var(--text-1)',
+                        letterSpacing: '-0.02em',
+                        lineHeight: 1,
+                        flex: 1,
+                        transition: 'color 0.2s',
+                      }}
+                    >
+                      {project.title}
+                    </span>
+
+                    {/* Spacer line */}
+                    <div
+                      style={{
+                        flex: 1,
+                        height: 1,
+                        backgroundColor: 'var(--border)',
+                        maxWidth: 'clamp(2rem, 10vw, 8rem)',
+                        display: 'none',
+                      }}
+                      className="hidden md:block"
+                    />
+
+                    {/* Category */}
+                    <span
+                      style={{
+                        fontFamily: 'var(--font-mono)',
+                        fontSize: '0.65rem',
+                        color: 'var(--text-3)',
+                        letterSpacing: '0.1em',
+                        flexShrink: 0,
+                        display: 'none',
+                      }}
+                      className="hidden sm:inline"
+                    >
+                      {meta.category}
+                    </span>
+
+                    {/* Stack */}
+                    <span
+                      style={{
+                        fontFamily: 'var(--font-mono)',
+                        fontSize: '0.6rem',
+                        color: 'var(--text-3)',
+                        flexShrink: 0,
+                        display: 'none',
+                      }}
+                      className="hidden lg:inline"
+                    >
+                      {meta.stack}
+                    </span>
+
+                    {/* Arrow */}
+                    <span
+                      style={{
+                        fontFamily: 'var(--font-mono)',
+                        fontSize: '0.75rem',
+                        color: isOpen ? meta.accent : 'var(--text-3)',
+                        flexShrink: 0,
+                        transition: 'color 0.2s, transform 0.3s',
+                        transform: isOpen ? 'rotate(45deg)' : 'rotate(0deg)',
+                        display: 'inline-block',
+                      }}
+                    >
+                      →
+                    </span>
+                  </div>
+                </div>
+
+                {/* Expand panel */}
+                <AnimatePresence>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.45, ease: E }}
+                      style={{ overflow: 'hidden', borderBottom: '1px solid var(--border)' }}
+                    >
+                      <div
+                        style={{
+                          display: 'grid',
+                          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 22rem), 1fr))',
+                          gap: 'clamp(1.5rem, 4vw, 3rem)',
+                          padding: 'clamp(1.5rem, 4vw, 2.5rem) 1rem',
+                          backgroundColor: 'rgba(255,255,255,0.012)',
+                        }}
+                      >
+                        {/* Info col */}
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                          <div>
+                            <div
+                              style={{
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                gap: '0.4rem',
+                                padding: '0.2rem 0.55rem',
+                                border: `1px solid ${meta.accent}30`,
+                                borderRadius: 3,
+                                marginBottom: '0.75rem',
+                              }}
+                            >
+                              <span style={{ width: 5, height: 5, borderRadius: '50%', backgroundColor: meta.accent, flexShrink: 0 }} />
+                              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.58rem', color: meta.accent, letterSpacing: '0.1em' }}>
+                                {project.status}
+                              </span>
+                            </div>
+                            <p
+                              style={{
+                                fontFamily: 'var(--font-sans)',
+                                fontSize: '0.9rem',
+                                color: 'var(--text-2)',
+                                lineHeight: 1.7,
+                                margin: 0,
+                              }}
+                            >
+                              {project.longDescription ?? project.description}
+                            </p>
+                          </div>
+
+                          {/* Features */}
+                          <div>
+                            <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.57rem', letterSpacing: '0.18em', color: 'var(--text-3)', textTransform: 'uppercase', marginBottom: '0.6rem' }}>
+                              Özellikler
+                            </p>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
+                              {project.features.slice(0, 5).map((f, fi) => (
+                                <div key={fi} style={{ display: 'flex', gap: '0.55rem', alignItems: 'flex-start' }}>
+                                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: meta.accent, flexShrink: 0, marginTop: '0.05rem' }}>[✓]</span>
+                                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.68rem', color: 'var(--text-2)', lineHeight: 1.5 }}>{f}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+
+                          {/* Tech tags */}
+                          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
+                            {project.technologies.map((t) => (
+                              <span
+                                key={t}
+                                style={{
+                                  fontFamily: 'var(--font-mono)',
+                                  fontSize: '0.6rem',
+                                  color: 'var(--text-3)',
+                                  padding: '0.2rem 0.5rem',
+                                  border: '1px solid var(--border)',
+                                  borderRadius: 3,
+                                  letterSpacing: '0.05em',
+                                }}
+                              >
+                                {t}
+                              </span>
+                            ))}
+                          </div>
+
+                          {/* Links */}
+                          <div style={{ display: 'flex', gap: '1rem', paddingTop: '0.5rem' }}>
+                            {project.githubUrl && (
+                              <a
+                                href={project.githubUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: 'var(--accent)', textDecoration: 'none', letterSpacing: '0.08em' }}
+                              >
+                                GitHub →
+                              </a>
+                            )}
+                            {project.demoUrl && (
+                              <a
+                                href={project.demoUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: 'var(--text-2)', textDecoration: 'none', letterSpacing: '0.08em' }}
+                              >
+                                Demo →
+                              </a>
+                            )}
+                          </div>
+                        </div>
+
+                        {/* Mockup col */}
+                        {Mockup && (
+                          <div
+                            style={{
+                              backgroundColor: 'var(--bg-elevated)',
+                              border: `1px solid ${meta.accent}18`,
+                              borderRadius: 8,
+                              overflow: 'hidden',
+                              minHeight: 260,
+                              maxHeight: 320,
+                              boxShadow: `0 0 40px ${meta.accent}08`,
+                            }}
+                          >
+                            <Mockup />
+                          </div>
+                        )}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            )
+          })}
         </div>
       </div>
     </section>

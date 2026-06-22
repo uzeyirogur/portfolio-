@@ -1,167 +1,201 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Menu, X, Github, Linkedin, Download } from 'lucide-react'
-import { profile } from '@/data/profile'
-import { socials } from '@/data/socials'
+import { motion } from 'framer-motion'
 
-const navLinks = [
-  { href: '#about',      label: 'About'      },
-  { href: '#skills',     label: 'Skills'     },
-  { href: '#projects',   label: 'Projects'   },
-  { href: '#experience', label: 'Experience' },
-  { href: '#contact',    label: 'Contact'    },
+const NAV_LINKS = [
+  { label: 'Hakkımda', href: '#about' },
+  { label: 'Projeler', href: '#projects' },
+  { label: 'Beceriler', href: '#skills' },
+  { label: 'Deneyim', href: '#experience' },
+  { label: 'İletişim', href: '#contact' },
 ]
 
 export default function Navbar() {
-  const [scrolled, setScrolled]   = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [activeId, setActiveId] = useState('')
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40)
+    const onScroll = () => setScrolled(window.scrollY > 60)
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  const borderColor   = scrolled ? 'rgba(255,255,255,0.06)' : 'transparent'
-  const bgColor       = scrolled ? 'rgba(7,9,13,0.85)' : 'transparent'
-  const backdropBlur  = scrolled ? 'blur(20px)' : 'none'
+  useEffect(() => {
+    const ids = ['about', 'projects', 'skills', 'experience', 'contact']
+    const observers = ids.map((id) => {
+      const el = document.getElementById(id)
+      if (!el) return null
+      const obs = new IntersectionObserver(
+        ([entry]) => { if (entry.isIntersecting) setActiveId(id) },
+        { rootMargin: '-40% 0px -55% 0px' }
+      )
+      obs.observe(el)
+      return obs
+    })
+    return () => observers.forEach((o) => o?.disconnect())
+  }, [])
 
   return (
-    <header
-      className="fixed inset-x-0 top-0 z-50 transition-all duration-500"
-      style={{ background: bgColor, backdropFilter: backdropBlur, borderBottom: `1px solid ${borderColor}` }}
-    >
-      <nav className="container-xl">
-        <div className="flex items-center justify-between h-16">
-
-          {/* Logo */}
-          <a href="#hero" className="group flex items-center gap-2.5">
-            <div
-              className="w-8 h-8 rounded-lg flex items-center justify-center text-xs font-black transition-all duration-200"
-              style={{
-                background: 'linear-gradient(135deg, #22D3EE 0%, #818CF8 100%)',
-                color: '#07090D',
-                boxShadow: '0 0 16px rgba(34,211,238,0.2)',
-              }}
-            >
-              {profile.initials}
-            </div>
-            <span
-              className="hidden sm:block text-sm font-semibold transition-colors duration-200"
-              style={{ color: 'var(--text-2)' }}
-            >
-              {profile.name}
-            </span>
+    <>
+      <motion.header
+        initial={{ opacity: 0, y: -8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 100,
+          borderBottom: scrolled ? '1px solid var(--border)' : '1px solid transparent',
+          backgroundColor: scrolled ? 'rgba(8,8,8,0.88)' : 'transparent',
+          backdropFilter: scrolled ? 'blur(12px)' : 'none',
+          transition: 'background-color 0.3s, border-color 0.3s',
+        }}
+      >
+        <div
+          style={{
+            maxWidth: '88rem',
+            margin: '0 auto',
+            padding: '0 clamp(1.5rem, 4vw, 3.5rem)',
+            height: '3.5rem',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}
+        >
+          {/* Monogram logo */}
+          <a
+            href="#home"
+            style={{
+              fontFamily: 'var(--font-display)',
+              fontSize: '1.1rem',
+              fontWeight: 800,
+              color: 'var(--text-1)',
+              textDecoration: 'none',
+              letterSpacing: '-0.02em',
+              lineHeight: 1,
+            }}
+          >
+            ÜÖ
           </a>
 
           {/* Desktop nav */}
-          <div className="hidden md:flex items-center gap-1">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="relative px-4 py-2 text-xs font-medium tracking-wide transition-colors duration-200"
-                style={{ fontFamily: 'var(--font-mono)', color: 'var(--text-3)' }}
-                onMouseEnter={e => (e.currentTarget.style.color = 'var(--text-1)')}
-                onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-3)')}
-              >
-                {link.label}
-              </a>
-            ))}
-          </div>
+          <nav style={{ display: 'flex', alignItems: 'center', gap: '2.5rem' }} className="hidden lg:flex">
+            {NAV_LINKS.map((link) => {
+              const isActive = activeId === link.href.slice(1)
+              return (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  style={{
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '0.63rem',
+                    letterSpacing: '0.14em',
+                    textTransform: 'uppercase',
+                    color: isActive ? 'var(--accent)' : 'var(--text-2)',
+                    textDecoration: 'none',
+                    transition: 'color 0.15s',
+                    position: 'relative',
+                    paddingBottom: '2px',
+                  }}
+                  onMouseEnter={(e) => { if (!isActive) e.currentTarget.style.color = 'var(--text-1)' }}
+                  onMouseLeave={(e) => { if (!isActive) e.currentTarget.style.color = 'var(--text-2)' }}
+                >
+                  {link.label}
+                  {isActive && (
+                    <span
+                      style={{
+                        position: 'absolute',
+                        bottom: -1,
+                        left: 0,
+                        right: 0,
+                        height: 1,
+                        backgroundColor: 'var(--accent)',
+                      }}
+                    />
+                  )}
+                </a>
+              )
+            })}
+          </nav>
 
-          {/* Right actions */}
-          <div className="flex items-center gap-1">
-            {[
-              { href: socials.github,   icon: <Github size={15} /> },
-              { href: socials.linkedin, icon: <Linkedin size={15} /> },
-            ].map(({ href, icon }) => (
-              <a
-                key={href}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hidden sm:flex w-8 h-8 rounded-lg items-center justify-center transition-all duration-200"
-                style={{ color: 'var(--text-3)', border: '1px solid transparent' }}
-                onMouseEnter={e => { e.currentTarget.style.color = 'var(--accent)'; e.currentTarget.style.borderColor = 'rgba(34,211,238,0.2)' }}
-                onMouseLeave={e => { e.currentTarget.style.color = 'var(--text-3)'; e.currentTarget.style.borderColor = 'transparent' }}
-              >
-                {icon}
-              </a>
+          {/* Mobile burger */}
+          <button
+            className="lg:hidden"
+            onClick={() => setMobileOpen((v) => !v)}
+            aria-label={mobileOpen ? 'Menüyü kapat' : 'Menüyü aç'}
+            style={{
+              background: 'none',
+              border: '1px solid var(--border)',
+              borderRadius: 3,
+              padding: '0.35rem 0.55rem',
+              cursor: 'pointer',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 4,
+            }}
+          >
+            {[0, 1, 2].map((i) => (
+              <span
+                key={i}
+                style={{
+                  display: 'block',
+                  width: 18,
+                  height: 1.5,
+                  backgroundColor: 'var(--text-2)',
+                  transition: 'transform 0.2s, opacity 0.2s',
+                  transformOrigin: 'center',
+                  transform: mobileOpen
+                    ? i === 0 ? 'rotate(45deg) translate(3.5px, 3.5px)'
+                      : i === 2 ? 'rotate(-45deg) translate(3.5px, -3.5px)'
+                      : 'scaleX(0)'
+                    : 'none',
+                  opacity: mobileOpen && i === 1 ? 0 : 1,
+                }}
+              />
             ))}
-            <a
-              href={profile.cvUrl}
-              download
-              className="hidden sm:flex items-center gap-1.5 ml-2 px-4 py-2 text-xs font-bold rounded-lg transition-all duration-200"
-              style={{ backgroundColor: 'var(--accent)', color: '#07090D' }}
-              onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#67E8F9')}
-              onMouseLeave={e => (e.currentTarget.style.backgroundColor = 'var(--accent)')}
-            >
-              <Download size={12} /> CV
-            </a>
-            <button
-              onClick={() => setMobileOpen(!mobileOpen)}
-              className="md:hidden w-8 h-8 rounded-lg flex items-center justify-center transition-colors duration-200"
-              style={{ color: 'var(--text-2)' }}
-            >
-              {mobileOpen ? <X size={18} /> : <Menu size={18} />}
-            </button>
-          </div>
+          </button>
         </div>
-      </nav>
 
-      {/* Mobile menu */}
-      {mobileOpen && (
-        <div
-          className="md:hidden absolute inset-x-0 top-16 z-50"
-          style={{ background: 'rgba(7,9,13,0.97)', borderBottom: '1px solid var(--border)', backdropFilter: 'blur(20px)' }}
-        >
-          <div className="px-4 py-4 space-y-1">
-            {navLinks.map((link) => (
+        {/* Mobile dropdown */}
+        {mobileOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.2 }}
+            style={{
+              borderTop: '1px solid var(--border)',
+              backgroundColor: 'rgba(8,8,8,0.96)',
+              backdropFilter: 'blur(16px)',
+              padding: '1.25rem clamp(1.5rem, 4vw, 3.5rem)',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '1.25rem',
+            }}
+          >
+            {NAV_LINKS.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileOpen(false)}
-                className="flex items-center px-4 py-3 text-sm font-medium rounded-xl transition-all duration-200"
-                style={{ color: 'var(--text-2)' }}
-                onMouseEnter={e => { e.currentTarget.style.color = 'var(--accent)'; e.currentTarget.style.backgroundColor = 'rgba(34,211,238,0.05)' }}
-                onMouseLeave={e => { e.currentTarget.style.color = 'var(--text-2)'; e.currentTarget.style.backgroundColor = 'transparent' }}
+                style={{
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: '0.72rem',
+                  letterSpacing: '0.14em',
+                  textTransform: 'uppercase',
+                  color: activeId === link.href.slice(1) ? 'var(--accent)' : 'var(--text-2)',
+                  textDecoration: 'none',
+                }}
               >
                 {link.label}
               </a>
             ))}
-            <div className="pt-3 pb-1 flex items-center gap-2 px-2">
-              <a
-                href={socials.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 rounded-xl flex items-center justify-center transition-all"
-                style={{ color: 'var(--text-3)', border: '1px solid var(--border)' }}
-              >
-                <Github size={15} />
-              </a>
-              <a
-                href={socials.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 rounded-xl flex items-center justify-center transition-all"
-                style={{ color: 'var(--text-3)', border: '1px solid var(--border)' }}
-              >
-                <Linkedin size={15} />
-              </a>
-              <a
-                href={profile.cvUrl}
-                download
-                className="flex-1 flex items-center justify-center gap-2 py-2.5 text-sm font-bold rounded-xl"
-                style={{ backgroundColor: 'var(--accent)', color: '#07090D' }}
-              >
-                <Download size={14} /> CV İndir
-              </a>
-            </div>
-          </div>
-        </div>
-      )}
-    </header>
+          </motion.div>
+        )}
+      </motion.header>
+    </>
   )
 }

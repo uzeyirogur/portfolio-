@@ -13,11 +13,7 @@ export default function CursorGlow() {
 
     document.body.classList.add('custom-cursor')
 
-    const s = {
-      mx: -999, my: -999,
-      rx: -999, ry: -999,
-      hovering: false,
-    }
+    const s = { mx: -999, my: -999, rx: -999, ry: -999, hovering: false }
 
     const onMove = (e: MouseEvent) => { s.mx = e.clientX; s.my = e.clientY }
     const onOver = (e: MouseEvent) => {
@@ -39,23 +35,22 @@ export default function CursorGlow() {
         dotRef.current.style.opacity = '1'
       }
 
-      s.rx = lerp(s.rx, mx, 0.09)
-      s.ry = lerp(s.ry, my, 0.09)
+      s.rx = lerp(s.rx, mx, 0.12)
+      s.ry = lerp(s.ry, my, 0.12)
 
       if (ringRef.current && mx !== -999) {
-        const size = hovering ? 64 : 44
-        ringRef.current.style.transform    = `translate3d(${s.rx - size / 2}px,${s.ry - size / 2}px,0)`
-        ringRef.current.style.width        = `${size}px`
-        ringRef.current.style.height       = `${size}px`
-        ringRef.current.style.borderColor  = hovering ? 'rgba(34,211,238,0.9)' : 'rgba(34,211,238,0.55)'
-        ringRef.current.style.boxShadow    = hovering
-          ? '0 0 30px rgba(34,211,238,0.35), inset 0 0 12px rgba(34,211,238,0.1)'
-          : '0 0 14px rgba(34,211,238,0.18)'
+        const size = hovering ? 56 : 36
+        ringRef.current.style.transform = `translate3d(${s.rx - size / 2}px,${s.ry - size / 2}px,0)`
+        ringRef.current.style.width  = `${size}px`
+        ringRef.current.style.height = `${size}px`
+        ringRef.current.style.borderColor = hovering ? 'rgba(34,211,238,0.9)' : 'rgba(34,211,238,0.45)'
+        ringRef.current.style.boxShadow   = hovering
+          ? '0 0 24px rgba(34,211,238,0.3), inset 0 0 10px rgba(34,211,238,0.08)'
+          : '0 0 10px rgba(34,211,238,0.12)'
       }
 
-      if (glowRef.current) {
-        glowRef.current.style.background =
-          `radial-gradient(circle 600px at ${mx}px ${my}px, rgba(34,211,238,0.07) 0%, transparent 100%)`
+      if (glowRef.current && mx !== -999) {
+        glowRef.current.style.background = `radial-gradient(circle 500px at ${mx}px ${my}px, rgba(34,211,238,0.05) 0%, transparent 100%)`
       }
 
       raf = requestAnimationFrame(tick)
@@ -72,33 +67,27 @@ export default function CursorGlow() {
 
   return (
     <>
-      {/* Glowing dot */}
       <div
         ref={dotRef}
         className="pointer-events-none fixed top-0 left-0 z-[9999] rounded-full"
         style={{
           width: 10, height: 10,
           background: '#22D3EE',
-          boxShadow: '0 0 16px rgba(34,211,238,1), 0 0 6px rgba(34,211,238,1)',
-          mixBlendMode: 'screen',
+          boxShadow: '0 0 14px rgba(34,211,238,1), 0 0 5px rgba(34,211,238,1)',
           willChange: 'transform',
           opacity: 0,
           transition: 'opacity 0.2s',
         }}
       />
-
-      {/* Lagging outer ring */}
       <div
         ref={ringRef}
         className="pointer-events-none fixed top-0 left-0 z-[9998] rounded-full"
         style={{
-          border: '1.5px solid rgba(34,211,238,0.55)',
+          border: '1.5px solid rgba(34,211,238,0.45)',
           willChange: 'transform',
-          transition: 'width 0.25s ease, height 0.25s ease, border-color 0.2s, box-shadow 0.2s',
+          transition: 'width 0.22s ease, height 0.22s ease, border-color 0.15s, box-shadow 0.15s',
         }}
       />
-
-      {/* Page-wide ambient glow */}
       <div
         ref={glowRef}
         className="pointer-events-none fixed inset-0 z-[1]"

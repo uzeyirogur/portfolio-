@@ -1,125 +1,159 @@
 'use client'
 
+import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Server, Database, Monitor, Wrench, Bot } from 'lucide-react'
-import { skills } from '@/data/skills'
 
-const ease = [0.16, 1, 0.3, 1] as const
+const E = [0.16, 1, 0.3, 1] as const
 
-const icons: Record<string, React.ReactNode> = {
-  Backend:          <Server size={16} />,
-  Database:         <Database size={16} />,
-  Frontend:         <Monitor size={16} />,
-  'Tools & DevOps': <Wrench size={16} />,
-  'AI & Otomasyon': <Bot size={16} />,
-}
+const LAYERS = [
+  {
+    key: 'UI LAYER',
+    color: '#22D3EE',
+    items: ['JavaScript', 'TypeScript', 'React', 'Next.js', 'Tailwind CSS', 'HTML / CSS'],
+    desc: 'Frontend ve kullanıcı arayüzü teknolojileri',
+  },
+  {
+    key: 'API LAYER',
+    color: '#818CF8',
+    items: ['ASP.NET Core', 'Web API', 'REST', 'JWT', 'Swagger / OpenAPI', 'Minimal API'],
+    desc: 'Backend API geliştirme ve kimlik doğrulama',
+  },
+  {
+    key: 'LOGIC LAYER',
+    color: '#F59E0B',
+    items: ['C#', 'Clean Architecture', 'Repository Pattern', 'UnitOfWork', 'SOLID', 'DTO / AutoMapper'],
+    desc: 'İş mantığı, mimari pattern ve tasarım prensipleri',
+  },
+  {
+    key: 'DATA LAYER',
+    color: '#34D399',
+    items: ['SQL Server', 'SQLite', 'Entity Framework Core', 'LINQ', 'Migrations', 'Stored Procedures'],
+    desc: 'Veritabanı tasarımı, ORM ve veri yönetimi',
+  },
+  {
+    key: 'TOOLS LAYER',
+    color: '#94A3B8',
+    items: ['Git', 'GitHub', 'Visual Studio', 'VS Code', 'Swagger UI', 'IIS'],
+    desc: 'Geliştirme araçları ve deployment',
+  },
+  {
+    key: 'AI WORKFLOW',
+    color: '#C084FC',
+    items: ['Claude Code', 'N8n', 'AI-assisted dev', 'Prompt Engineering', 'Deep Learning (temel)', 'Otomasyon'],
+    desc: 'Yapay zeka destekli geliştirme ve otomasyon',
+  },
+]
 
 export default function Skills() {
+  const [hoveredKey, setHoveredKey] = useState<string | null>(null)
+
   return (
-    <section
-      id="skills"
-      className="relative section-y overflow-hidden"
-      style={{ backgroundColor: 'var(--bg-base)' }}
-    >
-      <div className="absolute inset-0 pointer-events-none dot-grid opacity-40" />
-
-      <div className="container-xl relative">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+    <section id="skills" className="section-y" style={{ backgroundColor: 'var(--bg-surface)' }}>
+      <div className="container-xl">
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7, ease }}
-          className="mb-16"
+          transition={{ duration: 0.5 }}
+          className="section-label"
+          style={{ display: 'block', marginBottom: '3rem' }}
         >
-          <span className="section-label mb-4 block">
-            <span className="accent-line" /> 02 &mdash; Skills
-          </span>
-          <div className="overflow-hidden">
-            <motion.h2
-              className="heading-lg"
-              style={{ color: 'var(--text-1)' }}
-              initial={{ y: '100%' }}
-              whileInView={{ y: '0%' }}
-              viewport={{ once: true }}
-              transition={{ duration: 1, ease }}
-            >
-              Teknik{' '}
-              <span className="gradient-text-cyan">Arsenal</span>
-            </motion.h2>
-          </div>
-          <p className="mt-5 text-[15px] max-w-xl" style={{ color: 'var(--text-2)', lineHeight: 1.8 }}>
-            Projelerimde aktif olarak kullandığım teknolojiler ve araçlar.
-          </p>
-        </motion.div>
+          // Teknoloji Yığını
+        </motion.p>
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {skills.map((cat, i) => (
-            <motion.div
-              key={cat.category}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-40px' }}
-              transition={{ duration: 0.6, delay: i * 0.08, ease }}
-              className={`glass-card group p-6 ${i === skills.length - 1 && skills.length % 3 !== 0 ? 'sm:col-span-2 lg:col-span-1' : ''}`}
-            >
-              {/* Card header */}
-              <div className="flex items-center justify-between mb-5">
-                <div className="flex items-center gap-3">
-                  <div
-                    className="w-9 h-9 rounded-lg flex items-center justify-center transition-all duration-300"
-                    style={{
-                      color: 'var(--accent)',
-                      backgroundColor: 'var(--accent-dim)',
-                      border: '1px solid rgba(34,211,238,0.15)',
-                    }}
-                  >
-                    {icons[cat.category] ?? <Server size={16} />}
-                  </div>
-                  <div>
-                    <h3 className="text-sm font-bold" style={{ color: 'var(--text-1)' }}>{cat.category}</h3>
-                    <p
-                      className="text-[10px] mt-0.5"
-                      style={{ color: 'var(--text-3)', fontFamily: 'var(--font-mono)' }}
+        {/* Layer map */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 0, borderTop: '1px solid var(--border)' }}>
+          {LAYERS.map((layer, i) => {
+            const isHovered = hoveredKey === layer.key
+            return (
+              <motion.div
+                key={layer.key}
+                initial={{ opacity: 0, x: -16 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.07, ease: E }}
+                className="skill-layer"
+                style={{
+                  borderBottom: '1px solid var(--border)',
+                  padding: isHovered ? 'clamp(1rem, 2vw, 1.25rem) clamp(1rem, 2vw, 1.5rem)' : 'clamp(0.9rem, 1.8vw, 1.1rem) 0',
+                  cursor: 'default',
+                  '--skill-border': isHovered ? layer.color : 'transparent',
+                } as React.CSSProperties}
+                onMouseEnter={() => setHoveredKey(layer.key)}
+                onMouseLeave={() => setHoveredKey(null)}
+              >
+                <div style={{ display: 'flex', alignItems: 'baseline', gap: 'clamp(1rem, 3vw, 2.5rem)', flexWrap: 'wrap' }}>
+                  {/* Layer label */}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexShrink: 0, minWidth: '9rem' }}>
+                    <span
+                      style={{
+                        width: 6,
+                        height: 6,
+                        borderRadius: '50%',
+                        backgroundColor: layer.color,
+                        flexShrink: 0,
+                        boxShadow: isHovered ? `0 0 8px ${layer.color}` : 'none',
+                        transition: 'box-shadow 0.2s',
+                      }}
+                    />
+                    <span
+                      style={{
+                        fontFamily: 'var(--font-mono)',
+                        fontSize: '0.6rem',
+                        letterSpacing: '0.14em',
+                        color: isHovered ? layer.color : 'var(--text-3)',
+                        textTransform: 'uppercase',
+                        transition: 'color 0.2s',
+                        fontWeight: isHovered ? 700 : 400,
+                      }}
                     >
-                      {cat.items.length} skills
-                    </p>
+                      {layer.key}
+                    </span>
                   </div>
+
+                  {/* Items */}
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.3rem 1.5rem', flex: 1 }}>
+                    {layer.items.map((item, j) => (
+                      <span
+                        key={item}
+                        style={{
+                          fontFamily: 'var(--font-mono)',
+                          fontSize: 'clamp(0.72rem, 1.3vw, 0.82rem)',
+                          color: isHovered ? 'var(--text-1)' : 'var(--text-2)',
+                          transition: 'color 0.2s',
+                          transitionDelay: isHovered ? `${j * 0.02}s` : '0s',
+                        }}
+                      >
+                        {item}
+                        {j < layer.items.length - 1 && (
+                          <span style={{ color: 'var(--text-3)', marginLeft: '1.5rem', marginRight: '-1.5rem' }}> ·</span>
+                        )}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Description on hover */}
+                  {isHovered && (
+                    <motion.span
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.2 }}
+                      style={{
+                        fontFamily: 'var(--font-mono)',
+                        fontSize: '0.6rem',
+                        color: 'var(--text-3)',
+                        flexShrink: 0,
+                        display: 'none',
+                      }}
+                      className="hidden xl:inline"
+                    >
+                      {layer.desc}
+                    </motion.span>
+                  )}
                 </div>
-                <span className="text-lg select-none opacity-50">{cat.icon}</span>
-              </div>
-
-              {/* Divider */}
-              <div className="w-full h-px mb-4" style={{ backgroundColor: 'var(--border)' }} />
-
-              {/* Pills */}
-              <div className="flex flex-wrap gap-1.5">
-                {cat.items.map((item) => (
-                  <span
-                    key={item}
-                    className="px-2.5 py-1 text-[11px] rounded-lg cursor-default transition-all duration-200"
-                    style={{
-                      fontFamily: 'var(--font-mono)',
-                      color: 'var(--text-3)',
-                      border: '1px solid var(--border)',
-                      backgroundColor: 'var(--bg-elevated)',
-                    }}
-                    onMouseEnter={e => {
-                      e.currentTarget.style.color = 'var(--accent)'
-                      e.currentTarget.style.borderColor = 'rgba(34,211,238,0.25)'
-                    }}
-                    onMouseLeave={e => {
-                      e.currentTarget.style.color = 'var(--text-3)'
-                      e.currentTarget.style.borderColor = 'var(--border)'
-                    }}
-                  >
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            )
+          })}
         </div>
       </div>
     </section>

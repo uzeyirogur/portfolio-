@@ -5,13 +5,12 @@ import About from '@/components/sections/About'
 import Skills from '@/components/sections/Skills'
 import Projects from '@/components/sections/Projects'
 import Experience from '@/components/sections/Experience'
-import Education from '@/components/sections/Education'
 import Contact from '@/components/sections/Contact'
 import CursorGlow from '@/components/ui/CursorGlow'
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen overflow-x-hidden" style={{ backgroundColor: 'var(--bg-base)' }}>
+    <div className="min-h-screen" style={{ backgroundColor: 'var(--bg)', overflowX: 'clip' }}>
       <div className="noise-overlay" aria-hidden />
       <CursorGlow />
       <Navbar />
@@ -21,7 +20,6 @@ export default function HomePage() {
         <Skills />
         <Projects />
         <Experience />
-        <Education />
         <Contact />
       </main>
       <Footer />

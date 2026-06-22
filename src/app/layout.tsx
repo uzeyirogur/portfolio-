@@ -4,7 +4,7 @@ import './globals.css'
 import { siteConfig } from '@/data/site'
 
 const bricolage = Bricolage_Grotesque({
-  subsets: ['latin'],
+  subsets: ['latin', 'latin-ext'],
   variable: '--font-display',
   weight: ['400', '500', '600', '700', '800'],
   display: 'swap',
