@@ -8,7 +8,7 @@ const E = [0.16, 1, 0.3, 1] as const
 const LAYERS = [
   {
     key: 'UI LAYER',
-    color: '#22D3EE',
+    color: '#E8003A',
     items: ['JavaScript', 'TypeScript', 'React', 'Next.js', 'Tailwind CSS', 'HTML / CSS'],
     desc: 'Frontend ve kullanıcı arayüzü teknolojileri',
   },

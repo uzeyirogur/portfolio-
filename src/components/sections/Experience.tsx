@@ -31,7 +31,7 @@ export default function Experience() {
                 <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.58rem', letterSpacing: '0.2em', color: 'var(--accent)', textTransform: 'uppercase' }}>
                   DEPLOY LOG #{String(i + 1).padStart(2, '0')}
                 </span>
-                <div style={{ flex: 1, height: 1, backgroundColor: 'rgba(34,211,238,0.1)' }} />
+                <div style={{ flex: 1, height: 1, backgroundColor: 'rgba(232,0,58,0.15)' }} />
               </div>
 
               {/* Company + role */}

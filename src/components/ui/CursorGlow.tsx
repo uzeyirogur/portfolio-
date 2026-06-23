@@ -43,14 +43,14 @@ export default function CursorGlow() {
         ringRef.current.style.transform = `translate3d(${s.rx - size / 2}px,${s.ry - size / 2}px,0)`
         ringRef.current.style.width  = `${size}px`
         ringRef.current.style.height = `${size}px`
-        ringRef.current.style.borderColor = hovering ? 'rgba(34,211,238,0.9)' : 'rgba(34,211,238,0.45)'
+        ringRef.current.style.borderColor = hovering ? 'rgba(232,0,58,0.8)' : 'rgba(232,0,58,0.35)'
         ringRef.current.style.boxShadow   = hovering
-          ? '0 0 24px rgba(34,211,238,0.3), inset 0 0 10px rgba(34,211,238,0.08)'
-          : '0 0 10px rgba(34,211,238,0.12)'
+          ? '0 0 20px rgba(232,0,58,0.15)'
+          : 'none'
       }
 
       if (glowRef.current && mx !== -999) {
-        glowRef.current.style.background = `radial-gradient(circle 500px at ${mx}px ${my}px, rgba(34,211,238,0.05) 0%, transparent 100%)`
+        glowRef.current.style.background = `radial-gradient(circle 400px at ${mx}px ${my}px, rgba(232,0,58,0.04) 0%, transparent 100%)`
       }
 
       raf = requestAnimationFrame(tick)
@@ -72,8 +72,8 @@ export default function CursorGlow() {
         className="pointer-events-none fixed top-0 left-0 z-[9999] rounded-full"
         style={{
           width: 10, height: 10,
-          background: '#22D3EE',
-          boxShadow: '0 0 14px rgba(34,211,238,1), 0 0 5px rgba(34,211,238,1)',
+          background: '#E8003A',
+          boxShadow: '0 0 10px rgba(232,0,58,0.6)',
           willChange: 'transform',
           opacity: 0,
           transition: 'opacity 0.2s',
@@ -83,7 +83,7 @@ export default function CursorGlow() {
         ref={ringRef}
         className="pointer-events-none fixed top-0 left-0 z-[9998] rounded-full"
         style={{
-          border: '1.5px solid rgba(34,211,238,0.45)',
+          border: '1.5px solid rgba(232,0,58,0.35)',
           willChange: 'transform',
           transition: 'width 0.22s ease, height 0.22s ease, border-color 0.15s, box-shadow 0.15s',
         }}

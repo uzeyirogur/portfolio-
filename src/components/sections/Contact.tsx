@@ -122,7 +122,7 @@ export default function Contact() {
                   onChange={(e) => setForm((s) => ({ ...s, [f.key]: e.target.value }))}
                   placeholder={f.placeholder}
                   style={inputStyle}
-                  onFocus={(e) => (e.currentTarget.style.borderColor = 'rgba(34,211,238,0.35)')}
+                  onFocus={(e) => (e.currentTarget.style.borderColor = 'rgba(232,0,58,0.4)')}
                   onBlur={(e) => (e.currentTarget.style.borderColor = 'var(--border)')}
                 />
               ))}
@@ -133,7 +133,7 @@ export default function Contact() {
                 onChange={(e) => setForm((s) => ({ ...s, message: e.target.value }))}
                 placeholder="Mesajınız"
                 style={{ ...inputStyle, resize: 'none' }}
-                onFocus={(e) => (e.currentTarget.style.borderColor = 'rgba(34,211,238,0.35)')}
+                onFocus={(e) => (e.currentTarget.style.borderColor = 'rgba(232,0,58,0.4)')}
                 onBlur={(e) => (e.currentTarget.style.borderColor = 'var(--border)')}
               />
               <button
@@ -144,14 +144,14 @@ export default function Contact() {
                   letterSpacing: '0.1em', textTransform: 'uppercase',
                   color: sent ? '#34D399' : 'var(--accent)',
                   backgroundColor: 'transparent',
-                  border: `1px solid ${sent ? '#34D399' : 'rgba(34,211,238,0.25)'}`,
+                  border: `1px solid ${sent ? '#34D399' : 'rgba(232,0,58,0.3)'}`,
                   borderRadius: 3, padding: '0.65rem 1.5rem',
                   cursor: sent ? 'default' : 'pointer',
                   alignSelf: 'flex-start', transition: 'all 0.2s',
                   display: 'flex', alignItems: 'center', gap: '0.5rem',
                 }}
-                onMouseEnter={(e) => { if (!sent) e.currentTarget.style.borderColor = 'rgba(34,211,238,0.5)' }}
-                onMouseLeave={(e) => { if (!sent) e.currentTarget.style.borderColor = 'rgba(34,211,238,0.25)' }}
+                onMouseEnter={(e) => { if (!sent) e.currentTarget.style.borderColor = 'rgba(232,0,58,0.5)' }}
+                onMouseLeave={(e) => { if (!sent) e.currentTarget.style.borderColor = 'rgba(232,0,58,0.3)' }}
               >
                 {sent ? <><CheckCircle size={12} /> Gönderildi</> : <><Send size={12} /> Gönder</>}
               </button>

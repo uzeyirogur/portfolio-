@@ -49,14 +49,14 @@ function LogicBoard() {
             style={{
               width: 32, height: 32,
               border: '1px solid var(--border)', borderRadius: 3,
-              background: cell ? 'rgba(34,211,238,0.04)' : 'transparent',
+              background: cell ? 'rgba(232,0,58,0.05)' : 'transparent',
               cursor: cell || winner ? 'default' : 'pointer',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               fontFamily: 'var(--font-mono)', fontSize: '0.7rem', fontWeight: 700,
-              color: cell === 'X' ? 'var(--accent)' : 'rgba(255,255,255,0.35)',
+              color: cell === 'X' ? 'var(--accent)' : 'rgba(0,0,0,0.3)',
               transition: 'border-color 0.15s',
             }}
-            onMouseEnter={(e) => { if (!cell && !winner) e.currentTarget.style.borderColor = 'rgba(34,211,238,0.3)' }}
+            onMouseEnter={(e) => { if (!cell && !winner) e.currentTarget.style.borderColor = 'rgba(232,0,58,0.35)' }}
             onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--border)' }}
           >
             {cell}
@@ -165,7 +165,7 @@ export default function About() {
                   lineHeight: 1.8,
                   margin: 0,
                   paddingLeft: '1rem',
-                  borderLeft: `1px solid rgba(34,211,238,${0.4 - i * 0.12})`,
+                  borderLeft: `1px solid rgba(232,0,58,${0.4 - i * 0.12})`,
                   opacity: para.op,
                 }}
               >

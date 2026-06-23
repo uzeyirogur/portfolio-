@@ -50,7 +50,7 @@ export default function Navbar() {
           right: 0,
           zIndex: 100,
           borderBottom: scrolled ? '1px solid var(--border)' : '1px solid transparent',
-          backgroundColor: scrolled ? 'rgba(8,8,8,0.88)' : 'transparent',
+          backgroundColor: scrolled ? 'rgba(248,248,248,0.92)' : 'transparent',
           backdropFilter: scrolled ? 'blur(12px)' : 'none',
           transition: 'background-color 0.3s, border-color 0.3s',
         }}
@@ -168,7 +168,7 @@ export default function Navbar() {
             transition={{ duration: 0.2 }}
             style={{
               borderTop: '1px solid var(--border)',
-              backgroundColor: 'rgba(8,8,8,0.96)',
+              backgroundColor: 'rgba(248,248,248,0.97)',
               backdropFilter: 'blur(16px)',
               padding: '1.25rem clamp(1.5rem, 4vw, 3.5rem)',
               display: 'flex',

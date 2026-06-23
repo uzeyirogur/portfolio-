@@ -74,7 +74,7 @@ function IntroOverlay() {
             position: 'fixed',
             inset: 0,
             zIndex: 9999,
-            backgroundColor: '#080808',
+            backgroundColor: 'var(--bg)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -142,7 +142,7 @@ export default function Hero() {
               position: 'absolute',
               inset: 0,
               background:
-                'radial-gradient(ellipse 65% 55% at 50% 50%, transparent 25%, rgba(8,8,8,0.6) 100%)',
+                'radial-gradient(ellipse 65% 55% at 50% 50%, transparent 25%, rgba(248,248,248,0.55) 100%)',
               pointerEvents: 'none',
               zIndex: 1,
             }}
@@ -153,7 +153,7 @@ export default function Hero() {
               position: 'absolute',
               inset: 0,
               background:
-                'linear-gradient(to right, rgba(8,8,8,0.6) 0%, transparent 30%, transparent 70%, rgba(8,8,8,0.6) 100%)',
+                'linear-gradient(to right, rgba(248,248,248,0.55) 0%, transparent 30%, transparent 70%, rgba(248,248,248,0.55) 100%)',
               pointerEvents: 'none',
               zIndex: 1,
             }}

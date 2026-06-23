@@ -10,7 +10,7 @@ const E = [0.16, 1, 0.3, 1] as const
 const DISPLAY_PROJECTS = projects.filter((p) => p.status !== 'Fikir')
 
 const PROJECT_META: Record<string, { category: string; stack: string; accent: string }> = {
-  paramnet:           { category: 'Finance Dashboard',     stack: '.NET / SQL / EF Core',  accent: '#22D3EE' },
+  paramnet:           { category: 'Finance Dashboard',     stack: '.NET / SQL / EF Core',  accent: '#E8003A' },
   'anka-sports':      { category: 'Management System',     stack: 'ASP.NET Core / MVC',    accent: '#818CF8' },
   'gold-price-tracker': { category: 'Data Dashboard',      stack: 'Web API / Scraper',     accent: '#F59E0B' },
   'vehicle-inventory':  { category: 'Operations Tool',     stack: 'EF Core / SQL Server',  accent: '#34D399' },
@@ -50,7 +50,7 @@ export default function Projects() {
           fontSize: '0.58rem',
           color: 'var(--accent)',
           letterSpacing: '0.1em',
-          backgroundColor: 'rgba(8,8,8,0.85)',
+          backgroundColor: 'rgba(248,248,248,0.95)',
           padding: '0.3rem 0.6rem',
           border: '1px solid var(--border)',
           borderRadius: 3,
@@ -95,7 +95,7 @@ export default function Projects() {
         {/* Project list */}
         <div style={{ borderTop: '1px solid var(--border)' }}>
           {DISPLAY_PROJECTS.map((project, idx) => {
-            const meta = PROJECT_META[project.slug] ?? { category: project.category[0] ?? '', stack: project.technologies.slice(0, 3).join(' / '), accent: '#22D3EE' }
+            const meta = PROJECT_META[project.slug] ?? { category: project.category[0] ?? '', stack: project.technologies.slice(0, 3).join(' / '), accent: '#E8003A' }
             const isOpen = openIdx === idx
             const Mockup = MOCKUPS[project.slug]
             const num = String(idx + 1).padStart(2, '0')
@@ -230,7 +230,7 @@ export default function Projects() {
                           gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 22rem), 1fr))',
                           gap: 'clamp(1.5rem, 4vw, 3rem)',
                           padding: 'clamp(1.5rem, 4vw, 2.5rem) 1rem',
-                          backgroundColor: 'rgba(255,255,255,0.012)',
+                          backgroundColor: 'rgba(0,0,0,0.02)',
                         }}
                       >
                         {/* Info col */}

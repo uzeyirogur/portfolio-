@@ -14,7 +14,7 @@ export default function Footer() {
       {/* Top accent line */}
       <div
         className="absolute top-0 inset-x-0 h-px pointer-events-none"
-        style={{ background: 'linear-gradient(to right, transparent, rgba(34,211,238,0.15), transparent)' }}
+        style={{ background: 'linear-gradient(to right, transparent, rgba(0,0,0,0.12), transparent)' }}
       />
 
       <div className="container-xl py-8">
@@ -26,8 +26,8 @@ export default function Footer() {
               <div
                 className="w-7 h-7 rounded-lg flex items-center justify-center text-xs font-black"
                 style={{
-                  background: 'linear-gradient(135deg, #22D3EE, #818CF8)',
-                  color: '#07090D',
+                  background: '#0A0A0A',
+                  color: '#F8F8F8',
                 }}
               >
                 {profile.initials}
@@ -57,7 +57,7 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 className="w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-200"
                 style={{ color: 'var(--text-3)', border: '1px solid var(--border)' }}
-                onMouseEnter={e => { e.currentTarget.style.color = 'var(--accent)'; e.currentTarget.style.borderColor = 'rgba(34,211,238,0.25)' }}
+                onMouseEnter={e => { e.currentTarget.style.color = 'var(--accent)'; e.currentTarget.style.borderColor = 'rgba(232,0,58,0.3)' }}
                 onMouseLeave={e => { e.currentTarget.style.color = 'var(--text-3)'; e.currentTarget.style.borderColor = 'var(--border)' }}
               >
                 {icon}

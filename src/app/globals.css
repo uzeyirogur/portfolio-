@@ -4,18 +4,18 @@
 
 /* ─── Design tokens ───────────────────────────────────────────────────────────── */
 :root {
-  --bg:           #080808;
-  --bg-base:      #080808;
-  --bg-surface:   #0D0D0D;
-  --bg-elevated:  #141414;
-  --text-1:       #F0F0F0;
-  --text-2:       #888888;
-  --text-3:       #404040;
-  --accent:       #22D3EE;
-  --accent-dim:   rgba(34, 211, 238, 0.12);
-  --accent-glow:  rgba(34, 211, 238, 0.06);
-  --border:       rgba(255, 255, 255, 0.07);
-  --border-light: rgba(255, 255, 255, 0.12);
+  --bg:           #F8F8F8;
+  --bg-base:      #F8F8F8;
+  --bg-surface:   #F0F0F0;
+  --bg-elevated:  #E6E6E6;
+  --text-1:       #0A0A0A;
+  --text-2:       #555555;
+  --text-3:       #999999;
+  --accent:       #E8003A;
+  --accent-dim:   rgba(232, 0, 58, 0.10);
+  --accent-glow:  rgba(232, 0, 58, 0.05);
+  --border:       rgba(0, 0, 0, 0.09);
+  --border-light: rgba(0, 0, 0, 0.16);
 }
 
 /* ─── Base ─────────────────────────────────────────────────────────────────────── */
@@ -31,13 +31,13 @@ body {
 }
 
 ::selection {
-  background: rgba(34, 211, 238, 0.18);
-  color: #F0F0F0;
+  background: rgba(232, 0, 58, 0.14);
+  color: #0A0A0A;
 }
 
 ::-webkit-scrollbar { width: 2px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: rgba(34, 211, 238, 0.2); border-radius: 1px; }
+::-webkit-scrollbar-thumb { background: rgba(232, 0, 58, 0.3); border-radius: 1px; }
 
 /* ─── Layout helpers ──────────────────────────────────────────────────────────── */
 .section-y    { @apply py-24 lg:py-32; }
@@ -120,7 +120,7 @@ body {
   transform: scaleY(1);
 }
 .project-row:hover {
-  background: rgba(34, 211, 238, 0.025);
+  background: rgba(232, 0, 58, 0.03);
 }
 
 /* ─── Skill layer hover ───────────────────────────────────────────────────────── */
@@ -130,7 +130,7 @@ body {
 }
 .skill-layer:hover {
   border-left-color: var(--accent);
-  background: rgba(34, 211, 238, 0.03);
+  background: rgba(232, 0, 58, 0.03);
   padding-left: 1rem;
 }
 

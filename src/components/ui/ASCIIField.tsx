@@ -107,10 +107,9 @@ export default function ASCIIField() {
           }
 
           if (proximity > 0.5) {
-            const g = Math.round(211 + proximity * 27)
-            ctx.fillStyle = `rgba(34,${Math.min(g, 238)},238,${alpha.toFixed(3)})`
+            ctx.fillStyle = `rgba(232,0,58,${alpha.toFixed(3)})`
           } else {
-            ctx.fillStyle = `rgba(34,211,238,${alpha.toFixed(3)})`
+            ctx.fillStyle = `rgba(10,10,10,${alpha.toFixed(3)})`
           }
 
           ctx.fillText(ch, x, y)
