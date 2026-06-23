@@ -49,61 +49,182 @@ function Ticker({ reverse = false }: { reverse?: boolean }) {
   )
 }
 
+// ─── Intro animation constants ────────────────────────────────────────────────
+const INTRO_WORDS = [
+  { text: 'BUILD',   color: '#F0F0F0' },
+  { text: 'SYSTEMS', color: '#F0F0F0' },
+  { text: 'THAT',    color: '#F0F0F0' },
+  { text: 'WORK.',   color: '#E8003A' },
+]
+const INTRO_NAME = 'ÜZEYİR ÖĞÜR'
+const INTRO_SUB  = 'FULL STACK .NET DEVELOPER · 2026'
+const SC_CHARS   = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#&İÜÖÇŞĞ'
+
 function IntroOverlay() {
-  const [visible, setVisible] = useState(false)
+  const [show, setShow]         = useState(false)
+  const [phase, setPhase]       = useState<'words' | 'name'>('words')
+  const [wordIdx, setWordIdx]   = useState(0)
+  const [chars, setChars]       = useState<string[]>(
+    INTRO_NAME.split('').map(() => SC_CHARS[0])
+  )
+  const [showLine, setShowLine] = useState(false)
+  const [showSub, setShowSub]   = useState(false)
 
   useEffect(() => {
     if (typeof window === 'undefined') return
-    const seen = sessionStorage.getItem('portfolio-v4-intro')
-    if (!seen) {
-      setVisible(true)
-      sessionStorage.setItem('portfolio-v4-intro', '1')
-      const t = setTimeout(() => setVisible(false), 1400)
-      return () => clearTimeout(t)
-    }
+    if (sessionStorage.getItem('intro-v5')) return
+    sessionStorage.setItem('intro-v5', '1')
+    setShow(true)
   }, [])
+
+  // Master timeline
+  useEffect(() => {
+    if (!show) return
+    const ts = [
+      setTimeout(() => setWordIdx(1), 650),
+      setTimeout(() => setWordIdx(2), 1300),
+      setTimeout(() => setWordIdx(3), 1950),
+      setTimeout(() => setPhase('name'), 2700),
+      setTimeout(() => setShowLine(true), 4050),
+      setTimeout(() => setShowSub(true), 4350),
+      setTimeout(() => setShow(false), 5300),
+    ]
+    return () => ts.forEach(clearTimeout)
+  }, [show])
+
+  // Letter-by-letter scramble
+  useEffect(() => {
+    if (phase !== 'name') return
+    const nameArr = INTRO_NAME.split('')
+    const t0 = Date.now()
+    const STAGGER = 95   // ms between each letter locking
+    const LEAD    = 350  // ms before first letter locks
+
+    const id = setInterval(() => {
+      const elapsed = Date.now() - t0
+      setChars(nameArr.map((ch, i) => {
+        if (ch === ' ') return ' '
+        if (elapsed >= LEAD + i * STAGGER) return ch
+        return SC_CHARS[Math.floor(Math.random() * SC_CHARS.length)]
+      }))
+    }, 48)
+
+    const done = setTimeout(
+      () => clearInterval(id),
+      LEAD + (nameArr.length - 1) * STAGGER + 300
+    )
+    return () => { clearInterval(id); clearTimeout(done) }
+  }, [phase])
 
   return (
     <AnimatePresence>
-      {visible && (
+      {show && (
         <motion.div
+          key="intro"
           initial={{ opacity: 1 }}
-          exit={{ opacity: 0, transition: { duration: 0.4 } }}
-          onClick={() => setVisible(false)}
+          exit={{ opacity: 0, transition: { duration: 0.6, ease: 'easeInOut' } }}
+          onClick={() => setShow(false)}
           style={{
-            position: 'fixed',
-            inset: 0,
-            zIndex: 9999,
-            backgroundColor: 'var(--bg)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
+            position: 'fixed', inset: 0, zIndex: 9999,
+            backgroundColor: '#0D0D0D',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
             cursor: 'pointer',
           }}
         >
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: [0, 1, 1, 0] }}
-            transition={{ duration: 1.4, times: [0, 0.15, 0.85, 1] }}
-            style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: '0.8rem',
-              color: 'var(--accent)',
-              letterSpacing: '0.3em',
-              textTransform: 'uppercase',
-              display: 'flex',
-              alignItems: 'center',
-              gap: 4,
-            }}
-          >
-            $ RUN PORTFOLIO
-            <motion.span
-              animate={{ opacity: [1, 0] }}
-              transition={{ duration: 0.5, repeat: Infinity, repeatType: 'reverse' }}
+          {/* Word flash phase — absolute wrapper so flex centering works with AnimatePresence */}
+          {phase === 'words' && (
+            <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <AnimatePresence mode="wait">
+                <motion.p
+                  key={wordIdx}
+                  initial={{ opacity: 0, y: 14 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -14, transition: { duration: 0.09 } }}
+                  transition={{ duration: 0.13, ease: 'easeOut' }}
+                  style={{
+                    fontFamily: 'var(--font-display)',
+                    fontSize: 'clamp(3.5rem, 13vw, 12rem)',
+                    fontWeight: 900,
+                    color: INTRO_WORDS[wordIdx].color,
+                    letterSpacing: '-0.03em',
+                    margin: 0,
+                    lineHeight: 1,
+                    userSelect: 'none',
+                    whiteSpace: 'nowrap',
+                  }}
+                >
+                  {INTRO_WORDS[wordIdx].text}
+                </motion.p>
+              </AnimatePresence>
+            </div>
+          )}
+
+          {/* Name + line + subtitle phase */}
+          {phase === 'name' && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.18 }}
+              style={{ textAlign: 'center', width: '100%', padding: '0 2rem' }}
             >
-              _
-            </motion.span>
-          </motion.p>
+              {/* Scrambling name */}
+              <p style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: 'clamp(2rem, 7.5vw, 8rem)',
+                fontWeight: 800,
+                color: '#F0F0F0',
+                letterSpacing: '0.07em',
+                margin: 0,
+                lineHeight: 1,
+                userSelect: 'none',
+              }}>
+                {chars.map((ch, i) => (
+                  <span
+                    key={i}
+                    style={{
+                      display: 'inline-block',
+                      minWidth: INTRO_NAME[i] === ' ' ? '0.45em' : undefined,
+                      color: ch !== INTRO_NAME[i] ? 'rgba(240,240,240,0.3)' : '#F0F0F0',
+                      transition: 'color 0.06s',
+                    }}
+                  >
+                    {ch === ' ' ? ' ' : ch}
+                  </span>
+                ))}
+              </p>
+
+              {/* Sliding line */}
+              <motion.div
+                style={{
+                  height: 1,
+                  backgroundColor: 'rgba(255,255,255,0.18)',
+                  margin: '1.25rem auto',
+                  maxWidth: '44rem',
+                  transformOrigin: 'center',
+                }}
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: showLine ? 1 : 0 }}
+                transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+              />
+
+              {/* Subtitle */}
+              <motion.p
+                style={{
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: 'clamp(0.52rem, 1.1vw, 0.65rem)',
+                  letterSpacing: '0.28em',
+                  color: 'rgba(240,240,240,0.38)',
+                  margin: 0,
+                  textTransform: 'uppercase',
+                }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: showSub ? 1 : 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                {INTRO_SUB}
+              </motion.p>
+            </motion.div>
+          )}
         </motion.div>
       )}
     </AnimatePresence>
