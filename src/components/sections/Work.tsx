@@ -97,68 +97,81 @@ export default function Work() {
     const mm = gsap.matchMedia()
 
     mm.add('(min-width: 769px)', () => {
-      // All posters start tiny (far away in depth), hidden
+      // First project visible at rest; all others hidden off-right
       WORK_ITEMS.forEach((_, i) => {
-        gsap.set(titleRefs.current[i],  { clipPath: i === 0 ? 'inset(0% 0 0% 0)' : 'inset(100% 0 0 0)' })
-        gsap.set(ruleRefs.current[i],   { scaleX: i === 0 ? 1 : 0, transformOrigin: 'left center' })
-        gsap.set(posterRefs.current[i], { scale: 0.06, opacity: 0, x: 0, y: 0, rotationY: 0, transformPerspective: 1400 })
-        gsap.set(detailRefs.current[i], { opacity: 0, y: 16 })
+        const first = i === 0
+        gsap.set(titleRefs.current[i],  { clipPath: first ? 'inset(0% 0 0% 0)' : 'inset(100% 0 0 0)' })
+        gsap.set(ruleRefs.current[i],   { scaleX: first ? 1 : 0, transformOrigin: 'left center' })
+        gsap.set(posterRefs.current[i], {
+          opacity:              first ? 1 : 0,
+          x:                    first ? 0 : 80,
+          y:                    first ? 0 : 24,
+          scale:                first ? 1 : 0.92,
+          rotationY:            first ? 2 : 10,
+          transformPerspective: 1000,
+        })
+        gsap.set(detailRefs.current[i], { opacity: first ? 1 : 0, y: first ? 0 : 14 })
       })
 
       if (titleCardRef.current) {
         titleCardRef.current.style.transform = 'translateY(0)'
       }
+      // bgText starts zoomed OUT — will zoom in as title card slides up
       if (bgTextRef.current) {
-        gsap.set(bgTextRef.current, { transformOrigin: 'center center', scale: 0.85 })
+        gsap.set(bgTextRef.current, { transformOrigin: 'center center', scale: 0.38 })
       }
 
       sectionTopRef.current =
         (sectionRef.current?.getBoundingClientRect().top ?? 0) + window.scrollY
 
-      // Between-project transition: current flies TOWARD viewer, next comes FROM depth
-      const runTransition = (from: number, to: number) => {
+      // Project slide transition — LEFT/RIGHT (not zoom)
+      const runTransition = (from: number, to: number, dir: number) => {
         transitionTlRef.current?.kill()
         const tl = gsap.timeline()
         transitionTlRef.current = tl
 
-        // Exit: fly toward viewer and vanish (scale 1 → 2, fade out)
-        tl.to(posterRefs.current[from], {
-          scale: 2.2, opacity: 0,
-          duration: 0.32, ease: 'power2.in',
-        }, 0)
         tl.to(titleRefs.current[from], {
-          clipPath: 'inset(0 0 100% 0)',
-          duration: 0.26, ease: 'power2.in',
+          clipPath: dir > 0 ? 'inset(100% 0 0 0)' : 'inset(0 0 100% 0)',
+          duration: 0.36, ease: 'power2.in',
         }, 0)
         tl.to(ruleRefs.current[from], {
-          scaleX: 0, transformOrigin: 'right center',
-          duration: 0.22, ease: 'power2.in',
+          scaleX: 0, transformOrigin: dir > 0 ? 'right center' : 'left center',
+          duration: 0.26, ease: 'power2.in',
+        }, 0)
+        tl.to(posterRefs.current[from], {
+          opacity: 0, x: dir > 0 ? -70 : 70, y: -20,
+          scale: 0.84, rotationY: dir > 0 ? -18 : 18,
+          duration: 0.38, ease: 'power2.in',
         }, 0)
         tl.to(detailRefs.current[from], {
-          opacity: 0, y: -10,
-          duration: 0.2, ease: 'power2.in',
+          opacity: 0, y: dir > 0 ? -12 : 12,
+          duration: 0.24, ease: 'power2.in',
         }, 0)
 
-        // Enter: emerge from depth (tiny → full)
-        tl.set(posterRefs.current[to], { scale: 0.06, opacity: 0, x: 0, y: 0 }, 0.18)
-        tl.set(titleRefs.current[to],  { clipPath: 'inset(100% 0 0 0)' }, 0.18)
+        tl.set(titleRefs.current[to], {
+          clipPath: dir > 0 ? 'inset(0 0 100% 0)' : 'inset(100% 0 0 0)',
+        }, 0.22)
+        tl.set(posterRefs.current[to], {
+          x: dir > 0 ? 110 : -110, y: 24,
+          opacity: 0, scale: 0.88, rotationY: dir > 0 ? 20 : -20,
+        }, 0.22)
 
-        tl.to(posterRefs.current[to], {
-          scale: 1, opacity: 1,
-          duration: 0.78, ease: 'power3.out',
-        }, 0.24)
         tl.to(ruleRefs.current[to], {
           scaleX: 1, transformOrigin: 'left center',
           duration: 0.44, ease: 'power2.out',
-        }, 0.32)
+        }, 0.28)
         tl.to(titleRefs.current[to], {
           clipPath: 'inset(0% 0 0% 0)',
-          duration: 0.56, ease: 'power3.out',
-        }, 0.34)
+          duration: 0.54, ease: 'power3.out',
+        }, 0.3)
+        tl.to(posterRefs.current[to], {
+          opacity: 1, x: 0, y: 0, scale: 1, rotationY: 2,
+          duration: 0.74, ease: 'power3.out',
+        }, 0.3)
         tl.to(detailRefs.current[to], {
           opacity: 1, y: 0,
-          duration: 0.42, ease: 'power2.out',
-        }, 0.48)
+          duration: 0.4, ease: 'power2.out',
+        }, 0.46)
 
         if (counterRef.current) {
           counterRef.current.textContent = `${WORK_ITEMS[to].index} / 05`
@@ -187,37 +200,22 @@ export default function Work() {
             titleCardRef.current.style.transform = `translateY(${ty}vh)`
           }
 
-          // bgText parallax — gentle drift
+          // bgText: ZOOM IN on entry (0.38→1.0), hold at 1.0, ZOOM OUT on exit (1.0→0.38)
+          // This creates "flying into the PROJECT letters" effect
           if (bgTextRef.current) {
             let bgScale = 1.0
-            if (p <= 0.16)  bgScale = 0.85 + (p / 0.16) * 0.15
-            else if (p >= 0.84) bgScale = 0.85 + ((1 - p) / 0.16) * 0.15
-            bgTextRef.current.style.transform = `translateY(${-(p * 8)}%) scale(${bgScale})`
-          }
-
-          const idx = activeIndexRef.current
-
-          // Section ENTRY (0→16%): first project zooms in from depth as title card slides up
-          if (p <= 0.16) {
-            const t = p / 0.16
-            const poster = posterRefs.current[0]
-            const detail = detailRefs.current[0]
-            if (poster) gsap.set(poster, { scale: 0.06 + t * 0.94, opacity: Math.min(1, t * 1.4) })
-            if (detail) gsap.set(detail, { opacity: Math.max(0, t - 0.5) * 2, y: (1 - Math.min(1, t * 2)) * 16 })
-          }
-
-          // Section EXIT (84→100%): active project zooms back into depth as title card returns
-          if (p >= 0.84) {
-            const t = (p - 0.84) / 0.16
-            const poster = posterRefs.current[idx]
-            const detail = detailRefs.current[idx]
-            if (poster) gsap.set(poster, { scale: Math.max(0.06, 1 - t * 0.94), opacity: Math.max(0, 1 - t) })
-            if (detail) gsap.set(detail, { opacity: Math.max(0, 1 - t * 2), y: t * 16 })
+            if (p <= 0.16)       bgScale = 0.38 + (p / 0.16) * 0.62
+            else if (p >= 0.84)  bgScale = 0.38 + ((1 - p) / 0.16) * 0.62
+            bgTextRef.current.style.transform = `translateY(${-(p * 6)}%) scale(${bgScale})`
           }
 
           const newIdx = Math.min(Math.floor(p * N), N - 1)
           if (newIdx !== activeIndexRef.current) {
-            runTransition(activeIndexRef.current, newIdx)
+            runTransition(
+              activeIndexRef.current,
+              newIdx,
+              newIdx > activeIndexRef.current ? 1 : -1
+            )
             activeIndexRef.current = newIdx
           }
         },

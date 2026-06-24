@@ -82,7 +82,7 @@ $ink:     #0C0B09;
   &::before {
     content: '';
     position: absolute;
-    inset: -22px -24px;
+    inset: -26px -28px;
     border: 1px solid rgba(12, 11, 9, 0.2);
     border-radius: 999px;
     pointer-events: none;
@@ -94,17 +94,17 @@ $ink:     #0C0B09;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 12px;
   background-color: $ink;
   border-radius: 999px;
-  width: 88px;
-  padding: 44px 0;
+  width: 104px;
+  padding: 52px 0;
 
   span {
     font-family: var(--font-display);
     font-weight: 800;
-    font-size: 20px;
-    letter-spacing: 0.12em;
+    font-size: 24px;
+    letter-spacing: 0.1em;
     color: $work-bg;
     line-height: 1;
   }
