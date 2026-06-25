@@ -17,42 +17,18 @@ const SLUG_ORDER = [
 
 const DISPLAY_TITLES: Record<string, string> = {
   'paramnet':           'PARAMNET',
-  'anka-sports':        'ANKA SPOR',
-  'gold-price-tracker': 'ALTIN TAKİP',
-  'vehicle-inventory':  'ARAÇ ENVANTERİ',
-  'ticket-system':      'DESTEK SİSTEMİ',
+  'anka-sports':        'ANKA SPORTS',
+  'gold-price-tracker': 'GOLD TRACKER',
+  'vehicle-inventory':  'VEHICLE INVENTORY',
+  'ticket-system':      'TICKET SYSTEM',
 }
 
-const VISUAL: Record<string, {
-  accentVar: string
-  subtitle: string
-  category: string
-}> = {
-  'paramnet': {
-    accentVar: '--accent-paramnet',
-    subtitle: 'Kişisel Finans ve Gider Takip Platformu',
-    category: '.NET / PANO',
-  },
-  'anka-sports': {
-    accentVar: '--accent-anka',
-    subtitle: 'Spor Akademisi Üye ve İçerik Yönetimi',
-    category: '.NET / KURUMSAL',
-  },
-  'gold-price-tracker': {
-    accentVar: '--accent-gold',
-    subtitle: 'Canlı Fiyat Çekme ve Karşılaştırma Panosu',
-    category: '.NET / API / PANO',
-  },
-  'vehicle-inventory': {
-    accentVar: '--accent-vehicle',
-    subtitle: 'Filo ve Bakım Yönetim Sistemi',
-    category: '.NET / KURUMSAL',
-  },
-  'ticket-system': {
-    accentVar: '--accent-ticket',
-    subtitle: 'N-Tier Kurumsal Destek Talep Sistemi',
-    category: '.NET / KURUMSAL',
-  },
+const VISUAL: Record<string, { accentVar: string; subtitle: string; category: string }> = {
+  'paramnet':           { accentVar: '--accent-paramnet', subtitle: 'Kişisel Finans ve Gider Takip Platformu',   category: '.NET / PANO'      },
+  'anka-sports':        { accentVar: '--accent-anka',     subtitle: 'Spor Akademisi Üye ve İçerik Yönetimi',    category: '.NET / KURUMSAL'  },
+  'gold-price-tracker': { accentVar: '--accent-gold',     subtitle: 'Canlı Fiyat Çekme ve Karşılaştırma Panosu', category: '.NET / API / PANO' },
+  'vehicle-inventory':  { accentVar: '--accent-vehicle',  subtitle: 'Filo ve Bakım Yönetim Sistemi',             category: '.NET / KURUMSAL'  },
+  'ticket-system':      { accentVar: '--accent-ticket',   subtitle: 'N-Tier Kurumsal Destek Talep Sistemi',      category: '.NET / KURUMSAL'  },
 }
 
 const WORK_ITEMS = SLUG_ORDER.map((slug, i) => {
@@ -74,22 +50,22 @@ const WORK_ITEMS = SLUG_ORDER.map((slug, i) => {
 
 const N = WORK_ITEMS.length
 
+
 export default function Work() {
   const sectionRef   = useRef<HTMLElement>(null)
   const bgTextRef    = useRef<HTMLDivElement>(null)
   const counterRef   = useRef<HTMLSpanElement>(null)
   const titleCardRef = useRef<HTMLDivElement>(null)
+  const carouselRef  = useRef<HTMLDivElement>(null)
 
-  const titleRefs  = useRef<(HTMLHeadingElement | null)[]>(Array(N).fill(null))
-  const ruleRefs   = useRef<(HTMLDivElement | null)[]>(Array(N).fill(null))
-  const posterRefs = useRef<(HTMLDivElement | null)[]>(Array(N).fill(null))
-  const detailRefs = useRef<(HTMLDivElement | null)[]>(Array(N).fill(null))
-  const sceneRefs  = useRef<(HTMLDivElement | null)[]>(Array(N).fill(null))
-  const dotRefs    = useRef<(HTMLButtonElement | null)[]>(Array(N).fill(null))
+  // Desktop: scatter cards
+  const cardRefs       = useRef<(HTMLDivElement | null)[]>(Array(N).fill(null))
+  // Mobile: poster + info inside scene
+  const posterRefs     = useRef<(HTMLDivElement | null)[]>(Array(N).fill(null))
+  const mobileInfoRefs = useRef<(HTMLDivElement | null)[]>(Array(N).fill(null))
+  const sceneRefs      = useRef<(HTMLDivElement | null)[]>(Array(N).fill(null))
+  const dotRefs        = useRef<(HTMLButtonElement | null)[]>(Array(N).fill(null))
 
-  const activeIndexRef  = useRef(0)
-  const sectionTopRef   = useRef(0)
-  const transitionTlRef = useRef<gsap.core.Timeline | null>(null)
 
   useGSAP(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
@@ -97,131 +73,131 @@ export default function Work() {
     const mm = gsap.matchMedia()
 
     mm.add('(min-width: 769px)', () => {
-      // First project visible at rest; all others hidden off-right
-      WORK_ITEMS.forEach((_, i) => {
-        const first = i === 0
-        gsap.set(titleRefs.current[i],  { clipPath: first ? 'inset(0% 0 0% 0)' : 'inset(100% 0 0 0)' })
-        gsap.set(ruleRefs.current[i],   { scaleX: first ? 1 : 0, transformOrigin: 'left center' })
-        gsap.set(posterRefs.current[i], {
-          opacity:              first ? 1 : 0,
-          x:                    first ? 0 : 80,
-          y:                    first ? 0 : 24,
-          scale:                first ? 1 : 0.92,
-          rotationY:            first ? 2 : 10,
-          transformPerspective: 1000,
-        })
-        gsap.set(detailRefs.current[i], { opacity: first ? 1 : 0, y: first ? 0 : 14 })
+      const CARD_OUT   = 0.08
+      const CARD_IN    = 0.92
+      const PROJ_START = 0.20
+      const PROJ_END   = 0.80
+      const SEG        = (PROJ_END - PROJ_START) / N
+
+      // Each card's lifecycle within its own segment [0..1]:
+      // [0, ENTER_END]          → rotate in from right (3D)
+      // [ENTER_END, EXIT_START] → dwell (fully visible, stationary)
+      // [EXIT_START, SHOW_END]  → rotate out to left (3D)
+      // [SHOW_END, 1]           → gap (all invisible — no overlap possible)
+      const ENTER_END  = 0.25
+      const EXIT_START = 0.62
+      const SHOW_END   = 0.88
+
+      const cl = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v))
+      const lp = (a: number, b: number, t: number) => a + (b - a) * cl(t, 0, 1)
+
+      if (titleCardRef.current) gsap.set(titleCardRef.current, { opacity: 1 })
+      if (bgTextRef.current) gsap.set(bgTextRef.current, { opacity: 0, scale: 2.4, x: 0 })
+
+      cardRefs.current.forEach((card) => {
+        if (!card) return
+        gsap.set(card, { opacity: 0, rotationY: 70, x: '12%', z: -120, scale: 0.88, zIndex: 0 })
       })
-
-      if (titleCardRef.current) {
-        titleCardRef.current.style.transform = 'translateY(0)'
-      }
-      // bgText starts zoomed OUT — will zoom in as title card slides up
-      if (bgTextRef.current) {
-        gsap.set(bgTextRef.current, { transformOrigin: 'center center', scale: 0.38 })
-      }
-
-      sectionTopRef.current =
-        (sectionRef.current?.getBoundingClientRect().top ?? 0) + window.scrollY
-
-      // Project slide transition — LEFT/RIGHT (not zoom)
-      const runTransition = (from: number, to: number, dir: number) => {
-        transitionTlRef.current?.kill()
-        const tl = gsap.timeline()
-        transitionTlRef.current = tl
-
-        tl.to(titleRefs.current[from], {
-          clipPath: dir > 0 ? 'inset(100% 0 0 0)' : 'inset(0 0 100% 0)',
-          duration: 0.36, ease: 'power2.in',
-        }, 0)
-        tl.to(ruleRefs.current[from], {
-          scaleX: 0, transformOrigin: dir > 0 ? 'right center' : 'left center',
-          duration: 0.26, ease: 'power2.in',
-        }, 0)
-        tl.to(posterRefs.current[from], {
-          opacity: 0, x: dir > 0 ? -70 : 70, y: -20,
-          scale: 0.84, rotationY: dir > 0 ? -18 : 18,
-          duration: 0.38, ease: 'power2.in',
-        }, 0)
-        tl.to(detailRefs.current[from], {
-          opacity: 0, y: dir > 0 ? -12 : 12,
-          duration: 0.24, ease: 'power2.in',
-        }, 0)
-
-        tl.set(titleRefs.current[to], {
-          clipPath: dir > 0 ? 'inset(0 0 100% 0)' : 'inset(100% 0 0 0)',
-        }, 0.22)
-        tl.set(posterRefs.current[to], {
-          x: dir > 0 ? 110 : -110, y: 24,
-          opacity: 0, scale: 0.88, rotationY: dir > 0 ? 20 : -20,
-        }, 0.22)
-
-        tl.to(ruleRefs.current[to], {
-          scaleX: 1, transformOrigin: 'left center',
-          duration: 0.44, ease: 'power2.out',
-        }, 0.28)
-        tl.to(titleRefs.current[to], {
-          clipPath: 'inset(0% 0 0% 0)',
-          duration: 0.54, ease: 'power3.out',
-        }, 0.3)
-        tl.to(posterRefs.current[to], {
-          opacity: 1, x: 0, y: 0, scale: 1, rotationY: 2,
-          duration: 0.74, ease: 'power3.out',
-        }, 0.3)
-        tl.to(detailRefs.current[to], {
-          opacity: 1, y: 0,
-          duration: 0.4, ease: 'power2.out',
-        }, 0.46)
-
-        if (counterRef.current) {
-          counterRef.current.textContent = `${WORK_ITEMS[to].index} / 05`
-        }
-        dotRefs.current.forEach((d, i) =>
-          d?.setAttribute('data-active', String(i === to))
-        )
-      }
 
       ScrollTrigger.create({
         id:      'work-pin',
         trigger: sectionRef.current,
         start:   'top top',
-        end:     () => `+=${N * window.innerHeight}`,
+        end:     () => `+=${(N * 1.5 + 2) * window.innerHeight}`,
         pin:     true,
-        scrub:   0.6,
         invalidateOnRefresh: true,
         onUpdate(self) {
           const p = self.progress
 
-          // Title card: slide UP on entry (0→16%), slide DOWN on exit (84→100%)
           if (titleCardRef.current) {
-            let ty = -200
-            if (p <= 0.16)  ty = -(p / 0.16) * 100
-            else if (p >= 0.84) ty = -((1 - p) / 0.16) * 100
-            titleCardRef.current.style.transform = `translateY(${ty}vh)`
+            let op = 0
+            if (p <= CARD_OUT)     op = 1 - p / CARD_OUT
+            else if (p >= CARD_IN) op = (p - CARD_IN) / (1 - CARD_IN)
+            titleCardRef.current.style.opacity = String(cl(op, 0, 1))
           }
 
-          // bgText: ZOOM IN on entry (0.38→1.0), hold at 1.0, ZOOM OUT on exit (1.0→0.38)
-          // This creates "flying into the PROJECT letters" effect
           if (bgTextRef.current) {
-            let bgScale = 1.0
-            if (p <= 0.16)       bgScale = 0.38 + (p / 0.16) * 0.62
-            else if (p >= 0.84)  bgScale = 0.38 + ((1 - p) / 0.16) * 0.62
-            bgTextRef.current.style.transform = `translateY(${-(p * 6)}%) scale(${bgScale})`
+            let bgOp = 0, bgSc = 1.0, bgX = 0
+            if (p < PROJ_START) {
+              bgOp = (p / PROJ_START) * 0.12
+              bgSc = lp(2.4, 1.0, p / PROJ_START)
+              bgX  = 0
+            } else if (p > PROJ_END) {
+              bgOp = ((1 - p) / (1 - PROJ_END)) * 0.12
+              bgX  = N * -150
+            } else {
+              bgOp = 0.12
+              bgX  = ((p - PROJ_START) / SEG) * -150
+            }
+            gsap.to(bgTextRef.current, {
+              opacity: bgOp, scale: bgSc, x: bgX,
+              duration: p < PROJ_START ? 0.25 : 0.6,
+              ease: 'none',
+              overwrite: 'auto',
+            })
           }
 
-          const newIdx = Math.min(Math.floor(p * N), N - 1)
-          if (newIdx !== activeIndexRef.current) {
-            runTransition(
-              activeIndexRef.current,
-              newIdx,
-              newIdx > activeIndexRef.current ? 1 : -1
-            )
-            activeIndexRef.current = newIdx
+          if (p < PROJ_START || p > PROJ_END) {
+            cardRefs.current.forEach(card => {
+              if (card) gsap.to(card, { opacity: 0, duration: 0.3, overwrite: 'auto' })
+            })
+            return
           }
-        },
-        onRefresh() {
-          sectionTopRef.current =
-            (sectionRef.current?.getBoundingClientRect().top ?? 0) + window.scrollY
+
+          const vi  = (p - PROJ_START) / SEG
+          const idx = Math.min(Math.max(Math.floor(vi), 0), N - 1)
+          if (counterRef.current) counterRef.current.textContent = `${WORK_ITEMS[idx].index} / 05`
+          dotRefs.current.forEach((d, j) => d?.setAttribute('data-active', String(j === idx)))
+
+          cardRefs.current.forEach((card, i) => {
+            if (!card) return
+            const segStart = PROJ_START + i * SEG
+            const t = (p - segStart) / SEG  // 0..1 within this card's segment
+
+            let op: number, rotY: number, txPct: number, tz: number, sc: number
+
+            if (t < 0) {
+              // Not yet — parked right
+              op = 0; rotY = 70; txPct = 12; tz = -120; sc = 0.88
+            } else if (t > 1) {
+              // Already gone — parked left
+              op = 0; rotY = -70; txPct = -12; tz = -120; sc = 0.88
+            } else if (t <= ENTER_END) {
+              // 3D rotate in from right
+              const e = t / ENTER_END
+              op    = lp(0,    1.0,  e)
+              rotY  = lp(70,   0,    e)
+              txPct = lp(12,   0,    e)
+              tz    = lp(-120, 0,    e)
+              sc    = lp(0.88, 1.0,  e)
+            } else if (t <= EXIT_START) {
+              // Dwell — fully visible, stationary
+              op = 1; rotY = 0; txPct = 0; tz = 0; sc = 1.0
+            } else if (t <= SHOW_END) {
+              // 3D rotate out to left
+              const e = (t - EXIT_START) / (SHOW_END - EXIT_START)
+              op    = lp(1.0,  0,    e)
+              rotY  = lp(0,    -70,  e)
+              txPct = lp(0,    -12,  e)
+              tz    = lp(0,    -120, e)
+              sc    = lp(1.0,  0.88, e)
+            } else {
+              // Gap — all hidden, background visible before next card enters
+              op = 0; rotY = -70; txPct = -12; tz = -120; sc = 0.88
+            }
+
+            gsap.to(card, {
+              opacity:   op,
+              rotationY: rotY,
+              x:         `${txPct}%`,
+              z:         tz,
+              scale:     sc,
+              zIndex:    Math.round(op * 10),
+              duration:  0.35,
+              ease:      'power2.out',
+              overwrite: 'auto',
+            })
+          })
         },
       })
     })
@@ -231,10 +207,8 @@ export default function Work() {
 
       sceneRefs.current.forEach((scene, i) => {
         if (!scene) return
-        gsap.set(titleRefs.current[i],  { clipPath: 'inset(100% 0 0 0)' })
-        gsap.set(ruleRefs.current[i],   { scaleX: 0, transformOrigin: 'left center' })
-        gsap.set(posterRefs.current[i], { opacity: 0, y: 28 })
-        gsap.set(detailRefs.current[i], { opacity: 0, y: 16 })
+        gsap.set(mobileInfoRefs.current[i],   { opacity: 0, y: 20 })
+        gsap.set(posterRefs.current[i],       { opacity: 0, y: 28 })
 
         ScrollTrigger.create({
           trigger: scene,
@@ -242,10 +216,8 @@ export default function Work() {
           once:    true,
           onEnter() {
             const tl = gsap.timeline()
-            tl.to(posterRefs.current[i], { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' })
-            tl.to(ruleRefs.current[i],   { scaleX: 1, duration: 0.4, ease: 'power2.out' }, '-=0.3')
-            tl.to(titleRefs.current[i],  { clipPath: 'inset(0% 0 0% 0)', duration: 0.52, ease: 'power3.out' }, '-=0.25')
-            tl.to(detailRefs.current[i], { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, '-=0.2')
+            tl.to(posterRefs.current[i],     { opacity: 1, y: 0, duration: 0.6,  ease: 'power3.out' })
+            tl.to(mobileInfoRefs.current[i], { opacity: 1, y: 0, duration: 0.52, ease: 'power3.out' }, '-=0.3')
           },
         })
       })
@@ -269,42 +241,95 @@ export default function Work() {
       id="work"
       aria-label="Projeler"
     >
-      {/* Background letter grid — huge crimson rows, matching reference structure */}
-      <div ref={bgTextRef} className={styles.bgText} aria-hidden="true">
-        {['P','R','O','J','E','C','T','P','R','O','J','E'].map((letter, row) => (
-          <div
-            key={row}
-            className={`${styles.bgRow} ${styles[`bgShift${row % 4}` as keyof typeof styles]}`}
-          >
-            {Array.from({ length: 6 }, (_, j) => (
-              <span key={j} className={styles.bgWord}>{letter}</span>
-            ))}
-          </div>
-        ))}
+      {/* Letter grid background */}
+      <div className={styles.bgClip} aria-hidden="true">
+        <div ref={bgTextRef} className={styles.bgText}>
+          {Array.from({ length: 10 }, (_, row) => (
+            <div key={row} className={`${styles.bgRow} ${styles[`bgShift${row % 4}` as keyof typeof styles]}`}>
+              {Array.from({ length: 14 }, (_, col) => (
+                <span key={col} className={styles.bgWord}>
+                  {'PROJECT'[(col + row) % 7]}
+                </span>
+              ))}
+            </div>
+          ))}
+        </div>
       </div>
 
-      {/* Title card — light bg, dark pill + outer ring, slides up on scroll */}
+      {/* Title card */}
       <div ref={titleCardRef} className={styles.titleCard} aria-hidden="true">
         <div className={styles.titlePillOuter}>
           <div className={styles.titlePill}>
-            {'PROJELER'.split('').map((c, i) => (
-              <span key={i}>{c}</span>
-            ))}
+            {'PROJELER'.split('').map((c, i) => <span key={i}>{c}</span>)}
           </div>
         </div>
       </div>
 
-      <div className={styles.inner}>
+      {/* ── Scattered screenshot cards (desktop only) ── */}
+      {/* ── Project panel cards (desktop) ── */}
+      <div className={styles.carouselWrap} aria-hidden="true">
+        <div ref={carouselRef} className={styles.carousel}>
+          {WORK_ITEMS.map((item, i) => (
+            <div
+              key={item.slug}
+              ref={el => { cardRefs.current[i] = el }}
+              className={styles.carouselCard}
+              style={{ '--project-accent': `var(${item.accentVar})` } as React.CSSProperties}
+            >
+              <div className={styles.projectPanel}>
+                {/* Left: project info */}
+                <div className={styles.panelInfo}>
+                  <span className={styles.panelMeta}>{item.index} — {item.category}</span>
+                  <div className={styles.panelRule} />
+                  <h2 className={styles.panelTitle}>{item.title}</h2>
+                  <p className={styles.panelDesc}>{item.subtitle}</p>
+                  <div className={styles.panelStack}>
+                    {item.stack.map(t => <span key={t} className={styles.panelTag}>{t}</span>)}
+                  </div>
+                  {(item.demoUrl || item.githubUrl) && (
+                    <a
+                      href={item.demoUrl || item.githubUrl}
+                      className={styles.panelLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {item.demoUrl ? '→ PROJEYİ KEŞFET' : '→ GITHUB\'DA GÖR'}
+                    </a>
+                  )}
+                </div>
+                {/* Right: browser mockup screenshot */}
+                <div className={styles.panelScreen}>
+                  <div className={styles.browser} style={{ '--project-accent': `var(${item.accentVar})` } as React.CSSProperties}>
+                    <div className={styles.browserChrome}>
+                      <div className={styles.browserDots}><span /><span /><span /></div>
+                      <div className={styles.browserUrl} />
+                    </div>
+                    <div className={styles.browserScreen}>
+                      <Image
+                        src={item.image}
+                        alt={`${item.title} ekran görüntüsü`}
+                        width={1200}
+                        height={675}
+                        className={styles.screenshot}
+                        priority={i === 0}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
 
-        {/* Section header */}
+      {/* ── Inner: header + mobile layout + nav ── */}
+      <div className={styles.inner}>
         <div className={styles.header}>
           <span className={styles.headerLabel}>Projeler</span>
-          <span ref={counterRef} className={styles.counter} aria-live="polite">
-            01 / 05
-          </span>
+          <span ref={counterRef} className={styles.counter} aria-live="polite">01 / 05</span>
         </div>
 
-        {/* Stage — all scenes stacked, GSAP manages visibility */}
+        {/* Mobile only: poster + info per project */}
         <div className={styles.stage}>
           {WORK_ITEMS.map((item, i) => (
             <div
@@ -314,48 +339,10 @@ export default function Work() {
               style={{ '--project-accent': `var(${item.accentVar})` } as React.CSSProperties}
               aria-hidden={i !== 0}
             >
-              {/* Left: project info */}
-              <div className={styles.info}>
-                <span className={styles.sceneNum} aria-hidden="true">{item.index}</span>
-
-                <div ref={el => { ruleRefs.current[i] = el }} className={styles.rule} aria-hidden="true" />
-                <h2 ref={el => { titleRefs.current[i] = el }} className={styles.title}>
-                  {item.title}
-                </h2>
-                <div ref={el => { detailRefs.current[i] = el }} className={styles.details}>
-                  <div className={styles.projectMeta}>
-                    {item.index}&nbsp;—&nbsp;{item.category}
-                  </div>
-                  <p className={styles.subtitle}>{item.subtitle}</p>
-                  <div className={styles.stack}>
-                    {item.stack.map(t => (
-                      <span key={t} className={styles.tag}>{t}</span>
-                    ))}
-                  </div>
-                  {(item.demoUrl || item.githubUrl) && (
-                    <a
-                      href={item.demoUrl || item.githubUrl}
-                      className={styles.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      data-cursor-label={item.demoUrl ? 'ZİYARET ET' : 'GITHUB'}
-                    >
-                      {item.demoUrl ? '→ PROJEYİ KEŞFET' : '→ GITHUB\'DA GÖR'}
-                    </a>
-                  )}
-                </div>
-              </div>
-
-              {/* Right: browser chrome mockup */}
-              <div ref={el => { posterRefs.current[i] = el }} className={styles.poster}>
-                <div
-                  className={styles.browser}
-                  style={{ '--project-accent': `var(${item.accentVar})` } as React.CSSProperties}
-                >
+              <div ref={el => { posterRefs.current[i] = el }} className={styles.posterMobile}>
+                <div className={styles.browser} style={{ '--project-accent': `var(${item.accentVar})` } as React.CSSProperties}>
                   <div className={styles.browserChrome}>
-                    <div className={styles.browserDots}>
-                      <span /><span /><span />
-                    </div>
+                    <div className={styles.browserDots}><span /><span /><span /></div>
                     <div className={styles.browserUrl} />
                   </div>
                   <div className={styles.browserScreen}>
@@ -370,11 +357,25 @@ export default function Work() {
                   </div>
                 </div>
               </div>
+
+              <div ref={el => { mobileInfoRefs.current[i] = el }} className={styles.mobileInfo}>
+                <div className={styles.rule} />
+                <h2 className={styles.title}>{item.title}</h2>
+                <div className={styles.projectMeta}>{item.index}&nbsp;—&nbsp;{item.category}</div>
+                <p className={styles.subtitle}>{item.subtitle}</p>
+                <div className={styles.stack}>
+                  {item.stack.map(t => <span key={t} className={styles.tag}>{t}</span>)}
+                </div>
+                {(item.demoUrl || item.githubUrl) && (
+                  <a href={item.demoUrl || item.githubUrl} className={styles.link} target="_blank" rel="noopener noreferrer">
+                    {item.demoUrl ? '→ PROJEYİ KEŞFET' : '→ GITHUB\'DA GÖR'}
+                  </a>
+                )}
+              </div>
             </div>
           ))}
         </div>
 
-        {/* Dot navigation */}
         <nav className={styles.nav} aria-label="Proje navigasyonu">
           {WORK_ITEMS.map((item, i) => (
             <button
@@ -387,7 +388,6 @@ export default function Work() {
             />
           ))}
         </nav>
-
       </div>
     </section>
   )

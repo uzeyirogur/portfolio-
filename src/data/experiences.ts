@@ -15,7 +15,7 @@ export const experiences: Experience[] = [
   {
     company: 'GMR GENÇ METAL RAFİNERİ A.Ş.',
     companyShort: 'GMR Genç Metal',
-    role: 'Computer Engineer',
+    role: 'Computer Engineer / Full Stack .NET Developer',
     location: 'İstanbul, Türkiye',
     startDate: 'Ocak 2026',
     endDate: 'Devam Ediyor',

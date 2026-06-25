@@ -1,163 +1,126 @@
 'use client'
 
-import { useState } from 'react'
-import { motion } from 'framer-motion'
-import { Mail, Github, Linkedin, Download, Send, CheckCircle } from 'lucide-react'
-import { profile } from '@/data/profile'
-import { socials } from '@/data/socials'
+import { useRef } from 'react'
+import { useGSAP } from '@gsap/react'
+import { gsap } from '@/scripts/gsap'
+import styles from './Contact.module.scss'
 
-const E = [0.16, 1, 0.3, 1] as const
-
-const inputStyle: React.CSSProperties = {
-  width: '100%',
-  padding: '0.65rem 0',
-  backgroundColor: 'transparent',
-  border: 'none',
-  borderBottom: '1px solid var(--border)',
-  color: 'var(--text-1)',
-  fontFamily: 'var(--font-mono)',
-  fontSize: '0.78rem',
-  outline: 'none',
-  transition: 'border-color 0.2s',
-}
+const EMAIL  = 'uzeyirogur52@outlook.com'
+const GITHUB = 'https://github.com/uzeyirogur'
 
 export default function Contact() {
-  const [form, setForm] = useState({ name: '', email: '', message: '' })
-  const [sent, setSent] = useState(false)
+  const sectionRef  = useRef<HTMLElement>(null)
+  const labelRowRef = useRef<HTMLDivElement>(null)
+  const headlineRef = useRef<HTMLHeadingElement>(null)
+  const availRef    = useRef<HTMLParagraphElement>(null)
+  const emailRef    = useRef<HTMLAnchorElement>(null)
+  const footerRef   = useRef<HTMLDivElement>(null)
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    const sub = encodeURIComponent(`Portfolyo: ${form.name}`)
-    const body = encodeURIComponent(`Ad: ${form.name}\nMail: ${form.email}\n\n${form.message}`)
-    window.location.href = `mailto:${profile.email}?subject=${sub}&body=${body}`
-    setSent(true)
-    setTimeout(() => setSent(false), 4000)
-  }
+  useGSAP(() => {
+    if (!sectionRef.current) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
-  const LINKS = [
-    { command: 'mail send',    label: profile.email,              href: `mailto:${profile.email}`, Icon: Mail },
-    { command: 'github open',  label: 'github.com/uzeyirogur',   href: socials.github, Icon: Github, external: true },
-    { command: 'linkedin',     label: 'linkedin/uzeyirogur',     href: socials.linkedin, Icon: Linkedin, external: true },
-    { command: 'cv download',  label: 'uzeyir-ogur-cv.pdf',      href: profile.cvUrl, Icon: Download, download: true },
-  ]
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: 'top 72%',
+        once: true,
+      },
+    })
+
+    tl.fromTo(labelRowRef.current,
+      { opacity: 0, y: 14 },
+      { opacity: 1, y: 0, duration: 0.55, ease: 'power2.out' }, 0
+    )
+    tl.fromTo(headlineRef.current,
+      { clipPath: 'inset(0 0 100% 0)' },
+      { clipPath: 'inset(0 0 0% 0)', duration: 0.9, ease: 'power3.out' }, 0.15
+    )
+    tl.fromTo(availRef.current,
+      { opacity: 0, y: 12 },
+      { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 0.65
+    )
+    tl.fromTo(emailRef.current,
+      { opacity: 0, y: 16 },
+      { opacity: 1, y: 0, duration: 0.65, ease: 'power2.out' }, 0.82
+    )
+    tl.fromTo(footerRef.current,
+      { opacity: 0 },
+      { opacity: 1, duration: 0.6, ease: 'power2.out' }, 1.1
+    )
+  }, { scope: sectionRef })
 
   return (
-    <section id="contact" className="section-y" style={{ backgroundColor: 'var(--bg-surface)' }}>
-      <div className="container-xl">
-        <motion.p
-          initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="section-label" style={{ display: 'block', marginBottom: '3rem' }}
-        >
-          // İletişim
-        </motion.p>
+    <section
+      ref={sectionRef}
+      className={styles.contact}
+      data-theme="dark"
+      id="contact"
+      aria-label="İletişim"
+    >
+      <div className={styles.inner}>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 24rem), 1fr))', gap: 'clamp(2.5rem, 6vw, 6rem)', maxWidth: '56rem' }}>
-          {/* Left: command palette */}
-          <div>
-            <motion.p
-              initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: 'var(--text-3)', marginBottom: '2rem' }}
-            >
-              $ contact --mode=interactive
-            </motion.p>
+        {/* Etiket satırı */}
+        <div ref={labelRowRef} className={styles.labelRow}>
+          <span className={styles.label}>İLETİŞİM</span>
+          <div className={styles.labelRule} aria-hidden="true" />
+          <span className={styles.labelIndex}>06</span>
+        </div>
 
-            <div>
-              {LINKS.map((item, i) => (
-                <motion.a
-                  key={item.command}
-                  href={item.href}
-                  {...(item.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                  {...(item.download ? { download: true } : {})}
-                  initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: i * 0.08, ease: E }}
-                  style={{
-                    display: 'flex', alignItems: 'center', gap: '1.25rem',
-                    padding: '0.85rem 0', borderBottom: '1px solid var(--border)',
-                    textDecoration: 'none', transition: 'padding-left 0.18s',
-                  }}
-                  onMouseEnter={(e) => (e.currentTarget.style.paddingLeft = '0.5rem')}
-                  onMouseLeave={(e) => (e.currentTarget.style.paddingLeft = '0')}
-                >
-                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: 'var(--accent)', flexShrink: 0, minWidth: '7.5rem' }}>
-                    {'> '}{item.command}
-                  </span>
-                  <span style={{ flex: 1, borderBottom: '1px dotted rgba(255,255,255,0.07)', alignSelf: 'center' }} />
-                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.62rem', color: 'var(--text-3)' }}>
-                    {item.label}
-                  </span>
-                </motion.a>
-              ))}
-            </div>
+        {/* Ana CTA bloğu */}
+        <div className={styles.ctaBlock}>
+          <h2 ref={headlineRef} className={styles.headline}>
+            Gerçek bir<br />sistemi birlikte<br />hayata geçirelim.
+          </h2>
 
-            <motion.p
-              initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: 'var(--text-3)', marginTop: '2.25rem', fontStyle: 'italic' }}
-            >
-              // Bir sistem birlikte inşa edelim.
-            </motion.p>
+          <p ref={availRef} className={styles.availability}>
+            İŞ GÜCÜNE AÇIĞIM&nbsp;—&nbsp;İSTANBUL, TÜRKİYE
+          </p>
+
+          <p className={styles.subtext}>
+            Yeni bir proje, iş birliği veya fikir için ulaşabilirsin.
+          </p>
+
+          <a
+            ref={emailRef}
+            href={`mailto:${EMAIL}`}
+            className={styles.email}
+            aria-label={`${EMAIL} adresine e-posta gönder`}
+          >
+            <span className={styles.emailArrow} aria-hidden="true">→</span>
+            {EMAIL}
+          </a>
+        </div>
+
+        {/* Footer */}
+        <footer ref={footerRef} className={styles.footer}>
+          <div className={styles.footerLeft}>
+            <span className={styles.footerName}>ÜZEYİR ÖĞÜR</span>
+            <span className={styles.footerRole}>Full Stack .NET Developer · Bilgisayar Mühendisi</span>
           </div>
 
-          {/* Right: minimal form */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2, ease: E }}
-          >
-            <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.57rem', letterSpacing: '0.18em', color: 'var(--text-3)', textTransform: 'uppercase', marginBottom: '1.75rem' }}>
-              VEYA MESAJ BIRAK
-            </p>
-            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-              {[
-                { type: 'text', placeholder: 'Ad Soyad', key: 'name' as const },
-                { type: 'email', placeholder: 'E-posta', key: 'email' as const },
-              ].map((f) => (
-                <input
-                  key={f.key}
-                  type={f.type}
-                  required
-                  value={form[f.key]}
-                  onChange={(e) => setForm((s) => ({ ...s, [f.key]: e.target.value }))}
-                  placeholder={f.placeholder}
-                  style={inputStyle}
-                  onFocus={(e) => (e.currentTarget.style.borderColor = 'rgba(232,0,58,0.4)')}
-                  onBlur={(e) => (e.currentTarget.style.borderColor = 'var(--border)')}
-                />
-              ))}
-              <textarea
-                required
-                rows={4}
-                value={form.message}
-                onChange={(e) => setForm((s) => ({ ...s, message: e.target.value }))}
-                placeholder="Mesajınız"
-                style={{ ...inputStyle, resize: 'none' }}
-                onFocus={(e) => (e.currentTarget.style.borderColor = 'rgba(232,0,58,0.4)')}
-                onBlur={(e) => (e.currentTarget.style.borderColor = 'var(--border)')}
-              />
-              <button
-                type="submit"
-                disabled={sent}
-                style={{
-                  fontFamily: 'var(--font-mono)', fontSize: '0.68rem',
-                  letterSpacing: '0.1em', textTransform: 'uppercase',
-                  color: sent ? '#34D399' : 'var(--accent)',
-                  backgroundColor: 'transparent',
-                  border: `1px solid ${sent ? '#34D399' : 'rgba(232,0,58,0.3)'}`,
-                  borderRadius: 3, padding: '0.65rem 1.5rem',
-                  cursor: sent ? 'default' : 'pointer',
-                  alignSelf: 'flex-start', transition: 'all 0.2s',
-                  display: 'flex', alignItems: 'center', gap: '0.5rem',
-                }}
-                onMouseEnter={(e) => { if (!sent) e.currentTarget.style.borderColor = 'rgba(232,0,58,0.5)' }}
-                onMouseLeave={(e) => { if (!sent) e.currentTarget.style.borderColor = 'rgba(232,0,58,0.3)' }}
-              >
-                {sent ? <><CheckCircle size={12} /> Gönderildi</> : <><Send size={12} /> Gönder</>}
-              </button>
-            </form>
-          </motion.div>
-        </div>
+          <div className={styles.footerLinks}>
+            <a
+              href={GITHUB}
+              className={styles.footerLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub profili"
+            >
+              GITHUB ↗
+            </a>
+            <a
+              href={`mailto:${EMAIL}`}
+              className={styles.footerLink}
+              aria-label="E-posta gönder"
+            >
+              E-POSTA ↗
+            </a>
+          </div>
+
+          <span className={styles.footerCopy}>© {new Date().getFullYear()}</span>
+        </footer>
+
       </div>
     </section>
   )

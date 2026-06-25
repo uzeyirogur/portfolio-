@@ -1,0 +1,13 @@
+- generic [active]:
+  - banner "Site navigation" [ref=e1]:
+    - generic [ref=e2]:
+      - link "Üzeyir Öğür — back to top" [ref=e3]:
+        - /url: "#"
+        - text: ÜÖ
+      - button "Open navigation" [ref=e26]
+  - generic:
+    - generic: MENU
+  - main
+  - button "Open Next.js Dev Tools" [ref=e21] [cursor=pointer]:
+    - img [ref=e22]
+  - alert [ref=e25]

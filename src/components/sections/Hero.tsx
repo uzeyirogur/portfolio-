@@ -1,433 +1,296 @@
 'use client'
 
-import dynamic from 'next/dynamic'
-import { motion, AnimatePresence } from 'framer-motion'
-import { useEffect, useState } from 'react'
-import { profile } from '@/data/profile'
+import { useRef, useState, useCallback, useEffect } from 'react'
+import { useGSAP } from '@gsap/react'
+import { gsap, Draggable } from '@/scripts/gsap'
+import styles from './Hero.module.scss'
 
-const ASCIIField = dynamic(() => import('@/components/ui/ASCIIField'), { ssr: false })
+// ── XOX / AI logic ────────────────────────────────────────────────────────────
 
-const E = [0.16, 1, 0.3, 1] as const
+type Cell = 'X' | 'O' | null
 
-const TICKER_ITEMS = 'ASP.NET CORE · C# · SQL SERVER · ENTITY FRAMEWORK · NEXT.JS · REACT · WEB API · JWT · CLEAN ARCH · EF CORE · TYPESCRIPT · TAILWIND · '
+const WIN_LINES = [
+  [0,1,2],[3,4,5],[6,7,8],
+  [0,3,6],[1,4,7],[2,5,8],
+  [0,4,8],[2,4,6],
+]
 
-function Ticker({ reverse = false }: { reverse?: boolean }) {
-  const doubled = TICKER_ITEMS + TICKER_ITEMS
-  return (
-    <div
-      style={{
-        overflow: 'hidden',
-        borderTop: '1px solid var(--border)',
-        borderBottom: '1px solid var(--border)',
-        padding: '0.55rem 0',
-        backgroundColor: 'transparent',
-        position: 'relative',
-        zIndex: 20,
-        flexShrink: 0,
-      }}
-    >
-      <div
-        className={reverse ? 'ticker-right' : 'ticker-left'}
-        style={{ display: 'flex', whiteSpace: 'nowrap', width: 'max-content' }}
-      >
-        {[0, 1, 2, 3].map((i) => (
-          <span
-            key={i}
-            style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: '0.6rem',
-              color: 'var(--text-3)',
-              letterSpacing: '0.12em',
-              paddingRight: '2rem',
-            }}
-          >
-            {doubled}
-          </span>
-        ))}
-      </div>
-    </div>
-  )
+function checkWinner(board: Cell[]): { winner: Cell; line: number[] | null } {
+  for (const ln of WIN_LINES) {
+    const [a,b,c] = ln
+    if (board[a] && board[a] === board[b] && board[a] === board[c])
+      return { winner: board[a], line: ln }
+  }
+  return { winner: null, line: null }
 }
 
-// ─── Intro animation constants ────────────────────────────────────────────────
-const INTRO_WORDS = [
-  { text: 'BUILD',   color: '#F0F0F0' },
-  { text: 'SYSTEMS', color: '#F0F0F0' },
-  { text: 'THAT',    color: '#F0F0F0' },
-  { text: 'WORK.',   color: '#E8003A' },
-]
-const INTRO_NAME = 'ÜZEYİR ÖĞÜR'
-const INTRO_SUB  = 'FULL STACK .NET DEVELOPER · 2026'
-const SC_CHARS   = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#&İÜÖÇŞĞ'
+function minimax(board: Cell[], depth: number, isMax: boolean): number {
+  const { winner } = checkWinner(board)
+  if (winner === 'O') return 10 - depth
+  if (winner === 'X') return depth - 10
+  if (board.every(c => c !== null)) return 0
 
-function IntroOverlay() {
-  const [show, setShow]         = useState(false)
-  const [phase, setPhase]       = useState<'words' | 'name'>('words')
-  const [wordIdx, setWordIdx]   = useState(0)
-  const [chars, setChars]       = useState<string[]>(
-    INTRO_NAME.split('').map(() => SC_CHARS[0])
-  )
-  const [showLine, setShowLine] = useState(false)
-  const [showSub, setShowSub]   = useState(false)
+  if (isMax) {
+    let best = -Infinity
+    for (let i = 0; i < 9; i++) {
+      if (!board[i]) { board[i] = 'O'; best = Math.max(best, minimax(board, depth+1, false)); board[i] = null }
+    }
+    return best
+  } else {
+    let best = Infinity
+    for (let i = 0; i < 9; i++) {
+      if (!board[i]) { board[i] = 'X'; best = Math.min(best, minimax(board, depth+1, true));  board[i] = null }
+    }
+    return best
+  }
+}
 
+function getBestMove(board: Cell[]): number {
+  let bestVal = -Infinity, bestMove = -1
+  for (let i = 0; i < 9; i++) {
+    if (!board[i]) {
+      board[i] = 'O'
+      const val = minimax(board, 0, false)
+      board[i] = null
+      if (val > bestVal) { bestVal = val; bestMove = i }
+    }
+  }
+  return bestMove
+}
+
+// ── Deterministic particle positions ─────────────────────────────────────────
+
+const PARTICLES = [
+  { x:  8, y: 15, s: 3, d:  7.0, dl:  0.0, c: '#CC1133',              k: 1 },
+  { x: 22, y: 68, s: 2, d: 10.0, dl: -2.1, c: 'rgba(255,255,255,0.55)', k: 2 },
+  { x: 35, y: 42, s: 4, d:  6.0, dl: -4.5, c: '#B89132',              k: 3 },
+  { x: 48, y: 82, s: 2, d:  9.0, dl: -1.2, c: '#CC1133',              k: 1 },
+  { x: 58, y: 25, s: 3, d: 13.0, dl: -6.0, c: 'rgba(255,255,255,0.45)', k: 2 },
+  { x: 72, y: 55, s: 2, d:  8.0, dl: -3.3, c: '#B89132',              k: 3 },
+  { x: 85, y: 38, s: 4, d: 11.0, dl: -5.0, c: '#CC1133',              k: 1 },
+  { x: 15, y: 88, s: 2, d:  7.5, dl: -0.8, c: 'rgba(255,255,255,0.35)', k: 2 },
+  { x: 62, y: 72, s: 3, d:  9.5, dl: -2.9, c: '#B89132',              k: 3 },
+  { x: 91, y: 18, s: 2, d: 12.0, dl: -7.0, c: '#CC1133',              k: 1 },
+  { x: 44, y: 10, s: 3, d:  6.5, dl: -3.7, c: 'rgba(255,255,255,0.5)',  k: 2 },
+  { x: 78, y: 90, s: 2, d: 14.0, dl: -1.5, c: '#B89132',              k: 3 },
+  { x:  3, y: 52, s: 4, d:  8.5, dl: -5.2, c: '#CC1133',              k: 1 },
+  { x: 55, y: 62, s: 2, d: 10.5, dl: -4.0, c: 'rgba(255,255,255,0.4)',  k: 2 },
+  { x: 30, y: 30, s: 3, d:  7.0, dl: -6.5, c: '#B89132',              k: 3 },
+  { x: 68, y: 85, s: 2, d:  9.0, dl: -1.8, c: '#CC1133',              k: 1 },
+  { x: 18, y: 45, s: 3, d: 11.5, dl: -3.0, c: 'rgba(255,255,255,0.3)',  k: 3 },
+  { x: 94, y: 65, s: 2, d:  8.0, dl: -5.8, c: '#B89132',              k: 2 },
+] as const
+
+// ── Component ─────────────────────────────────────────────────────────────────
+
+interface HeroProps { loaderDone: boolean }
+
+export default function Hero({ loaderDone }: HeroProps) {
+  const sectionRef   = useRef<HTMLElement>(null)
+  const metaRef      = useRef<HTMLDivElement>(null)
+  const ruleRef      = useRef<HTMLDivElement>(null)
+  const roleRef      = useRef<HTMLDivElement>(null)
+  const statementRef = useRef<HTMLParagraphElement>(null)
+  const gameRef      = useRef<HTMLDivElement>(null)
+  const chromeRef    = useRef<HTMLDivElement>(null)
+
+  // ── XOX state ──
+  const [board, setBoard]           = useState<Cell[]>(Array(9).fill(null))
+  const [isPlayerTurn, setIsPlayerTurn] = useState(true)
+  const [scores, setScores]         = useState({ player: 0, ai: 0 })
+
+  const { winner, line: winLine } = checkWinner(board)
+  const isDraw = !winner && board.every(c => c !== null)
+
+  const handleCell = useCallback((i: number) => {
+    if (board[i] || winner || !isPlayerTurn) return
+    const next = [...board]
+    next[i] = 'X'
+    const result = checkWinner(next)
+    if (result.winner) setScores(s => ({ ...s, player: s.player + 1 }))
+    setBoard(next)
+    setIsPlayerTurn(false)
+  }, [board, winner, isPlayerTurn])
+
+  // AI responds after 450ms
   useEffect(() => {
-    if (typeof window === 'undefined') return
-    if (sessionStorage.getItem('intro-v5')) return
-    sessionStorage.setItem('intro-v5', '1')
-    setShow(true)
+    if (isPlayerTurn || winner || isDraw) return
+    const t = setTimeout(() => {
+      const move = getBestMove([...board])
+      if (move === -1) return
+      const next = [...board]
+      next[move] = 'O'
+      const result = checkWinner(next)
+      if (result.winner) setScores(s => ({ ...s, ai: s.ai + 1 }))
+      setBoard(next)
+      setIsPlayerTurn(true)
+    }, 450)
+    return () => clearTimeout(t)
+  }, [board, isPlayerTurn, winner, isDraw])
+
+  const handleRestart = useCallback(() => {
+    setBoard(Array(9).fill(null))
+    setIsPlayerTurn(true)
   }, [])
 
-  // Master timeline
+  // Auto-restart 1.5s after game ends
   useEffect(() => {
-    if (!show) return
-    const ts = [
-      setTimeout(() => setWordIdx(1), 650),
-      setTimeout(() => setWordIdx(2), 1300),
-      setTimeout(() => setWordIdx(3), 1950),
-      setTimeout(() => setPhase('name'), 2700),
-      setTimeout(() => setShowLine(true), 4050),
-      setTimeout(() => setShowSub(true), 4350),
-      setTimeout(() => setShow(false), 5300),
-    ]
-    return () => ts.forEach(clearTimeout)
-  }, [show])
+    if (!winner && !isDraw) return
+    const t = setTimeout(handleRestart, 1500)
+    return () => clearTimeout(t)
+  }, [winner, isDraw, handleRestart])
 
-  // Letter-by-letter scramble
-  useEffect(() => {
-    if (phase !== 'name') return
-    const nameArr = INTRO_NAME.split('')
-    const t0 = Date.now()
-    const STAGGER = 95   // ms between each letter locking
-    const LEAD    = 350  // ms before first letter locks
+  const status = winner
+    ? (winner === 'X' ? 'KAZANDIN! 🎉' : 'AI KAZANDI')
+    : isDraw    ? 'BERABERE'
+    : isPlayerTurn ? 'SEN OYNUYORSUN'
+    : 'AI DÜŞÜNÜYOR...'
 
-    const id = setInterval(() => {
-      const elapsed = Date.now() - t0
-      setChars(nameArr.map((ch, i) => {
-        if (ch === ' ') return ' '
-        if (elapsed >= LEAD + i * STAGGER) return ch
-        return SC_CHARS[Math.floor(Math.random() * SC_CHARS.length)]
-      }))
-    }, 48)
+  // ── GSAP: initial hidden states ──
+  useGSAP(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    gsap.set(metaRef.current,      { opacity: 0, y: -10 })
+    gsap.set(ruleRef.current,      { scaleX: 0, transformOrigin: 'left center' })
+    gsap.set(roleRef.current,      { opacity: 0, y: 16 })
+    gsap.set(statementRef.current, { opacity: 0, y: 12 })
+    gsap.set(gameRef.current,      { opacity: 0, y: 20 })
+  }, { scope: sectionRef, dependencies: [] })
 
-    const done = setTimeout(
-      () => clearInterval(id),
-      LEAD + (nameArr.length - 1) * STAGGER + 300
-    )
-    return () => { clearInterval(id); clearTimeout(done) }
-  }, [phase])
+  // ── GSAP: reveal after loader + setup Draggable ──
+  useGSAP(() => {
+    if (!loaderDone) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+    const tl = gsap.timeline({ delay: 0.1 })
+    tl.to(metaRef.current,      { opacity: 1, y: 0,      duration: 0.65, ease: 'power2.out' })
+    tl.to(ruleRef.current,      { scaleX: 1,             duration: 0.65, ease: 'power2.out' }, '-=0.2')
+    tl.to(roleRef.current,      { opacity: 1, y: 0,      duration: 0.55, ease: 'power2.out' }, '-=0.35')
+    tl.to(statementRef.current, { opacity: 1, y: 0,      duration: 0.5,  ease: 'power2.out' }, '-=0.2')
+    tl.to(gameRef.current,      { opacity: 1, y: 0,      duration: 0.6,  ease: 'power3.out' }, '-=0.1')
+
+    if (gameRef.current && chromeRef.current && sectionRef.current) {
+      Draggable.create(gameRef.current, {
+        type:          'x,y',
+        bounds:        sectionRef.current,
+        trigger:       chromeRef.current,
+        cursor:        'grab',
+        activeCursor:  'grabbing',
+      })
+    }
+  }, { scope: sectionRef, dependencies: [loaderDone] })
 
   return (
-    <AnimatePresence>
-      {show && (
-        <motion.div
-          key="intro"
-          initial={{ opacity: 1 }}
-          exit={{ opacity: 0, transition: { duration: 0.6, ease: 'easeInOut' } }}
-          onClick={() => setShow(false)}
-          style={{
-            position: 'fixed', inset: 0, zIndex: 9999,
-            backgroundColor: '#0D0D0D',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            cursor: 'pointer',
-          }}
-        >
-          {/* Word flash phase — absolute wrapper so flex centering works with AnimatePresence */}
-          {phase === 'words' && (
-            <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <AnimatePresence mode="wait">
-                <motion.p
-                  key={wordIdx}
-                  initial={{ opacity: 0, y: 14 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -14, transition: { duration: 0.09 } }}
-                  transition={{ duration: 0.13, ease: 'easeOut' }}
-                  style={{
-                    fontFamily: 'var(--font-display)',
-                    fontSize: 'clamp(3.5rem, 13vw, 12rem)',
-                    fontWeight: 900,
-                    color: INTRO_WORDS[wordIdx].color,
-                    letterSpacing: '-0.03em',
-                    margin: 0,
-                    lineHeight: 1,
-                    userSelect: 'none',
-                    whiteSpace: 'nowrap',
-                  }}
-                >
-                  {INTRO_WORDS[wordIdx].text}
-                </motion.p>
-              </AnimatePresence>
-            </div>
-          )}
-
-          {/* Name + line + subtitle phase */}
-          {phase === 'name' && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.18 }}
-              style={{ textAlign: 'center', width: '100%', padding: '0 2rem' }}
-            >
-              {/* Scrambling name */}
-              <p style={{
-                fontFamily: 'var(--font-display)',
-                fontSize: 'clamp(2rem, 7.5vw, 8rem)',
-                fontWeight: 800,
-                color: '#F0F0F0',
-                letterSpacing: '0.07em',
-                margin: 0,
-                lineHeight: 1,
-                userSelect: 'none',
-              }}>
-                {chars.map((ch, i) => (
-                  <span
-                    key={i}
-                    style={{
-                      display: 'inline-block',
-                      minWidth: INTRO_NAME[i] === ' ' ? '0.45em' : undefined,
-                      color: ch !== INTRO_NAME[i] ? 'rgba(240,240,240,0.3)' : '#F0F0F0',
-                      transition: 'color 0.06s',
-                    }}
-                  >
-                    {ch === ' ' ? ' ' : ch}
-                  </span>
-                ))}
-              </p>
-
-              {/* Sliding line */}
-              <motion.div
-                style={{
-                  height: 1,
-                  backgroundColor: 'rgba(255,255,255,0.18)',
-                  margin: '1.25rem auto',
-                  maxWidth: '44rem',
-                  transformOrigin: 'center',
-                }}
-                initial={{ scaleX: 0 }}
-                animate={{ scaleX: showLine ? 1 : 0 }}
-                transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
-              />
-
-              {/* Subtitle */}
-              <motion.p
-                style={{
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: 'clamp(0.52rem, 1.1vw, 0.65rem)',
-                  letterSpacing: '0.28em',
-                  color: 'rgba(240,240,240,0.38)',
-                  margin: 0,
-                  textTransform: 'uppercase',
-                }}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: showSub ? 1 : 0 }}
-                transition={{ duration: 0.5 }}
-              >
-                {INTRO_SUB}
-              </motion.p>
-            </motion.div>
-          )}
-        </motion.div>
-      )}
-    </AnimatePresence>
-  )
-}
-
-export default function Hero() {
-  return (
-    <>
-      <IntroOverlay />
-
-      <section
-        id="home"
-        style={{
-          position: 'relative',
-          height: '100dvh',
-          minHeight: '600px',
-          overflow: 'hidden',
-          backgroundColor: 'var(--bg)',
-          display: 'flex',
-          flexDirection: 'column',
-        }}
-      >
-        {/* Top ticker */}
-        <Ticker />
-
-        {/* Main canvas area */}
-        <div style={{ flex: 1, position: 'relative', overflow: 'hidden' }}>
-          {/* ASCII Field — full viewport, mouse-reactive identity */}
-          <ASCIIField />
-
-          {/* Vignette for readability */}
-          <div
-            aria-hidden
+    <section
+      ref={sectionRef}
+      className={styles.hero}
+      data-theme="dark"
+      id="hero"
+      aria-label="Introduction"
+    >
+      {/* Ambient layers */}
+      <div className={styles.aurora}    aria-hidden="true" />
+      <div className={styles.grid}      aria-hidden="true" />
+      <div className={styles.ring}      aria-hidden="true" />
+      <div className={styles.particles} aria-hidden="true">
+        {PARTICLES.map((p, i) => (
+          <span
+            key={i}
+            className={`${styles.particle} ${styles[`pk${p.k}` as 'pk1'|'pk2'|'pk3']}`}
             style={{
-              position: 'absolute',
-              inset: 0,
-              background:
-                'radial-gradient(ellipse 65% 55% at 50% 50%, transparent 25%, rgba(248,248,248,0.55) 100%)',
-              pointerEvents: 'none',
-              zIndex: 1,
-            }}
+              left:              `${p.x}%`,
+              top:               `${p.y}%`,
+              width:             `${p.s}px`,
+              height:            `${p.s}px`,
+              background:        p.c,
+              boxShadow:         `0 0 ${p.s * 4}px ${Math.ceil(p.s / 2)}px ${p.c}`,
+              animationDuration: `${p.d}s`,
+              animationDelay:    `${p.dl}s`,
+            } as React.CSSProperties}
           />
-          <div
-            aria-hidden
-            style={{
-              position: 'absolute',
-              inset: 0,
-              background:
-                'linear-gradient(to right, rgba(248,248,248,0.55) 0%, transparent 30%, transparent 70%, rgba(248,248,248,0.55) 100%)',
-              pointerEvents: 'none',
-              zIndex: 1,
-            }}
-          />
+        ))}
+      </div>
 
-          {/* Content layer */}
-          <div
-            style={{
-              position: 'absolute',
-              inset: 0,
-              zIndex: 10,
-              padding: 'clamp(1.5rem, 3.5vw, 2.75rem)',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between',
-            }}
-          >
-            {/* TOP: first name + info */}
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-              <motion.h1
-                initial={{ opacity: 0, y: -24 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.9, ease: E }}
-                style={{
-                  fontFamily: 'var(--font-display)',
-                  fontSize: 'clamp(3rem, 12vw, 14rem)',
-                  fontWeight: 800,
-                  color: 'var(--text-1)',
-                  margin: 0,
-                  lineHeight: 0.85,
-                  letterSpacing: '-0.04em',
-                  textTransform: 'uppercase',
-                  userSelect: 'none',
-                }}
-              >
-                ÜZEYİR
-              </motion.h1>
-
-              {/* Info — top right */}
-              <motion.div
-                initial={{ opacity: 0, x: 16 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.7, delay: 0.5, ease: E }}
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '0.6rem',
-                  alignItems: 'flex-end',
-                  paddingTop: '0.5rem',
-                }}
-              >
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.45rem',
-                    padding: '0.3rem 0.6rem',
-                    border: '1px solid rgba(34,197,94,0.28)',
-                    borderRadius: 3,
-                    backgroundColor: 'rgba(34,197,94,0.07)',
-                  }}
-                >
-                  <span style={{ position: 'relative', display: 'inline-flex', width: 7, height: 7, flexShrink: 0 }}>
-                    <span
-                      className="animate-ping"
-                      style={{
-                        position: 'absolute',
-                        inset: 0,
-                        borderRadius: '50%',
-                        backgroundColor: '#22C55E',
-                        opacity: 0.5,
-                      }}
-                    />
-                    <span style={{ position: 'relative', width: 7, height: 7, borderRadius: '50%', backgroundColor: '#22C55E' }} />
-                  </span>
-                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.58rem', color: '#22C55E', letterSpacing: '0.1em' }}>
-                    Open to work
-                  </span>
-                </div>
-                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.67rem', color: 'var(--text-2)', textAlign: 'right' }}>
-                  Computer Engineer
-                </span>
-                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.67rem', color: 'var(--text-2)', textAlign: 'right' }}>
-                  Full Stack .NET Developer
-                </span>
-                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6rem', color: 'var(--text-3)', textAlign: 'right' }}>
-                  İstanbul · Turkey
-                </span>
-              </motion.div>
-            </div>
-
-            {/* BOTTOM: CTAs + last name */}
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
-              {/* CTAs — bottom left */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.7, ease: E }}
-                style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', paddingBottom: '0.35rem' }}
-              >
-                {[
-                  { label: 'projeler_gör()', href: '#projects' },
-                  { label: 'iletişime_geç()', href: '#contact' },
-                  { label: 'cv_indir()', href: profile.cvUrl, download: true },
-                ].map((cta) => (
-                  <a
-                    key={cta.label}
-                    href={cta.href}
-                    {...(cta.download ? { download: true } : {})}
-                    style={{
-                      fontFamily: 'var(--font-mono)',
-                      fontSize: 'clamp(0.62rem, 1.1vw, 0.75rem)',
-                      color: 'var(--accent)',
-                      textDecoration: 'none',
-                      letterSpacing: '0.06em',
-                      opacity: 0.7,
-                      transition: 'opacity 0.15s, letter-spacing 0.2s',
-                    }}
-                    onMouseEnter={(e) => { e.currentTarget.style.opacity = '1'; e.currentTarget.style.letterSpacing = '0.1em' }}
-                    onMouseLeave={(e) => { e.currentTarget.style.opacity = '0.7'; e.currentTarget.style.letterSpacing = '0.06em' }}
-                  >
-                    {'> '}{cta.label}
-                  </a>
-                ))}
-              </motion.div>
-
-              {/* Last name — bottom right, MASSIVE */}
-              <motion.h1
-                initial={{ opacity: 0, y: 32 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.9, delay: 0.1, ease: E }}
-                style={{
-                  fontFamily: 'var(--font-display)',
-                  fontSize: 'clamp(5rem, 27vw, 32rem)',
-                  fontWeight: 800,
-                  color: 'var(--text-1)',
-                  margin: 0,
-                  lineHeight: 0.8,
-                  letterSpacing: '-0.04em',
-                  textTransform: 'uppercase',
-                  textAlign: 'right',
-                  userSelect: 'none',
-                }}
-              >
-                ÖĞÜR
-              </motion.h1>
-            </div>
-          </div>
+      {/* Main content */}
+      <div className={styles.inner}>
+        <div ref={metaRef} className={styles.topRow}>
+          <span className={styles.label}>İSTANBUL, TÜRKİYE</span>
         </div>
 
-        {/* Bottom ticker */}
-        <Ticker reverse />
-      </section>
-    </>
+        <div className={styles.spacer} aria-hidden="true" />
+
+        <div className={styles.nameBlock}>
+          <div className={styles.nameLine}>ÜZEYİR</div>
+          <div className={styles.nameLine}>ÖĞÜR</div>
+        </div>
+
+        <div ref={ruleRef} className={styles.rule} aria-hidden="true" />
+
+        <div ref={roleRef} className={styles.roleBlock}>
+          <span className={styles.roleItem}>Full Stack .NET Developer</span>
+          <span className={styles.roleSep} aria-hidden="true">/</span>
+          <span className={styles.roleItem}>Bilgisayar Mühendisi</span>
+        </div>
+
+        <p ref={statementRef} className={styles.statement}>
+          Gerçek iş problemleri için web tabanlı sistemler geliştiriyorum.
+        </p>
+      </div>
+
+      {/* ── XOX Floating Game Panel ── */}
+      <div ref={gameRef} className={styles.gamePanel} role="application" aria-label="XOX — Sen vs AI">
+
+        {/* Window chrome — drag handle only */}
+        <div ref={chromeRef} className={styles.chrome}>
+          <div className={styles.chromeDots}>
+            <span data-c="r" /><span data-c="y" /><span data-c="g" />
+          </div>
+          <span className={styles.chromeTitle}>XOX.EXE — SEN vs AI</span>
+          <span className={styles.chromeHint}>SÜRÜKLE</span>
+        </div>
+
+        {/* Status */}
+        <div className={styles.gameStatus}>
+          <span className={styles.gameStatusLabel}>STATUS</span>
+          <span className={`${styles.gameStatusVal} ${winner ? (winner === 'X' ? styles.statusWinPlayer : styles.statusWinAi) : ''}`}>
+            {status}
+          </span>
+        </div>
+
+        {/* Board */}
+        <div className={styles.board} role="grid" aria-label="Oyun tahtası">
+          {board.map((cell, i) => (
+            <button
+              key={i}
+              className={`${styles.cell} ${winLine?.includes(i) ? styles.cellWin : ''}`}
+              onClick={() => handleCell(i)}
+              disabled={!!cell || !!winner || !isPlayerTurn}
+              aria-label={`Hücre ${i + 1}: ${cell ?? 'boş'}`}
+            >
+              {cell && <span className={styles.mark} data-mark={cell}>{cell}</span>}
+            </button>
+          ))}
+        </div>
+
+        {/* Footer: score + restart */}
+        <div className={styles.gameFooter}>
+          <div className={styles.scores}>
+            <span className={styles.scoreLabel}>SEN</span>
+            <span className={styles.scoreVal}>{scores.player}</span>
+            <span className={styles.scoreSep}>/</span>
+            <span className={styles.scoreVal}>{scores.ai}</span>
+            <span className={styles.scoreLabel}>AI</span>
+          </div>
+          <button className={styles.restartBtn} onClick={handleRestart} aria-label="Yeniden başlat">
+            ↺ YENİDEN
+          </button>
+        </div>
+
+      </div>
+
+      {/* Scroll indicator */}
+      <div className={styles.scrollIndicator} aria-hidden="true">
+        <span className={styles.scrollLine} />
+      </div>
+    </section>
   )
 }

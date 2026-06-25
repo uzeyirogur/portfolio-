@@ -1,0 +1,66 @@
+// =============================================================================
+// CLEAR OUTPUT — Global Stylesheet Entry Point
+// Import order matters: tokens first, then reset (uses tokens), then rest.
+// =============================================================================
+
+@use 'tokens';
+@use 'reset';
+@use 'typography';
+@use 'animations';
+
+// ---------------------------------------------------------------------------
+// Section register system
+// Each section declares its background register via data-theme attribute.
+// ---------------------------------------------------------------------------
+
+[data-theme='dark'] {
+  background-color: var(--dark-bg);
+  color: var(--dark-primary);
+}
+
+[data-theme='light'] {
+  background-color: var(--light-bg);
+  color: var(--light-primary);
+}
+
+[data-theme='grey'] {
+  background-color: var(--grey-bg);
+  color: var(--grey-primary);
+}
+
+// ---------------------------------------------------------------------------
+// Layout utilities
+// ---------------------------------------------------------------------------
+
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: var(--content-pad);
+}
+
+.section {
+  padding-block: var(--section-pad);
+}
+
+// ---------------------------------------------------------------------------
+// Custom cursor: hide OS cursor on pointer:fine devices
+// The Cursor component renders its own dot/ring on these devices.
+// ---------------------------------------------------------------------------
+
+@media (hover: hover) and (pointer: fine) {
+  html,
+  a,
+  button {
+    cursor: none !important;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Selection styling
+// ---------------------------------------------------------------------------
+
+::selection {
+  background-color: var(--gold);
+  color: var(--dark-bg);
+}

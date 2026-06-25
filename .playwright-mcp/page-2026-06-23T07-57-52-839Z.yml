@@ -1,0 +1,10 @@
+- generic [active]:
+  - generic [ref=e1]:
+    - generic [ref=e2]: "100"
+    - generic [ref=e3]:
+      - generic [ref=e5]: ÜZEYİR
+      - generic [ref=e7]: ÖĞÜR
+  - main
+  - button "Open Next.js Dev Tools" [ref=e13] [cursor=pointer]:
+    - img [ref=e14]
+  - alert [ref=e17]

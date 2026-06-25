@@ -1,0 +1,556 @@
+- generic [active] [ref=e1]:
+  - banner "Site navigation" [ref=e2]:
+    - generic [ref=e3]:
+      - link "Üzeyir Öğür — back to top" [ref=e4]:
+        - /url: "#"
+        - text: ÜZO
+      - navigation "Primary" [ref=e5]:
+        - link "İŞLER" [ref=e6]:
+          - /url: "#work"
+        - link "YETKİNLİK" [ref=e7]:
+          - /url: "#stack"
+        - link "HAKKIMDA" [ref=e8]:
+          - /url: "#about"
+        - link "İLETİŞİM" [ref=e9]:
+          - /url: "#contact"
+  - generic [ref=e10] [cursor=pointer]:
+    - generic [ref=e11]: "000"
+    - generic [ref=e12]: click to skip
+    - generic [ref=e13]:
+      - generic [ref=e14]: › init portfolio
+      - generic [ref=e15]: › loading assets
+      - generic [ref=e16]: › compile systems
+      - generic [ref=e17]: › run ÜZO
+    - generic [ref=e18]:
+      - generic [ref=e19]: "?"
+      - generic [ref=e20]: "?"
+      - generic [ref=e21]: "?"
+  - main [ref=e23]:
+    - region "Introduction" [ref=e24]:
+      - generic [ref=e25]:
+        - generic [ref=e26]:
+          - generic [ref=e29]: İŞE AÇIĞIM
+          - generic [ref=e30]: İSTANBUL, TÜRKİYE
+        - generic [ref=e32]:
+          - generic [ref=e33]: ÜZEYİR
+          - generic [ref=e34]: ÖĞÜR
+        - generic [ref=e36]:
+          - generic [ref=e37]: Full Stack .NET Developer
+          - generic [ref=e38]: /
+          - generic [ref=e39]: Bilgisayar Mühendisi
+        - paragraph [ref=e40]: Gerçek iş problemleri için web tabanlı sistemler geliştiriyorum.
+    - generic "Technology stack and availability" [ref=e41]:
+      - generic [ref=e42]:
+        - generic [ref=e43]:
+          - generic [ref=e44]:
+            - generic [ref=e45]: FULL STACK .NET DEVELOPER
+            - generic [ref=e46]: —
+          - generic [ref=e47]:
+            - generic [ref=e48]: COMPUTER ENGINEER
+            - generic [ref=e49]: —
+          - generic [ref=e50]:
+            - generic [ref=e51]: ISTANBUL, TR
+            - generic [ref=e52]: —
+          - generic [ref=e53]:
+            - generic [ref=e54]: OPEN TO WORK
+            - generic [ref=e55]: —
+          - generic [ref=e56]:
+            - generic [ref=e57]: .NET 8
+            - generic [ref=e58]: —
+          - generic [ref=e59]:
+            - generic [ref=e60]: NEXT.JS 15
+            - generic [ref=e61]: —
+          - generic [ref=e62]:
+            - generic [ref=e63]: REACT 19
+            - generic [ref=e64]: —
+          - generic [ref=e65]:
+            - generic [ref=e66]: TYPESCRIPT
+            - generic [ref=e67]: —
+          - generic [ref=e68]:
+            - generic [ref=e69]: POSTGRESQL
+            - generic [ref=e70]: —
+          - generic [ref=e71]:
+            - generic [ref=e72]: AZURE
+            - generic [ref=e73]: —
+          - generic [ref=e74]:
+            - generic [ref=e75]: DOCKER
+            - generic [ref=e76]: —
+          - generic [ref=e77]:
+            - generic [ref=e78]: GIT
+            - generic [ref=e79]: —
+        - generic [ref=e80]:
+          - generic [ref=e81]:
+            - generic [ref=e82]: FULL STACK .NET DEVELOPER
+            - generic [ref=e83]: —
+          - generic [ref=e84]:
+            - generic [ref=e85]: COMPUTER ENGINEER
+            - generic [ref=e86]: —
+          - generic [ref=e87]:
+            - generic [ref=e88]: ISTANBUL, TR
+            - generic [ref=e89]: —
+          - generic [ref=e90]:
+            - generic [ref=e91]: OPEN TO WORK
+            - generic [ref=e92]: —
+          - generic [ref=e93]:
+            - generic [ref=e94]: .NET 8
+            - generic [ref=e95]: —
+          - generic [ref=e96]:
+            - generic [ref=e97]: NEXT.JS 15
+            - generic [ref=e98]: —
+          - generic [ref=e99]:
+            - generic [ref=e100]: REACT 19
+            - generic [ref=e101]: —
+          - generic [ref=e102]:
+            - generic [ref=e103]: TYPESCRIPT
+            - generic [ref=e104]: —
+          - generic [ref=e105]:
+            - generic [ref=e106]: POSTGRESQL
+            - generic [ref=e107]: —
+          - generic [ref=e108]:
+            - generic [ref=e109]: AZURE
+            - generic [ref=e110]: —
+          - generic [ref=e111]:
+            - generic [ref=e112]: DOCKER
+            - generic [ref=e113]: —
+          - generic [ref=e114]:
+            - generic [ref=e115]: GIT
+            - generic [ref=e116]: —
+    - region "Projeler" [ref=e117]:
+      - generic:
+        - generic:
+          - generic: P
+          - generic: R
+          - generic: O
+          - generic: J
+          - generic: E
+          - generic: C
+          - generic: T
+          - generic: P
+          - generic: R
+          - generic: O
+          - generic: J
+          - generic: E
+          - generic: C
+          - generic: T
+        - generic:
+          - generic: R
+          - generic: O
+          - generic: J
+          - generic: E
+          - generic: C
+          - generic: T
+          - generic: P
+          - generic: R
+          - generic: O
+          - generic: J
+          - generic: E
+          - generic: C
+          - generic: T
+          - generic: P
+        - generic:
+          - generic: O
+          - generic: J
+          - generic: E
+          - generic: C
+          - generic: T
+          - generic: P
+          - generic: R
+          - generic: O
+          - generic: J
+          - generic: E
+          - generic: C
+          - generic: T
+          - generic: P
+          - generic: R
+        - generic:
+          - generic: J
+          - generic: E
+          - generic: C
+          - generic: T
+          - generic: P
+          - generic: R
+          - generic: O
+          - generic: J
+          - generic: E
+          - generic: C
+          - generic: T
+          - generic: P
+          - generic: R
+          - generic: O
+        - generic:
+          - generic: E
+          - generic: C
+          - generic: T
+          - generic: P
+          - generic: R
+          - generic: O
+          - generic: J
+          - generic: E
+          - generic: C
+          - generic: T
+          - generic: P
+          - generic: R
+          - generic: O
+          - generic: J
+        - generic:
+          - generic: C
+          - generic: T
+          - generic: P
+          - generic: R
+          - generic: O
+          - generic: J
+          - generic: E
+          - generic: C
+          - generic: T
+          - generic: P
+          - generic: R
+          - generic: O
+          - generic: J
+          - generic: E
+        - generic:
+          - generic: T
+          - generic: P
+          - generic: R
+          - generic: O
+          - generic: J
+          - generic: E
+          - generic: C
+          - generic: T
+          - generic: P
+          - generic: R
+          - generic: O
+          - generic: J
+          - generic: E
+          - generic: C
+        - generic:
+          - generic: P
+          - generic: R
+          - generic: O
+          - generic: J
+          - generic: E
+          - generic: C
+          - generic: T
+          - generic: P
+          - generic: R
+          - generic: O
+          - generic: J
+          - generic: E
+          - generic: C
+          - generic: T
+        - generic:
+          - generic: R
+          - generic: O
+          - generic: J
+          - generic: E
+          - generic: C
+          - generic: T
+          - generic: P
+          - generic: R
+          - generic: O
+          - generic: J
+          - generic: E
+          - generic: C
+          - generic: T
+          - generic: P
+        - generic:
+          - generic: O
+          - generic: J
+          - generic: E
+          - generic: C
+          - generic: T
+          - generic: P
+          - generic: R
+          - generic: O
+          - generic: J
+          - generic: E
+          - generic: C
+          - generic: T
+          - generic: P
+          - generic: R
+      - generic:
+        - generic:
+          - generic:
+            - generic: P
+            - generic: R
+            - generic: O
+            - generic: J
+            - generic: E
+            - generic: L
+            - generic: E
+            - generic: R
+      - generic [ref=e118]:
+        - generic [ref=e119]:
+          - generic [ref=e120]: Projeler
+          - generic [ref=e121]: 01 / 05
+        - generic [ref=e122]:
+          - generic [ref=e123]:
+            - generic [ref=e124]:
+              - heading "PARAMNET" [level=2] [ref=e126]
+              - generic [ref=e127]:
+                - generic [ref=e128]: 01 — .NET / PANO
+                - paragraph [ref=e129]: Kişisel Finans ve Gider Takip Platformu
+                - generic [ref=e130]:
+                  - generic [ref=e131]: ASP.NET Core
+                  - generic [ref=e132]: Entity Framework Core
+                  - generic [ref=e133]: SQL Server
+                  - generic [ref=e134]: SQLite
+            - img "PARAMNET ekran görüntüsü" [ref=e144]
+          - generic [ref=e145]:
+            - generic [ref=e146]:
+              - heading [level=2] [ref=e148]: ANKA SPOR
+              - generic [ref=e149]:
+                - generic [ref=e150]: 02 — .NET / KURUMSAL
+                - paragraph [ref=e151]: Spor Akademisi Üye ve İçerik Yönetimi
+                - generic [ref=e152]:
+                  - generic [ref=e153]: ASP.NET Core MVC
+                  - generic [ref=e154]: Web API
+                  - generic [ref=e155]: Entity Framework Core
+                  - generic [ref=e156]: SQL Server
+                - link [ref=e157]:
+                  - /url: https://ankavm.com
+                  - text: → PROJEYİ KEŞFET
+            - img [ref=e167]
+          - generic [ref=e168]:
+            - generic [ref=e169]:
+              - heading [level=2] [ref=e171]: ALTIN TAKİP
+              - generic [ref=e172]:
+                - generic [ref=e173]: 03 — .NET / API / PANO
+                - paragraph [ref=e174]: Canlı Fiyat Çekme ve Karşılaştırma Panosu
+                - generic [ref=e175]:
+                  - generic [ref=e176]: ASP.NET Core
+                  - generic [ref=e177]: SQLite
+                  - generic [ref=e178]: SQL Server
+                  - generic [ref=e179]: Background Service
+            - img [ref=e189]
+          - generic [ref=e190]:
+            - generic [ref=e191]:
+              - heading [level=2] [ref=e193]: ARAÇ ENVANTERİ
+              - generic [ref=e194]:
+                - generic [ref=e195]: 04 — .NET / KURUMSAL
+                - paragraph [ref=e196]: Filo ve Bakım Yönetim Sistemi
+                - generic [ref=e197]:
+                  - generic [ref=e198]: ASP.NET Core MVC
+                  - generic [ref=e199]: Entity Framework Core
+                  - generic [ref=e200]: SQL Server
+                  - generic [ref=e201]: Bootstrap
+            - img [ref=e211]
+          - generic [ref=e212]:
+            - generic [ref=e213]:
+              - heading [level=2] [ref=e215]: DESTEK SİSTEMİ
+              - generic [ref=e216]:
+                - generic [ref=e217]: 05 — .NET / KURUMSAL
+                - paragraph [ref=e218]: N-Tier Kurumsal Destek Talep Sistemi
+                - generic [ref=e219]:
+                  - generic [ref=e220]: ASP.NET Core 8
+                  - generic [ref=e221]: Entity Framework Core
+                  - generic [ref=e222]: SQLite
+                  - generic [ref=e223]: JWT
+                - link [ref=e224]:
+                  - /url: https://github.com/uzeyirogur/Ticket-System
+                  - text: → GITHUB'DA GÖR
+            - img [ref=e234]
+        - navigation "Proje navigasyonu" [ref=e235]:
+          - button "PARAMNET projesini görüntüle" [ref=e236]
+          - button "ANKA SPOR projesini görüntüle" [ref=e237]
+          - button "ALTIN TAKİP projesini görüntüle" [ref=e238]
+          - button "ARAÇ ENVANTERİ projesini görüntüle" [ref=e239]
+          - button "DESTEK SİSTEMİ projesini görüntüle" [ref=e240]
+    - region "About" [ref=e241]:
+      - generic [ref=e242]:
+        - generic [ref=e243]:
+          - generic [ref=e244]: MÜHENDİS HAKKINDA
+          - generic [ref=e246]: "02"
+        - generic [ref=e247]:
+          - generic [ref=e248]:
+            - heading "Gerçek iş problemleri için sistemler." [level=2] [ref=e249]:
+              - text: Gerçek iş
+              - text: problemleri
+              - text: için sistemler.
+            - paragraph [ref=e250]: Demo değil, gerçek çıktı.
+          - generic [ref=e251]:
+            - paragraph [ref=e252]: Finans, operasyon, üyelik, araç yönetimi ve destek süreçleri için uçtan uca web tabanlı sistemler geliştiriyorum. İstanbul merkezli; kurumsal .NET uygulamalarına odaklı.
+            - paragraph [ref=e253]: Temiz mimari. Sürdürülebilir kod. Görünür sonuç.
+            - generic [ref=e254]: FULL STACK .NET GELİŞTİRİCİ / BİLGİSAYAR MÜHENDİSİ
+        - generic [ref=e255]:
+          - generic [ref=e256]:
+            - generic [ref=e257]: "05"
+            - generic [ref=e258]: GÖNDERİLEN PROJE
+          - generic [ref=e259]:
+            - generic [ref=e260]: 2+
+            - generic [ref=e261]: YIL DENEYİM
+          - generic [ref=e262]:
+            - generic [ref=e263]: .NET
+            - generic [ref=e264]: ANA PLATFORM
+          - generic [ref=e265]:
+            - generic [ref=e266]: IST
+            - generic [ref=e267]: İSTANBUL, TR
+    - region "Teknoloji Yetkinliği" [ref=e268]:
+      - generic [ref=e269]:
+        - generic [ref=e270]:
+          - generic [ref=e271]: YETKİNLİK MATRİSİ
+          - generic [ref=e273]: "03"
+        - generic [ref=e274]:
+          - generic [ref=e275]:
+            - generic [ref=e280]: STACK_MANIFEST.cfg
+            - generic [ref=e281]: ● OPERASYONEL
+          - generic [ref=e282]:
+            - button "RUNTIME Çalışma Zamanı Çalışma Zamanı teknolojileri" [pressed] [ref=e283] [cursor=pointer]:
+              - generic [ref=e284]:
+                - generic [ref=e285]: "01"
+                - generic [ref=e286]:
+                  - generic [ref=e287]: RUNTIME
+                  - generic [ref=e288]: Çalışma Zamanı
+              - list "Çalışma Zamanı teknolojileri" [ref=e291]:
+                - listitem [ref=e292]: ASP.NET Core 8
+                - listitem [ref=e293]: C# 12
+                - listitem [ref=e294]: .NET 8
+                - listitem [ref=e295]: Background Services
+                - listitem [ref=e296]: Middleware
+            - button "WEB LAYER Web Katmanı Web Katmanı teknolojileri" [ref=e297] [cursor=pointer]:
+              - generic [ref=e298]:
+                - generic [ref=e299]: "02"
+                - generic [ref=e300]:
+                  - generic [ref=e301]: WEB LAYER
+                  - generic [ref=e302]: Web Katmanı
+              - list "Web Katmanı teknolojileri" [ref=e305]:
+                - listitem [ref=e306]: MVC
+                - listitem [ref=e307]: Web API
+                - listitem [ref=e308]: Razor Pages
+                - listitem [ref=e309]: JWT Auth
+                - listitem [ref=e310]: AutoMapper
+                - listitem [ref=e311]: N-Tier
+            - button "DATA Veri Katmanı Veri Katmanı teknolojileri" [ref=e312] [cursor=pointer]:
+              - generic [ref=e313]:
+                - generic [ref=e314]: "03"
+                - generic [ref=e315]:
+                  - generic [ref=e316]: DATA
+                  - generic [ref=e317]: Veri Katmanı
+              - list "Veri Katmanı teknolojileri" [ref=e320]:
+                - listitem [ref=e321]: SQL Server
+                - listitem [ref=e322]: SQLite
+                - listitem [ref=e323]: EF Core
+                - listitem [ref=e324]: LINQ
+                - listitem [ref=e325]: T-SQL
+            - button "FRONTEND Arayüz Arayüz teknolojileri" [ref=e326] [cursor=pointer]:
+              - generic [ref=e327]:
+                - generic [ref=e328]: "04"
+                - generic [ref=e329]:
+                  - generic [ref=e330]: FRONTEND
+                  - generic [ref=e331]: Arayüz
+              - list "Arayüz teknolojileri" [ref=e334]:
+                - listitem [ref=e335]: HTML5
+                - listitem [ref=e336]: CSS3 / SCSS
+                - listitem [ref=e337]: JavaScript
+                - listitem [ref=e338]: Bootstrap 5
+                - listitem [ref=e339]: Chart.js
+                - listitem [ref=e340]: DataTables
+            - button "TOOLCHAIN Araç Zinciri Araç Zinciri teknolojileri" [ref=e341] [cursor=pointer]:
+              - generic [ref=e342]:
+                - generic [ref=e343]: "05"
+                - generic [ref=e344]:
+                  - generic [ref=e345]: TOOLCHAIN
+                  - generic [ref=e346]: Araç Zinciri
+              - list "Araç Zinciri teknolojileri" [ref=e349]:
+                - listitem [ref=e350]: Git
+                - listitem [ref=e351]: GitHub
+                - listitem [ref=e352]: Visual Studio
+                - listitem [ref=e353]: VS Code
+                - listitem [ref=e354]: Postman
+                - listitem [ref=e355]: IIS
+          - generic [ref=e357]: "> AKTİF: ÇALIŞMA ZAMANI — 5 TEKNOLOJİ"
+    - region "Experience" [ref=e359]:
+      - generic [ref=e360]:
+        - generic [ref=e361]:
+          - generic [ref=e362]: DENEYİM
+          - generic [ref=e364]: "04"
+        - generic [ref=e365]:
+          - generic [ref=e366]:
+            - generic [ref=e367]:
+              - generic [ref=e368]:
+                - generic [ref=e369]: "01"
+                - generic "Devam eden pozisyon" [ref=e370]: DEVAM EDİYOR
+              - heading "GMR GENÇ METAL RAFİNERİ" [level=2] [ref=e371]
+              - generic [ref=e372]:
+                - generic [ref=e373]: Bilgisayar Mühendisi · Full Stack .NET Geliştirici
+                - generic [ref=e375]: OCA 2026 — DEVAM
+                - generic [ref=e376]: İSTANBUL, TR
+            - list "Temel katkılar" [ref=e377]:
+              - listitem [ref=e378]: → Kurumsal .NET uygulama geliştirme
+              - listitem [ref=e379]: → ASP.NET Core MVC ve Web API mimarisi
+              - listitem [ref=e380]: → Entity Framework Core + SQL Server veri katmanı
+              - listitem [ref=e381]: → Yönetim paneli ve admin dashboard geliştirme
+              - listitem [ref=e382]: → İç araç ve süreç otomasyon sistemleri
+          - generic [ref=e383]:
+            - generic [ref=e384]:
+              - generic [ref=e386]: "02"
+              - heading "WEB BEYAZ" [level=2] [ref=e387]
+              - generic [ref=e388]:
+                - generic [ref=e389]: Yazılım Mühendisi Stajyeri
+                - generic [ref=e391]: AĞU 2025 — OCA 2026
+                - generic [ref=e392]: SAMSUN, TR
+            - list "Temel katkılar" [ref=e393]:
+              - listitem [ref=e394]: → ASP.NET Core web uygulama geliştirme
+              - listitem [ref=e395]: → Veritabanı tabanlı yönetim panelleri
+              - listitem [ref=e396]: → Entity Framework Core operasyonları
+              - listitem [ref=e397]: → Dashboard arayüz ekranları
+              - listitem [ref=e398]: → Git ve GitHub ile versiyon kontrolü
+    - region "Mini Lab — İnteraktif" [ref=e399]:
+      - generic: LAB
+      - generic [ref=e400]:
+        - generic [ref=e401]:
+          - generic [ref=e402]: MİNİ LAB
+          - generic [ref=e404]: "05"
+        - application "XOX game" [ref=e405]:
+          - generic [ref=e406]:
+            - generic [ref=e411]: MİNİ LAB — XOX.EXE
+            - generic [ref=e412]: SÜRÜKLE
+          - generic [ref=e413]:
+            - generic [ref=e414]:
+              - generic [ref=e415]: STATUS
+              - generic [ref=e416]: X OYNUYOR
+            - grid "Game board" [ref=e417]:
+              - 'button "Cell 1: empty" [ref=e418]'
+              - 'button "Cell 2: empty" [ref=e419]'
+              - 'button "Cell 3: empty" [ref=e420]'
+              - 'button "Cell 4: empty" [ref=e421]'
+              - 'button "Cell 5: empty" [ref=e422]'
+              - 'button "Cell 6: empty" [ref=e423]'
+              - 'button "Cell 7: empty" [ref=e424]'
+              - 'button "Cell 8: empty" [ref=e425]'
+              - 'button "Cell 9: empty" [ref=e426]'
+            - generic [ref=e427]:
+              - generic [ref=e428]:
+                - generic [ref=e429]: X
+                - generic [ref=e430]: "0"
+                - generic [ref=e431]: /
+                - generic [ref=e432]: "0"
+                - generic [ref=e433]: O
+              - button "Oyunu yeniden başlat" [ref=e434]: ↺ YENİDEN
+    - region "İletişim" [ref=e435]:
+      - generic [ref=e436]:
+        - generic [ref=e437]:
+          - generic [ref=e438]: İLETİŞİM
+          - generic [ref=e440]: "06"
+        - generic [ref=e441]:
+          - heading "Gerçek bir sistemi birlikte hayata geçirelim." [level=2] [ref=e442]:
+            - text: Gerçek bir
+            - text: sistemi birlikte
+            - text: hayata geçirelim.
+          - paragraph [ref=e443]: İŞ GÜCÜNE AÇIĞIM — İSTANBUL, TÜRKİYE
+          - paragraph [ref=e444]: Yeni bir proje, iş birliği veya fikir için ulaşabilirsin.
+          - link "uzeyirogur52@outlook.com adresine e-posta gönder" [ref=e445]:
+            - /url: mailto:uzeyirogur52@outlook.com
+            - generic [ref=e446]: →
+            - text: uzeyirogur52@outlook.com
+        - generic [ref=e447]:
+          - generic [ref=e448]:
+            - generic [ref=e449]: ÜZEYİR ÖĞÜR
+            - generic [ref=e450]: Full Stack .NET Developer · Bilgisayar Mühendisi
+          - generic [ref=e451]:
+            - link "GitHub profili" [ref=e452]:
+              - /url: https://github.com/uzeyirogur
+              - text: GITHUB ↗
+            - link "E-posta gönder" [ref=e453]:
+              - /url: mailto:uzeyirogur52@outlook.com
+              - text: E-POSTA ↗
+          - generic [ref=e454]: © 2026

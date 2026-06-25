@@ -1,0 +1,115 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e5]: BUILD
+    - generic:
+      - generic:
+        - generic:
+          - generic: D
+        - generic:
+          - generic: O
+        - generic:
+          - generic: U
+        - generic:
+          - generic: G
+        - generic:
+          - generic: L
+        - generic:
+          - generic: U
+        - generic:
+          - generic: S
+      - generic:
+        - generic: Creative Developer · 2026
+  - generic:
+    - img
+    - generic:
+      - generic:
+        - generic:
+          - generic: Works
+  - generic [ref=e8]:
+    - generic:
+      - generic:
+        - generic:
+          - link "Douglus Nguyen" [ref=e10] [cursor=pointer]:
+            - /url: /
+            - generic [ref=e11]: Douglus
+            - generic: Nguyen
+          - generic [ref=e12] [cursor=pointer]:
+            - paragraph [ref=e13]: Menu
+            - paragraph [ref=e14]: Close
+      - img
+      - img
+    - generic [ref=e16]:
+      - generic [ref=e17]:
+        - generic [ref=e18]:
+          - heading "DOUGLUS NGUYEN" [level=1] [ref=e19]:
+            - text: DOUGLUS
+            - text: NGUYEN
+          - generic [ref=e20]: 01/
+        - generic [ref=e23]:
+          - paragraph [ref=e24]: HO CHI MINH CITY · ARCHITECT & UI
+          - heading "CREATIVE DEVELOPER" [level=1] [ref=e25]:
+            - text: CREATIVE
+            - text: DEVELOPER
+      - generic [ref=e26]:
+        - generic [ref=e27]:
+          - generic [ref=e28]: 02/
+          - paragraph [ref=e29]:
+            - text: I BUILD THE INFRASTRUCTURE
+            - text: BEHIND SEAMLESS DIGITAL EXPERIENCES.
+        - generic [ref=e30]:
+          - generic [ref=e31]: Fullstack
+          - generic [ref=e32]: Frontend
+          - generic [ref=e33]: Backend
+          - generic [ref=e34]: Design
+        - link "More About Me →" [ref=e44] [cursor=pointer]:
+          - /url: /about
+          - generic [ref=e45]: More About Me
+          - generic [ref=e46]: →
+      - generic [ref=e47]:
+        - img "Hello Clever" [ref=e49]
+        - generic [ref=e50]:
+          - generic [ref=e51]:
+            - generic [ref=e52]: 03/
+            - generic [ref=e53]: 2024 · Back-end Dev
+          - heading "Hello Clever" [level=2] [ref=e55]:
+            - text: Hello
+            - text: Clever
+          - paragraph [ref=e57]: The first Australian buy-to-earn platform that makes shopping, payments, and money management easier for all.
+          - img [ref=e59]
+      - generic [ref=e60]:
+        - generic [ref=e61]:
+          - generic [ref=e62]: 04/
+          - generic [ref=e63]:
+            - generic [ref=e64]: Creative Developer
+            - generic [ref=e65]: + Problem Solver
+          - paragraph [ref=e66]:
+            - text: Crafting elegant
+            - text: solutions to
+            - text: complex problems
+        - generic [ref=e67]:
+          - generic [ref=e68]: D
+          - generic [ref=e69]: O
+          - generic [ref=e70]: U
+          - generic [ref=e71]: G
+          - generic [ref=e72]: L
+          - generic [ref=e73]: U
+          - generic [ref=e74]: S
+      - generic [ref=e75]:
+        - generic [ref=e76]:
+          - generic [ref=e77]: 05/
+          - generic [ref=e78]:
+            - generic [ref=e79]: Let's
+            - generic [ref=e80]: HAVE
+            - generic [ref=e81]: a chat
+        - generic [ref=e82]:
+          - generic [ref=e83]:
+            - link "toannguyenvan145@gmail.com" [ref=e84] [cursor=pointer]:
+              - /url: mailto:toannguyenvan145@gmail.com
+            - link "+84 39 327 7584" [ref=e85] [cursor=pointer]:
+              - /url: tel:+84393277584
+          - button "↑ Back to top" [ref=e86] [cursor=pointer]
+    - generic:
+      - generic:
+        - generic:
+          - generic: © 2026 Portfolio
+          - generic: Design & code by Douglus

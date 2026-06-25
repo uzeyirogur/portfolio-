@@ -1,0 +1,24 @@
+- generic:
+  - banner "Site navigation" [ref=e1]:
+    - generic [ref=e2]:
+      - link "Üzeyir Öğür — back to top" [ref=e3]:
+        - /url: "#"
+        - text: ÜÖ
+      - button "Close navigation" [expanded] [active] [ref=e38]
+  - dialog "Mobile navigation" [ref=e39]:
+    - navigation [ref=e40]:
+      - link "WORK" [ref=e41]:
+        - /url: "#work"
+      - link "STACK" [ref=e42]:
+        - /url: "#stack"
+      - link "ABOUT" [ref=e43]:
+        - /url: "#about"
+      - link "CONTACT" [ref=e44]:
+        - /url: "#contact"
+    - paragraph [ref=e45]: ISTANBUL, TR
+  - generic:
+    - generic: MENU
+  - main
+  - button "Open Next.js Dev Tools" [ref=e21] [cursor=pointer]:
+    - img [ref=e22]
+  - alert [ref=e25]

@@ -1,0 +1,630 @@
+- generic [ref=e2]:
+  - banner [ref=e3]:
+    - generic [ref=e4]:
+      - link "Antoine Wodniack" [ref=e6] [cursor=pointer]:
+        - /url: /
+        - img [ref=e7]
+        - generic [ref=e10]: Antoine Wodniack
+      - list [ref=e11]:
+        - listitem [ref=e12]:
+          - link "Follow me on CodePen" [ref=e13] [cursor=pointer]:
+            - /url: https://codepen.io/wodniack
+            - generic [ref=e15]: Follow me on CodePen
+        - listitem [ref=e16]:
+          - link "Follow me on LinkedIn" [ref=e17] [cursor=pointer]:
+            - /url: https://www.linkedin.com/in/wodniack/
+            - generic [ref=e19]: Follow me on LinkedIn
+      - button "Change contrast" [ref=e20] [cursor=pointer]:
+        - generic [ref=e22]: Change contrast
+      - complementary [ref=e23]:
+        - paragraph [ref=e24]:
+          - generic [ref=e25]: Coding globally from France.
+          - generic [ref=e26]:
+            - text: Available for freelance work →
+            - link "Hire me" [ref=e27] [cursor=pointer]:
+              - /url: mailto:hello@wodniack.dev
+  - generic [ref=e28]:
+    - img [ref=e30]
+    - generic [ref=e142]:
+      - generic [ref=e145]:
+        - generic [ref=e146]:
+          - generic [ref=e147]: 01 1
+          - generic [ref=e148]: 01 0
+          - generic [ref=e149]: 01 0
+          - generic [ref=e150]: 01 0
+          - generic [ref=e151]: 01 0
+          - generic [ref=e152]: 01 0
+          - generic [ref=e153]: 01 1
+          - generic [ref=e154]: 01 1
+          - generic [ref=e155]: 01 1
+          - generic [ref=e156]: 01 0
+          - generic [ref=e157]: 01 1
+          - generic [ref=e158]: 01 1
+          - generic [ref=e159]: 01 1
+          - generic [ref=e160]: 01 0
+          - generic [ref=e161]: 01 1
+          - generic [ref=e162]: 01 1
+          - generic [ref=e163]: 01 1
+          - generic [ref=e164]: 01 0
+          - generic [ref=e165]: 01 1
+          - generic [ref=e166]: 01 0
+          - generic [ref=e167]: 01 0
+        - generic [ref=e168]: /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        - generic [ref=e169]:
+          - generic [ref=e170]: 01 1
+          - generic [ref=e171]: 01 1
+          - generic [ref=e172]: 01 0
+          - generic [ref=e173]: 01 1
+          - generic [ref=e174]: 01 1
+          - generic [ref=e175]: 01 1
+          - generic [ref=e176]: 01 1
+          - generic [ref=e177]: 01 1
+          - generic [ref=e178]: 01 1
+          - generic [ref=e179]: 01 0
+          - generic [ref=e180]: 01 1
+          - generic [ref=e181]: 01 0
+          - generic [ref=e182]: 01 0
+          - generic [ref=e183]: 01 1
+        - generic [ref=e184]: /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        - generic [ref=e185]:
+          - generic [ref=e186]: 01 1
+          - generic [ref=e187]: 01 1
+          - generic [ref=e188]: 01 0
+          - generic [ref=e189]: 01 1
+          - generic [ref=e190]: 01 1
+          - generic [ref=e191]: 01 1
+          - generic [ref=e192]: 01 0
+          - generic [ref=e193]: 01 1
+          - generic [ref=e194]: 01 1
+          - generic [ref=e195]: 01 0
+          - generic [ref=e196]: 01 0
+          - generic [ref=e197]: 01 1
+          - generic [ref=e198]: 01 0
+          - generic [ref=e199]: 01 1
+        - generic [ref=e200]: /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        - generic [ref=e201]:
+          - generic [ref=e202]: 01 1
+          - generic [ref=e203]: 01 0
+          - generic [ref=e204]: 01 1
+          - generic [ref=e205]: 01 0
+          - generic [ref=e206]: 01 1
+          - generic [ref=e207]: 01 1
+          - generic [ref=e208]: 01 1
+          - generic [ref=e209]: 01 1
+          - generic [ref=e210]: 01 1
+          - generic [ref=e211]: 01 0
+          - generic [ref=e212]: 01 1
+          - generic [ref=e213]: 01 1
+          - generic [ref=e214]: 01 1
+          - generic [ref=e215]: 01 1
+        - generic [ref=e216]: /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        - generic [ref=e217]:
+          - generic [ref=e218]: 01 1
+          - generic [ref=e219]: 01 1
+          - generic [ref=e220]: 01 0
+          - generic [ref=e221]: 01 0
+          - generic [ref=e222]: 01 1
+          - generic [ref=e223]: 01 0
+          - generic [ref=e224]: 01 0
+          - generic [ref=e225]: 01 1
+          - generic [ref=e226]: 01 1
+          - generic [ref=e227]: 01 0
+          - generic [ref=e228]: 01 1
+          - generic [ref=e229]: 01 1
+          - generic [ref=e230]: 01 1
+          - generic [ref=e231]: 01 0
+        - generic [ref=e232]: /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        - generic [ref=e233]:
+          - generic [ref=e234]: 01 1
+          - generic [ref=e235]: 01 1
+          - generic [ref=e236]: 01 0
+          - generic [ref=e237]: 01 1
+          - generic [ref=e238]: 01 0
+          - generic [ref=e239]: 01 0
+          - generic [ref=e240]: 01 1
+          - generic [ref=e241]: 01 1
+          - generic [ref=e242]: 01 1
+          - generic [ref=e243]: 01 0
+          - generic [ref=e244]: 01 0
+          - generic [ref=e245]: 01 0
+          - generic [ref=e246]: 01 0
+          - generic [ref=e247]: 01 1
+        - generic [ref=e248]: /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        - generic [ref=e249]:
+          - generic [ref=e250]: 01 1
+          - generic [ref=e251]: 01 1
+          - generic [ref=e252]: 01 0
+          - generic [ref=e253]: 01 0
+          - generic [ref=e254]: 01 0
+          - generic [ref=e255]: 01 1
+          - generic [ref=e256]: 01 1
+          - generic [ref=e257]: 01 1
+          - generic [ref=e258]: 01 1
+          - generic [ref=e259]: 01 0
+          - generic [ref=e260]: 01 1
+          - generic [ref=e261]: 01 0
+          - generic [ref=e262]: 01 1
+          - generic [ref=e263]: 01 1
+        - text: /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      - heading "CCC C CCC RRR r RRR EEE e EEE AAA a AAA TTT t TTT III i III VVV v VVV EEE e EEE DDD D DDD EEE e EEE VVV v VVV EEE e EEE LLL l LLL OOO o OOO PPP p PPP EEE e EEE RRR r RRR" [level=1] [ref=e265]:
+        - generic [ref=e267]:
+          - generic [ref=e269]: CCC C CCC
+          - generic [ref=e271]: RRR r RRR
+          - generic [ref=e273]: EEE e EEE
+          - generic [ref=e275]: AAA a AAA
+          - generic [ref=e277]: TTT t TTT
+          - generic [ref=e279]: III i III
+          - generic [ref=e281]: VVV v VVV
+          - generic [ref=e283]: EEE e EEE
+        - generic [ref=e285]:
+          - generic [ref=e287]: DDD D DDD
+          - generic [ref=e289]: EEE e EEE
+          - generic [ref=e291]: VVV v VVV
+          - generic [ref=e293]: EEE e EEE
+          - generic [ref=e295]: LLL l LLL
+          - generic [ref=e297]: OOO o OOO
+          - generic [ref=e299]: PPP p PPP
+          - generic [ref=e301]: EEE e EEE
+          - generic [ref=e303]: RRR r RRR
+      - generic [ref=e306]:
+        - generic [ref=e307]:
+          - generic [ref=e308]: 01 1
+          - generic [ref=e309]: 01 0
+          - generic [ref=e310]: 01 0
+          - generic [ref=e311]: 01 0
+          - generic [ref=e312]: 01 1
+          - generic [ref=e313]: 01 0
+          - generic [ref=e314]: 01 0
+          - generic [ref=e315]: 01 1
+          - generic [ref=e316]: 01 1
+          - generic [ref=e317]: 01 0
+          - generic [ref=e318]: 01 1
+          - generic [ref=e319]: 01 1
+          - generic [ref=e320]: 01 1
+          - generic [ref=e321]: 01 1
+        - generic [ref=e322]: /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        - generic [ref=e323]:
+          - generic [ref=e324]: 01 1
+          - generic [ref=e325]: 01 0
+          - generic [ref=e326]: 01 1
+          - generic [ref=e327]: 01 0
+          - generic [ref=e328]: 01 1
+          - generic [ref=e329]: 01 0
+          - generic [ref=e330]: 01 0
+          - generic [ref=e331]: 01 1
+          - generic [ref=e332]: 01 1
+          - generic [ref=e333]: 01 0
+          - generic [ref=e334]: 01 1
+          - generic [ref=e335]: 01 0
+          - generic [ref=e336]: 01 0
+          - generic [ref=e337]: 01 0
+          - generic [ref=e338]: 01 1
+          - generic [ref=e339]: 01 1
+          - generic [ref=e340]: 01 0
+          - generic [ref=e341]: 01 1
+          - generic [ref=e342]: 01 0
+          - generic [ref=e343]: 01 0
+          - generic [ref=e344]: 01 1
+          - generic [ref=e345]: 01 1
+          - generic [ref=e346]: 01 1
+          - generic [ref=e347]: 01 0
+          - generic [ref=e348]: 01 1
+          - generic [ref=e349]: 01 1
+          - generic [ref=e350]: 01 1
+          - generic [ref=e351]: 01 0
+          - generic [ref=e352]: 01 1
+          - generic [ref=e353]: 01 1
+          - generic [ref=e354]: 01 0
+          - generic [ref=e355]: 01 0
+          - generic [ref=e356]: 01 1
+          - generic [ref=e357]: 01 1
+          - generic [ref=e358]: 01 1
+          - generic [ref=e359]: 01 1
+          - generic [ref=e360]: 01 1
+          - generic [ref=e361]: 01 1
+          - generic [ref=e362]: 01 0
+          - generic [ref=e363]: 01 0
+          - generic [ref=e364]: 01 1
+          - generic [ref=e365]: 01 1
+        - generic [ref=e366]: /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        - generic [ref=e367]:
+          - generic [ref=e368]: 01 1
+          - generic [ref=e369]: 01 0
+          - generic [ref=e370]: 01 1
+          - generic [ref=e371]: 01 1
+          - generic [ref=e372]: 01 0
+          - generic [ref=e373]: 01 0
+          - generic [ref=e374]: 01 1
+          - generic [ref=e375]: 01 1
+          - generic [ref=e376]: 01 1
+          - generic [ref=e377]: 01 0
+          - generic [ref=e378]: 01 1
+          - generic [ref=e379]: 01 1
+          - generic [ref=e380]: 01 1
+          - generic [ref=e381]: 01 1
+          - generic [ref=e382]: 01 1
+          - generic [ref=e383]: 01 1
+          - generic [ref=e384]: 01 1
+          - generic [ref=e385]: 01 0
+          - generic [ref=e386]: 01 1
+          - generic [ref=e387]: 01 0
+          - generic [ref=e388]: 01 1
+          - generic [ref=e389]: 01 1
+          - generic [ref=e390]: 01 1
+          - generic [ref=e391]: 01 1
+          - generic [ref=e392]: 01 0
+          - generic [ref=e393]: 01 0
+          - generic [ref=e394]: 01 1
+          - generic [ref=e395]: 01 0
+        - generic [ref=e396]: /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        - generic [ref=e397]:
+          - generic [ref=e398]: 01 1
+          - generic [ref=e399]: 01 0
+          - generic [ref=e400]: 01 1
+          - generic [ref=e401]: 01 0
+          - generic [ref=e402]: 01 1
+          - generic [ref=e403]: 01 1
+          - generic [ref=e404]: 01 1
+          - generic [ref=e405]: 01 1
+          - generic [ref=e406]: 01 1
+          - generic [ref=e407]: 01 0
+          - generic [ref=e408]: 01 0
+          - generic [ref=e409]: 01 0
+          - generic [ref=e410]: 01 0
+          - generic [ref=e411]: 01 1
+          - generic [ref=e412]: 01 1
+          - generic [ref=e413]: 01 1
+          - generic [ref=e414]: 01 1
+          - generic [ref=e415]: 01 1
+          - generic [ref=e416]: 01 0
+          - generic [ref=e417]: 01 0
+          - generic [ref=e418]: 01 1
+        - text: /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  - generic [ref=e421]:
+    - generic [ref=e422]:
+      - generic [ref=e423]:
+        - heading "About" [level=2] [ref=e424]
+        - generic [ref=e425]:
+          - paragraph [ref=e426]: I collaborate with agencies and designers to craft memorable user experiences, bringing their vision to life with a nice touch of animation.
+          - paragraph [ref=e427]:
+            - text: I started with Dreamweaver, played with Flash and ActionScript, did back-end dev from scratch, worked with all kinds of CMS, focused on creative dev, worked on 140+ projects, led a team of 10 designers and developers, founded
+            - link "Waaark" [ref=e428] [cursor=pointer]:
+              - /url: https://waaark.com
+            - text: and
+            - link "incredibles.dev" [ref=e429] [cursor=pointer]:
+              - /url: https://incredibles.dev
+            - text: ", won a few awards, and keep on learning."
+      - generic [ref=e430]:
+        - heading "Awards" [level=2] [ref=e431]
+        - list [ref=e432]:
+          - listitem [ref=e433]:
+            - generic [ref=e434]:
+              - generic [ref=e435]: awwwards
+              - generic [ref=e436]: (SOTD x 16)
+              - generic [ref=e437]: (Honors x 1)
+          - listitem [ref=e439]:
+            - generic [ref=e440]:
+              - generic [ref=e441]: fwa
+              - generic [ref=e442]: (SOTD x 4)
+              - generic [ref=e443]: (MOTD x 2)
+          - listitem [ref=e445]:
+            - generic [ref=e446]:
+              - generic [ref=e447]: cssda
+              - generic [ref=e448]: (WOTD x 18)
+              - generic [ref=e449]: (WOTM x 1)
+          - listitem [ref=e451]:
+            - generic [ref=e453]:
+              - text: 2025 Webby Awards Winner
+              - text: Best Home Page
+          - listitem [ref=e455]:
+            - generic [ref=e457]: Comm Arts Mag Interactive Annual Competition Winner 2017
+          - listitem [ref=e459]:
+            - generic [ref=e461]: Net Mag SOTM Summer 2016
+          - listitem [ref=e463]:
+            - generic [ref=e465]: GSAP SOTM October 2024
+          - listitem [ref=e467]:
+            - generic [ref=e469]: GSAP SOTM November 2024
+          - listitem [ref=e471]:
+            - generic [ref=e473]:
+              - text: CSSDA Best Front-End
+              - text: Developer 2016
+          - listitem [ref=e475]:
+            - generic [ref=e477]:
+              - text: CSSDA Best Front-End
+              - text: Developer 2015
+          - listitem [ref=e479]:
+            - img [ref=e480]
+            - img [ref=e482]
+            - img [ref=e484]
+            - img [ref=e486]
+            - img [ref=e488]
+    - img
+  - generic [ref=e492]:
+    - generic [ref=e493]:
+      - generic [ref=e494]: 01 1
+      - generic [ref=e495]: 01 0
+      - generic [ref=e496]: 01 0
+      - generic [ref=e497]: 01 0
+      - generic [ref=e498]: 01 1
+      - generic [ref=e499]: 01 0
+      - generic [ref=e500]: 01 0
+      - generic [ref=e501]: 01 1
+      - generic [ref=e502]: 01 1
+      - generic [ref=e503]: 01 0
+      - generic [ref=e504]: 01 1
+      - generic [ref=e505]: 01 1
+      - generic [ref=e506]: 01 1
+      - generic [ref=e507]: 01 1
+    - generic [ref=e508]: /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    - generic [ref=e509]:
+      - generic [ref=e510]: 01 1
+      - generic [ref=e511]: 01 0
+      - generic [ref=e512]: 01 1
+      - generic [ref=e513]: 01 0
+      - generic [ref=e514]: 01 1
+      - generic [ref=e515]: 01 0
+      - generic [ref=e516]: 01 0
+      - generic [ref=e517]: 01 1
+      - generic [ref=e518]: 01 1
+      - generic [ref=e519]: 01 0
+      - generic [ref=e520]: 01 1
+      - generic [ref=e521]: 01 0
+      - generic [ref=e522]: 01 0
+      - generic [ref=e523]: 01 0
+      - generic [ref=e524]: 01 1
+      - generic [ref=e525]: 01 1
+      - generic [ref=e526]: 01 0
+      - generic [ref=e527]: 01 1
+      - generic [ref=e528]: 01 0
+      - generic [ref=e529]: 01 0
+      - generic [ref=e530]: 01 1
+      - generic [ref=e531]: 01 1
+      - generic [ref=e532]: 01 1
+      - generic [ref=e533]: 01 0
+      - generic [ref=e534]: 01 1
+      - generic [ref=e535]: 01 1
+      - generic [ref=e536]: 01 1
+      - generic [ref=e537]: 01 0
+      - generic [ref=e538]: 01 1
+      - generic [ref=e539]: 01 1
+      - generic [ref=e540]: 01 0
+      - generic [ref=e541]: 01 0
+      - generic [ref=e542]: 01 1
+      - generic [ref=e543]: 01 1
+      - generic [ref=e544]: 01 1
+      - generic [ref=e545]: 01 1
+      - generic [ref=e546]: 01 1
+      - generic [ref=e547]: 01 1
+      - generic [ref=e548]: 01 0
+      - generic [ref=e549]: 01 0
+      - generic [ref=e550]: 01 1
+      - generic [ref=e551]: 01 1
+    - generic [ref=e552]: /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    - generic [ref=e553]:
+      - generic [ref=e554]: 01 1
+      - generic [ref=e555]: 01 0
+      - generic [ref=e556]: 01 1
+      - generic [ref=e557]: 01 1
+      - generic [ref=e558]: 01 0
+      - generic [ref=e559]: 01 0
+      - generic [ref=e560]: 01 1
+      - generic [ref=e561]: 01 1
+      - generic [ref=e562]: 01 1
+      - generic [ref=e563]: 01 0
+      - generic [ref=e564]: 01 1
+      - generic [ref=e565]: 01 1
+      - generic [ref=e566]: 01 1
+      - generic [ref=e567]: 01 1
+      - generic [ref=e568]: 01 1
+      - generic [ref=e569]: 01 1
+      - generic [ref=e570]: 01 1
+      - generic [ref=e571]: 01 0
+      - generic [ref=e572]: 01 1
+      - generic [ref=e573]: 01 0
+      - generic [ref=e574]: 01 1
+      - generic [ref=e575]: 01 1
+      - generic [ref=e576]: 01 1
+      - generic [ref=e577]: 01 1
+      - generic [ref=e578]: 01 0
+      - generic [ref=e579]: 01 0
+      - generic [ref=e580]: 01 1
+      - generic [ref=e581]: 01 0
+    - generic [ref=e582]: /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    - generic [ref=e583]:
+      - generic [ref=e584]: 01 1
+      - generic [ref=e585]: 01 0
+      - generic [ref=e586]: 01 1
+      - generic [ref=e587]: 01 0
+      - generic [ref=e588]: 01 1
+      - generic [ref=e589]: 01 1
+      - generic [ref=e590]: 01 1
+      - generic [ref=e591]: 01 1
+      - generic [ref=e592]: 01 1
+      - generic [ref=e593]: 01 0
+      - generic [ref=e594]: 01 0
+      - generic [ref=e595]: 01 0
+      - generic [ref=e596]: 01 0
+      - generic [ref=e597]: 01 1
+      - generic [ref=e598]: 01 1
+      - generic [ref=e599]: 01 1
+      - generic [ref=e600]: 01 1
+      - generic [ref=e601]: 01 1
+      - generic [ref=e602]: 01 0
+      - generic [ref=e603]: 01 0
+      - generic [ref=e604]: 01 1
+    - text: /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  - generic [ref=e607]:
+    - generic [ref=e608]:
+      - heading "W O R K" [level=2] [ref=e609]:
+        - generic [ref=e610]:
+          - generic [ref=e611]: W
+          - generic [ref=e612]: O
+          - generic [ref=e613]: R
+          - generic [ref=e614]: K
+      - generic [ref=e615]:
+        - generic: W W
+        - generic: W W
+        - generic: W W
+        - generic: W W
+        - generic: W W
+        - generic: W W
+        - generic: W W
+        - generic: W W
+        - generic: O O
+        - generic: O O
+        - generic: O O
+        - generic: O O
+        - generic: O O
+        - generic: O O
+        - generic: O O
+        - generic: O O
+        - generic: O O
+        - generic: O O
+        - generic: O O
+        - generic: R R
+        - generic: R R
+        - generic: R R
+        - generic: R R
+        - generic: R R
+        - generic: R R
+        - generic: R R
+        - generic: R R
+        - generic: R R
+        - generic: R R
+        - generic: R R
+        - generic: K K
+        - generic: K K
+        - generic: K K
+        - generic: K K
+        - generic: K K
+        - generic: K K
+        - generic: K K
+        - generic: K K
+        - generic: K K
+        - generic: K K
+    - generic:
+      - generic:
+        - img
+  - generic [ref=e653]:
+    - generic [ref=e654]:
+      - generic [ref=e655]: 01 1
+      - generic [ref=e656]: 01 0
+      - generic [ref=e657]: 01 0
+      - generic [ref=e658]: 01 0
+      - generic [ref=e659]: 01 1
+      - generic [ref=e660]: 01 0
+      - generic [ref=e661]: 01 0
+      - generic [ref=e662]: 01 1
+      - generic [ref=e663]: 01 1
+      - generic [ref=e664]: 01 0
+      - generic [ref=e665]: 01 1
+      - generic [ref=e666]: 01 1
+      - generic [ref=e667]: 01 1
+      - generic [ref=e668]: 01 1
+    - generic [ref=e669]: /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    - generic [ref=e670]:
+      - generic [ref=e671]: 01 1
+      - generic [ref=e672]: 01 0
+      - generic [ref=e673]: 01 1
+      - generic [ref=e674]: 01 0
+      - generic [ref=e675]: 01 1
+      - generic [ref=e676]: 01 0
+      - generic [ref=e677]: 01 0
+      - generic [ref=e678]: 01 1
+      - generic [ref=e679]: 01 1
+      - generic [ref=e680]: 01 0
+      - generic [ref=e681]: 01 1
+      - generic [ref=e682]: 01 0
+      - generic [ref=e683]: 01 0
+      - generic [ref=e684]: 01 0
+      - generic [ref=e685]: 01 1
+      - generic [ref=e686]: 01 1
+      - generic [ref=e687]: 01 0
+      - generic [ref=e688]: 01 1
+      - generic [ref=e689]: 01 0
+      - generic [ref=e690]: 01 0
+      - generic [ref=e691]: 01 1
+      - generic [ref=e692]: 01 1
+      - generic [ref=e693]: 01 1
+      - generic [ref=e694]: 01 0
+      - generic [ref=e695]: 01 1
+      - generic [ref=e696]: 01 1
+      - generic [ref=e697]: 01 1
+      - generic [ref=e698]: 01 0
+      - generic [ref=e699]: 01 1
+      - generic [ref=e700]: 01 1
+      - generic [ref=e701]: 01 0
+      - generic [ref=e702]: 01 0
+      - generic [ref=e703]: 01 1
+      - generic [ref=e704]: 01 1
+      - generic [ref=e705]: 01 1
+      - generic [ref=e706]: 01 1
+      - generic [ref=e707]: 01 1
+      - generic [ref=e708]: 01 1
+      - generic [ref=e709]: 01 0
+      - generic [ref=e710]: 01 0
+      - generic [ref=e711]: 01 1
+      - generic [ref=e712]: 01 1
+    - generic [ref=e713]: /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    - generic [ref=e714]:
+      - generic [ref=e715]: 01 1
+      - generic [ref=e716]: 01 0
+      - generic [ref=e717]: 01 1
+      - generic [ref=e718]: 01 1
+      - generic [ref=e719]: 01 0
+      - generic [ref=e720]: 01 0
+      - generic [ref=e721]: 01 1
+      - generic [ref=e722]: 01 1
+      - generic [ref=e723]: 01 1
+      - generic [ref=e724]: 01 0
+      - generic [ref=e725]: 01 1
+      - generic [ref=e726]: 01 1
+      - generic [ref=e727]: 01 1
+      - generic [ref=e728]: 01 1
+      - generic [ref=e729]: 01 1
+      - generic [ref=e730]: 01 1
+      - generic [ref=e731]: 01 1
+      - generic [ref=e732]: 01 0
+      - generic [ref=e733]: 01 1
+      - generic [ref=e734]: 01 0
+      - generic [ref=e735]: 01 1
+      - generic [ref=e736]: 01 1
+      - generic [ref=e737]: 01 1
+      - generic [ref=e738]: 01 1
+      - generic [ref=e739]: 01 0
+      - generic [ref=e740]: 01 0
+      - generic [ref=e741]: 01 1
+      - generic [ref=e742]: 01 0
+    - generic [ref=e743]: /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    - generic [ref=e744]:
+      - generic [ref=e745]: 01 1
+      - generic [ref=e746]: 01 0
+      - generic [ref=e747]: 01 1
+      - generic [ref=e748]: 01 0
+      - generic [ref=e749]: 01 1
+      - generic [ref=e750]: 01 1
+      - generic [ref=e751]: 01 1
+      - generic [ref=e752]: 01 1
+      - generic [ref=e753]: 01 1
+      - generic [ref=e754]: 01 0
+      - generic [ref=e755]: 01 0
+      - generic [ref=e756]: 01 0
+      - generic [ref=e757]: 01 0
+      - generic [ref=e758]: 01 1
+      - generic [ref=e759]: 01 1
+      - generic [ref=e760]: 01 1
+      - generic [ref=e761]: 01 1
+      - generic [ref=e762]: 01 1
+      - generic [ref=e763]: 01 0
+      - generic [ref=e764]: 01 0
+      - generic [ref=e765]: 01 1
+    - text: /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  - generic [ref=e767]:
+    - img [ref=e768]
+    - img [ref=e771]
+  - img [ref=e776]
+  - contentinfo [ref=e777]:
+    - link "Antoine Wodniack" [ref=e779] [cursor=pointer]:
+      - /url: /
+      - img [ref=e780]
+      - generic [ref=e783]: Antoine Wodniack

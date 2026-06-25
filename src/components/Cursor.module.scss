@@ -1,0 +1,72 @@
+// =============================================================================
+// Custom Cursor — Phase 2
+// Only active on pointer:fine devices (desktop mouse/trackpad).
+// Default: small filled dot. Hover: larger ring with optional label.
+// =============================================================================
+
+// Hide on touch/coarse devices — cursor never mounts, but belt-and-suspenders
+@media (pointer: coarse), (hover: none) {
+  .cursor {
+    display: none !important;
+  }
+}
+
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: var(--z-cursor);
+  pointer-events: none;
+  will-change: transform;
+
+  // Default: small filled dot
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--dark-primary);
+  border: 1px solid transparent;
+
+  // Starts invisible — JS adds .cursorVisible on first mousemove
+  opacity: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition:
+    width    220ms var(--ease-out),
+    height   220ms var(--ease-out),
+    background-color 220ms ease,
+    border-color     220ms ease,
+    opacity  180ms ease;
+}
+
+// Revealed after first mouse movement
+.cursorVisible {
+  opacity: 1;
+}
+
+// Hover state: ring with gold border, transparent fill
+.cursorHover {
+  width: 44px;
+  height: 44px;
+  background-color: transparent;
+  border-color: var(--gold);
+}
+
+// Label — shown inside ring when data-cursor-label is set
+.cursorLabel {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: var(--gold);
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 180ms ease;
+  user-select: none;
+}
+
+.cursorHover .cursorLabel {
+  opacity: 1;
+}

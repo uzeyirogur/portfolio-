@@ -1,0 +1,58 @@
+// =============================================================================
+// CLEAR OUTPUT — Animation Helpers
+// CSS initial states for GSAP animations. GSAP sets these back during animtion.
+// prefers-reduced-motion: all animations disabled, elements start visible.
+// =============================================================================
+
+// Clip-path reveal initial state (GSAP animates clipPath from this)
+.clip-reveal {
+  clip-path: inset(100% 0 0 0);
+}
+
+// Fade-in initial state (GSAP animates autoAlpha from this)
+.fade-hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+// Word stagger wrapper
+.word-stagger span {
+  display: inline-block;
+  opacity: 0;
+}
+
+// Grain noise overlay (fixed, covers full page)
+.grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: var(--z-content);
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px 200px;
+}
+
+// Status dot pulse animation (available indicator)
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.6; transform: scale(0.85); }
+}
+
+.pulse-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+// prefers-reduced-motion: show everything, no animations
+@media (prefers-reduced-motion: reduce) {
+  .clip-reveal    { clip-path: none !important; }
+  .fade-hidden    { opacity: 1 !important; visibility: visible !important; }
+  .word-stagger span { opacity: 1 !important; }
+  .pulse-dot      { animation: none !important; }
+
+  // Disable all GSAP-driven transforms via the will-change hint
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

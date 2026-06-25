@@ -1,0 +1,570 @@
+// =============================================================================
+// Hero Section — Phase 3
+// Full-viewport, dark cinematic. Typography carries the identity.
+// =============================================================================
+
+.hero {
+  position: relative;
+  min-height: calc(100svh - 52px);
+  background-color: var(--dark-bg);
+  display: flex;
+  flex-direction: column;
+  // Top padding: nav height (64px) + breathing room
+  padding-top: calc(64px + var(--space-l));
+  padding-bottom: var(--space-l);
+  padding-inline: var(--content-pad);
+}
+
+// ---------------------------------------------------------------------------
+// Ambient aurora — strong, clearly visible drifting color blobs
+// ---------------------------------------------------------------------------
+
+.aurora {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 75vw;
+    height: 75vw;
+    border-radius: 50%;
+    top: -25%;
+    right: -15%;
+    background: radial-gradient(ellipse, rgba(204, 17, 51, 0.35) 0%, rgba(204, 17, 51, 0.12) 40%, transparent 70%);
+    animation: auroraA 9s ease-in-out infinite;
+    filter: blur(60px);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 65vw;
+    height: 65vw;
+    border-radius: 50%;
+    bottom: -15%;
+    left: -12%;
+    background: radial-gradient(ellipse, rgba(180, 145, 55, 0.22) 0%, rgba(180, 145, 55, 0.07) 40%, transparent 70%);
+    animation: auroraB 12s ease-in-out infinite;
+    filter: blur(70px);
+  }
+}
+
+@keyframes auroraA {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  40%       { transform: translate(-10%, 14%) scale(1.14); }
+  70%       { transform: translate(7%, -7%) scale(0.90); }
+}
+
+@keyframes auroraB {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  35%       { transform: translate(10%, -12%) scale(1.18); }
+  68%       { transform: translate(-7%, 9%) scale(0.88); }
+}
+
+// ---------------------------------------------------------------------------
+// Moving grid — vertical scroll, radial fade at edges
+// ---------------------------------------------------------------------------
+
+.grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 80px 80px;
+  animation: gridRise 4s linear infinite;
+  mask-image: radial-gradient(ellipse 90% 90% at 50% 50%, black 20%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 90% 90% at 50% 50%, black 20%, transparent 100%);
+}
+
+@keyframes gridRise {
+  from { background-position: 0 0; }
+  to   { background-position: 0 -80px; }
+}
+
+// ---------------------------------------------------------------------------
+// Orbital rings — two concentric rings, clearly visible rotation
+// ---------------------------------------------------------------------------
+
+.ring {
+  position: absolute;
+  width: min(640px, 88vw);
+  height: min(640px, 88vw);
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  right: -12%;
+  bottom: -18%;
+  animation: ringSpin 10s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+
+  // inner ring, opposite spin
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 18%;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    animation: ringSpin 6s linear infinite reverse;
+  }
+
+  // orbiting red dot on outer ring
+  &::after {
+    content: '';
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #CC1133;
+    top: -4.5px;
+    left: 50%;
+    margin-left: -4.5px;
+    box-shadow:
+      0 0 16px 6px rgba(204, 17, 51, 0.65),
+      0 0 32px 10px rgba(204, 17, 51, 0.30);
+  }
+}
+
+// second, larger ring top-left, gold dot
+.ring::after + * { display: none; } // prevent cascade conflicts
+
+@keyframes ringSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+// ---------------------------------------------------------------------------
+// Particle field — 18 floating glowing dots
+// ---------------------------------------------------------------------------
+
+.particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.6;
+}
+
+.pk1 {
+  animation: pFloat1 ease-in-out infinite;
+}
+
+.pk2 {
+  animation: pFloat2 ease-in-out infinite;
+}
+
+.pk3 {
+  animation: pFloat3 ease-in-out infinite;
+}
+
+@keyframes pFloat1 {
+  0%, 100% { transform: translate(0, 0) scale(1);   opacity: 0.55; }
+  33%       { transform: translate(22px, -32px) scale(1.3); opacity: 1;    }
+  66%       { transform: translate(-16px, -20px) scale(0.8); opacity: 0.7; }
+}
+
+@keyframes pFloat2 {
+  0%, 100% { transform: translate(0, 0) scale(1);    opacity: 0.45; }
+  40%       { transform: translate(-28px, -44px) scale(1.2); opacity: 1;   }
+  70%       { transform: translate(20px, -18px) scale(0.85); opacity: 0.8; }
+}
+
+@keyframes pFloat3 {
+  0%, 100% { transform: translate(0, 0) scale(1);   opacity: 0.5; }
+  50%       { transform: translate(34px, -30px) scale(1.4); opacity: 1;   }
+  80%       { transform: translate(-12px, -42px) scale(0.9); opacity: 0.65; }
+}
+
+// ---------------------------------------------------------------------------
+// Scroll indicator — animated falling line, bottom-right
+// ---------------------------------------------------------------------------
+
+.scrollIndicator {
+  position: absolute;
+  right: var(--content-pad);
+  bottom: var(--space-l);
+  z-index: 1;
+}
+
+.scrollLine {
+  display: block;
+  width: 1px;
+  height: 72px;
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+    animation: scrollFall 2.2s ease-in-out infinite;
+  }
+}
+
+@keyframes scrollFall {
+  0%   { top: -100%; }
+  100% { top: 100%; }
+}
+
+// ---------------------------------------------------------------------------
+// Inner layout — full height flex column
+// ---------------------------------------------------------------------------
+
+.inner {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  max-width: var(--max-width);
+  width: 100%;
+  margin-inline: auto;
+  position: relative;
+  z-index: 1;
+}
+
+// ---------------------------------------------------------------------------
+// Top row — location + year
+// ---------------------------------------------------------------------------
+
+.topRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: 400;
+  letter-spacing: var(--tracking-wider);
+  color: var(--dark-body);
+}
+
+// ---------------------------------------------------------------------------
+// Spacer — pushes name block to lower-center of viewport
+// ---------------------------------------------------------------------------
+
+.spacer {
+  flex: 1;
+  min-height: var(--space-l);
+  max-height: 180px;
+}
+
+// ---------------------------------------------------------------------------
+// Name block — display type, the primary identity statement
+// ---------------------------------------------------------------------------
+
+.nameBlock {
+  flex-shrink: 0;
+}
+
+.nameLine {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--text-display);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--dark-primary);
+  will-change: transform, opacity;
+}
+
+// ---------------------------------------------------------------------------
+// Rule — separates name from role
+// ---------------------------------------------------------------------------
+
+.rule {
+  width: 100%;
+  height: 1px;
+  background-color: var(--gold);
+  margin-block: var(--space-s);
+  transform-origin: left center;
+  will-change: transform;
+}
+
+// ---------------------------------------------------------------------------
+// Role block — secondary identity, subordinate to name
+// ---------------------------------------------------------------------------
+
+.roleBlock {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px var(--space-s);
+  will-change: transform, opacity;
+}
+
+.roleItem {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(16px, 1.6vw, 24px);
+  letter-spacing: 0.01em;
+  line-height: var(--leading-snug);
+  color: var(--dark-primary);
+  opacity: 0.72;
+}
+
+.roleSep {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  color: var(--dark-muted);
+  padding-inline: 4px;
+}
+
+// ---------------------------------------------------------------------------
+// Statement — cinematic description, differentiates hero from loader
+// ---------------------------------------------------------------------------
+
+.statement {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(15px, 1.4vw, 19px);
+  line-height: 1.55;
+  color: var(--dark-body);
+  margin: 0;
+  margin-top: var(--space-s);
+  will-change: opacity, transform;
+  max-width: 480px;
+}
+
+// ---------------------------------------------------------------------------
+// XOX floating game panel
+// ---------------------------------------------------------------------------
+
+.gamePanel {
+  position: absolute;
+  right: max(var(--content-pad), 40px);
+  top: 76px;
+  z-index: 5;
+  width: clamp(200px, 22vw, 260px);
+  background-color: rgba(8, 8, 10, 0.94);
+  border: 1px solid rgba(204, 17, 51, 0.35);
+  border-top: 2px solid #CC1133;
+  border-radius: 8px;
+  box-shadow:
+    0 0 0 1px rgba(204, 17, 51, 0.10),
+    0 0 40px rgba(204, 17, 51, 0.12),
+    0 24px 60px rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(16px);
+  will-change: transform, opacity;
+  overflow: hidden;
+
+  @media (max-width: 900px) { display: none; }
+}
+
+.chrome {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 14px 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  cursor: grab;
+  user-select: none;
+  &:active { cursor: grabbing; }
+}
+
+.chromeDots {
+  display: flex;
+  gap: 5px;
+  flex-shrink: 0;
+
+  span {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    &[data-c='r'] { background: #FF5F57; }
+    &[data-c='y'] { background: #FEBC2E; }
+    &[data-c='g'] { background: #28C840; }
+  }
+}
+
+.chromeTitle {
+  flex: 1;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: var(--tracking-wider);
+  color: rgba(255, 255, 255, 0.35);
+  text-align: center;
+}
+
+.chromeHint {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: var(--tracking-wider);
+  color: rgba(255, 255, 255, 0.2);
+  flex-shrink: 0;
+}
+
+.gameStatus {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.gameStatusLabel {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: var(--tracking-wider);
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.gameStatusVal {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: var(--tracking-wide);
+  color: rgba(255, 255, 255, 0.80);
+  transition: color 200ms ease;
+}
+
+.statusWinPlayer { color: #28C840; }
+.statusWinAi     { color: #FF5F57; }
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  padding: 10px;
+}
+
+.cell {
+  aspect-ratio: 1;
+  background-color: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: crosshair;
+  padding: 0;
+  transition: background-color 120ms ease, border-color 120ms ease, box-shadow 120ms ease;
+
+  &:hover:not(:disabled) {
+    background-color: rgba(204, 17, 51, 0.12);
+    border-color: rgba(204, 17, 51, 0.55);
+    box-shadow: inset 0 0 12px rgba(204, 17, 51, 0.08);
+  }
+
+  &:disabled:not(.cellWin) { cursor: default; opacity: 0.85; }
+}
+
+.cellWin {
+  background-color: rgba(204, 17, 51, 0.15);
+  border-color: #CC1133;
+}
+
+.mark {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(18px, 2.5vw, 26px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+
+  &[data-mark='X'] { color: var(--dark-primary); }
+  &[data-mark='O'] { color: #CC1133; text-shadow: 0 0 12px rgba(204,17,51,0.5); }
+}
+
+.gameFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.scores {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.scoreLabel {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: var(--tracking-wider);
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.scoreVal {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 18px;
+  color: var(--dark-primary);
+  min-width: 16px;
+  text-align: center;
+}
+
+.scoreSep {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.20);
+}
+
+.restartBtn {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: var(--tracking-wide);
+  color: rgba(255, 255, 255, 0.45);
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 5px 12px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: color 160ms ease, border-color 160ms ease;
+
+  &:hover {
+    color: var(--dark-primary);
+    border-color: rgba(255, 255, 255, 0.35);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Responsive
+// ---------------------------------------------------------------------------
+
+@media (max-width: 768px) {
+  .hero {
+    padding-top: calc(64px + var(--space-m));
+    padding-bottom: var(--space-m);
+  }
+
+  .spacer {
+    max-height: 160px;
+  }
+
+  .roleSep {
+    display: none;
+  }
+
+  .roleItem {
+    display: block;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .spacer {
+    max-height: 100px;
+  }
+
+  .nameLine {
+    font-size: clamp(42px, 13vw, 72px);
+  }
+}

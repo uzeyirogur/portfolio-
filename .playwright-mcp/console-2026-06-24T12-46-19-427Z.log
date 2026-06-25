@@ -1,0 +1,198 @@
+[    1937ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:25630
+[    2503ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/favicon.ico:0
+[  445019ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  446962ms] [LOG] [Fast Refresh] done in 1946ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  451862ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  452598ms] [LOG] [Fast Refresh] done in 737ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  470801ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  471522ms] [LOG] [Fast Refresh] done in 722ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  848812ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  849675ms] [LOG] [Fast Refresh] done in 863ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  855135ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  856099ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  856102ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  856105ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  856107ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  856108ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  856110ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  856112ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  856116ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  856118ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  856122ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  856124ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  856126ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  856130ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  856135ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  856139ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  856140ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  856147ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  856150ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  856154ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  856165ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  856168ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  856171ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  856195ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  856222ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  856225ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  856227ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  856236ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  856242ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  856249ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  856258ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  856259ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  856265ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  856268ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  856270ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  856272ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  856275ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  856277ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  856279ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  856308ms] ReferenceError: POS_MAP is not defined
+    at Work.useGSAP.animateCards (webpack-internal:///(app-pages-browser)/./src/components/sections/Work.tsx:114:49)
+    at Array.forEach (<anonymous>)
+    at Work.useGSAP.animateCards (webpack-internal:///(app-pages-browser)/./src/components/sections/Work.tsx:107:46)
+    at Work.useGSAP (webpack-internal:///(app-pages-browser)/./src/components/sections/Work.tsx:135:21)
+    at f (webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:4000:21)
+    at MatchMedia.add (webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:4155:15)
+    at Work.useGSAP (webpack-internal:///(app-pages-browser)/./src/components/sections/Work.tsx:101:16)
+    at f (webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:4000:21)
+    at Context.add (webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:4009:35)
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/@gsap/react/src/index.js:48:33)
+    at Object.react_stack_bottom_frame (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:23669:20)
+    at runWithFiberInDEV (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:872:30)
+    at commitHookEffectListMount (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:12345:29)
+    at commitHookLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:12295:11)
+    at commitLayoutEffectOnFiber (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:13050:13)
+    at recursivelyTraverseLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:14121:11)
+    at commitLayoutEffectOnFiber (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:13164:11)
+    at recursivelyTraverseLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:14121:11)
+    at commitLayoutEffectOnFiber (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:13048:11)
+    at recursivelyTraverseLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:14121:11)
+    at commitLayoutEffectOnFiber (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:13048:11)
+    at recursivelyTraverseLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:14121:11)
+    at commitLayoutEffectOnFiber (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:13048:11)
+    at recursivelyTraverseLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:14121:11)
+    at commitLayoutEffectOnFiber (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:13255:11)
+    at recursivelyTraverseLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:14121:11)
+    at commitLayoutEffectOnFiber (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:13255:11)
+    at recursivelyTraverseLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:14121:11)
+    at commitLayoutEffectOnFiber (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:13048:11)
+    at recursivelyTraverseLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:14121:11)
+    at commitLayoutEffectOnFiber (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:13053:11)
+    at recursivelyTraverseLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:14121:11)
+    at commitLayoutEffectOnFiber (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:13048:11)
+    at recursivelyTraverseLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:14121:11)
+    at commitLayoutEffectOnFiber (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:13053:11)
+    at recursivelyTraverseLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:14121:11)
+    at commitLayoutEffectOnFiber (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:13048:11)
+    at recursivelyTraverseLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:14121:11)
+    at commitLayoutEffectOnFiber (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:13048:11)
+    at recursivelyTraverseLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:14121:11)
+    at commitLayoutEffectOnFiber (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:13048:11)
+    at recursivelyTraverseLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:14121:11)
+    at commitLayoutEffectOnFiber (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:13053:11)
+    at recursivelyTraverseLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:14121:11)
+    at commitLayoutEffectOnFiber (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:13048:11)
+    at recursivelyTraverseLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:14121:11)
+    at commitLayoutEffectOnFiber (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:13048:11)
+    at recursivelyTraverseLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:14121:11)
+    at commitLayoutEffectOnFiber (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:13255:11)
+    at recursivelyTraverseLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:14121:11)
+[  856312ms] [WARNING] [Fast Refresh] performing full reload because your application had an unrecoverable error @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:113
+[  859199ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:25630
+[  860098ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  860104ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  860106ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  860109ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  860116ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  860122ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  860126ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  860132ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  860135ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  860139ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  860153ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  860160ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  860168ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  860172ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  860183ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  860186ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  860192ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  860195ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  860198ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  860201ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  860205ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  860208ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  860220ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  860225ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  860228ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  860231ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  860235ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  860238ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  860240ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  860241ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  860243ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  860245ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  860249ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  860254ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  860257ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  860259ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  860261ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  860266ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  860270ms] [WARNING] Invalid scope @ webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:164
+[  860287ms] ReferenceError: POS_MAP is not defined
+    at Work.useGSAP.animateCards (webpack-internal:///(app-pages-browser)/./src/components/sections/Work.tsx:114:49)
+    at Array.forEach (<anonymous>)
+    at Work.useGSAP.animateCards (webpack-internal:///(app-pages-browser)/./src/components/sections/Work.tsx:107:46)
+    at Work.useGSAP (webpack-internal:///(app-pages-browser)/./src/components/sections/Work.tsx:135:21)
+    at f (webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:4000:21)
+    at MatchMedia.add (webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:4155:15)
+    at Work.useGSAP (webpack-internal:///(app-pages-browser)/./src/components/sections/Work.tsx:101:16)
+    at f (webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:4000:21)
+    at Context.add (webpack-internal:///(app-pages-browser)/./node_modules/gsap/gsap-core.js:4009:35)
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/@gsap/react/src/index.js:48:33)
+    at Object.react_stack_bottom_frame (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:23669:20)
+    at runWithFiberInDEV (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:872:30)
+    at commitHookEffectListMount (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:12345:29)
+    at commitHookLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:12295:11)
+    at commitLayoutEffectOnFiber (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:13050:13)
+    at recursivelyTraverseLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:14121:11)
+    at commitLayoutEffectOnFiber (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:13164:11)
+    at recursivelyTraverseLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:14121:11)
+    at commitLayoutEffectOnFiber (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:13048:11)
+    at recursivelyTraverseLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:14121:11)
+    at commitLayoutEffectOnFiber (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:13048:11)
+    at recursivelyTraverseLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:14121:11)
+    at commitLayoutEffectOnFiber (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:13048:11)
+    at recursivelyTraverseLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:14121:11)
+    at commitLayoutEffectOnFiber (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:13255:11)
+    at recursivelyTraverseLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:14121:11)
+    at commitLayoutEffectOnFiber (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:13255:11)
+    at recursivelyTraverseLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:14121:11)
+    at commitLayoutEffectOnFiber (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:13048:11)
+    at recursivelyTraverseLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:14121:11)
+    at commitLayoutEffectOnFiber (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:13053:11)
+    at recursivelyTraverseLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:14121:11)
+    at commitLayoutEffectOnFiber (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:13048:11)
+    at recursivelyTraverseLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:14121:11)
+    at commitLayoutEffectOnFiber (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:13053:11)
+    at recursivelyTraverseLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:14121:11)
+    at commitLayoutEffectOnFiber (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:13048:11)
+    at recursivelyTraverseLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:14121:11)
+    at commitLayoutEffectOnFiber (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:13048:11)
+    at recursivelyTraverseLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:14121:11)
+    at commitLayoutEffectOnFiber (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:13048:11)
+    at recursivelyTraverseLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:14121:11)
+    at commitLayoutEffectOnFiber (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:13053:11)
+    at recursivelyTraverseLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:14121:11)
+    at commitLayoutEffectOnFiber (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:13048:11)
+    at recursivelyTraverseLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:14121:11)
+    at commitLayoutEffectOnFiber (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:13048:11)
+    at recursivelyTraverseLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:14121:11)
+    at commitLayoutEffectOnFiber (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:13255:11)
+    at recursivelyTraverseLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:14121:11)
+[  894226ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  895015ms] [WARNING] [Fast Refresh] performing full reload because your application had an unrecoverable error @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:113
+[  897613ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:25630
+[  909937ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  911845ms] [LOG] [Fast Refresh] done in 1909ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  911863ms] [LOG] [HMR] Detected local css modules. Reload all css @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/mini-css-extract-plugin/hmr/hotModuleReplacement.js:1

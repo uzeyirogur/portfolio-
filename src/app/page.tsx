@@ -1,28 +1,34 @@
-import Navbar from '@/components/layout/Navbar'
-import Footer from '@/components/layout/Footer'
+'use client'
+
+import { useState, useCallback } from 'react'
+import Loader from '@/components/Loader'
 import Hero from '@/components/sections/Hero'
-import About from '@/components/sections/About'
-import Skills from '@/components/sections/Skills'
-import Projects from '@/components/sections/Projects'
+import Ticker from '@/components/sections/Ticker'
+import Work from '@/components/sections/Work'
+import Statement from '@/components/sections/Statement'
+import Stack from '@/components/sections/Stack'
 import Experience from '@/components/sections/Experience'
 import Contact from '@/components/sections/Contact'
-import CursorGlow from '@/components/ui/CursorGlow'
 
 export default function HomePage() {
+  const [loaderDone, setLoaderDone] = useState(false)
+
+  const handleLoaderComplete = useCallback(() => {
+    setLoaderDone(true)
+  }, [])
+
   return (
-    <div className="min-h-screen" style={{ backgroundColor: 'var(--bg)', overflowX: 'clip' }}>
-      <div className="noise-overlay" aria-hidden />
-      <CursorGlow />
-      <Navbar />
+    <>
+      {!loaderDone && <Loader onComplete={handleLoaderComplete} />}
       <main>
-        <Hero />
-        <About />
-        <Skills />
-        <Projects />
+        <Hero loaderDone={loaderDone} />
+        <Ticker />
+        <Work />
+        <Statement />
+        <Stack />
         <Experience />
         <Contact />
       </main>
-      <Footer />
-    </div>
+    </>
   )
 }

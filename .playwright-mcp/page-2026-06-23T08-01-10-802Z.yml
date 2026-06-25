@@ -1,0 +1,7 @@
+- generic [active]:
+  - generic [ref=e1]:
+    - generic [ref=e2]: "000"
+    - generic [ref=e3]:
+      - generic [ref=e5]: ÜZEYİR
+      - generic [ref=e7]: ÖĞÜR
+  - main

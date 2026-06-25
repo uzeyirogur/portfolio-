@@ -1,28 +1,23 @@
 import type { Metadata } from 'next'
-import { Bricolage_Grotesque, Outfit, JetBrains_Mono } from 'next/font/google'
-import './globals.css'
 import { siteConfig } from '@/data/site'
+import Providers from '@/components/Providers'
+import CursorGlow from '@/components/ui/CursorGlow'
 
-const bricolage = Bricolage_Grotesque({
-  subsets: ['latin', 'latin-ext'],
-  variable: '--font-display',
-  weight: ['400', '500', '600', '700', '800'],
-  display: 'swap',
-})
+// Fonts via @fontsource — self-hosted, no external requests
+import '@fontsource/syne/700.css'
+import '@fontsource/syne/800.css'
+import '@fontsource/fraunces/300-italic.css'
+import '@fontsource/fraunces/400.css'
+import '@fontsource/jetbrains-mono/400.css'
+import '@fontsource/jetbrains-mono/500.css'
+import '@fontsource/dm-sans/400.css'
+import '@fontsource/dm-sans/500.css'
 
-const outfit = Outfit({
-  subsets: ['latin'],
-  variable: '--font-sans',
-  weight: ['300', '400', '500', '600', '700'],
-  display: 'swap',
-})
+// Lenis CSS (required for correct scroll behavior)
+import 'lenis/dist/lenis.css'
 
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ['latin'],
-  variable: '--font-mono',
-  weight: ['400', '500'],
-  display: 'swap',
-})
+// Global styles
+import '../styles/global.scss'
 
 export const metadata: Metadata = {
   title: siteConfig.title,
@@ -46,18 +41,21 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
-    googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 },
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="tr" className="dark">
-      <body
-        className={`${bricolage.variable} ${outfit.variable} ${jetbrainsMono.variable} font-sans antialiased`}
-        style={{ backgroundColor: '#07090D', color: '#E2E8F0' }}
-      >
-        {children}
+    <html lang="en" suppressHydrationWarning>
+      <body>
+        <CursorGlow />
+        <Providers>{children}</Providers>
       </body>
     </html>
   )

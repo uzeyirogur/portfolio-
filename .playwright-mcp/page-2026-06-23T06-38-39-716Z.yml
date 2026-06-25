@@ -1,0 +1,299 @@
+- generic [ref=e2]:
+  - banner [ref=e3]:
+    - generic [ref=e4]:
+      - link "ÜÖ" [ref=e5] [cursor=pointer]:
+        - /url: "#home"
+      - navigation [ref=e6]:
+        - link "Hakkımda" [ref=e7] [cursor=pointer]:
+          - /url: "#about"
+        - link "Projeler" [ref=e8] [cursor=pointer]:
+          - /url: "#projects"
+        - link "Beceriler" [ref=e9] [cursor=pointer]:
+          - /url: "#skills"
+        - link "Deneyim" [ref=e10] [cursor=pointer]:
+          - /url: "#experience"
+        - link "İletişim" [ref=e11] [cursor=pointer]:
+          - /url: "#contact"
+      - button "Menüyü aç" [ref=e12] [cursor=pointer]
+  - main [ref=e16]:
+    - generic [ref=e17]:
+      - generic [ref=e19]:
+        - generic [ref=e20]: ASP.NET CORE · C# · SQL SERVER · ENTITY FRAMEWORK · NEXT.JS · REACT · WEB API · JWT · CLEAN ARCH · EF CORE · TYPESCRIPT · TAILWIND · ASP.NET CORE · C# · SQL SERVER · ENTITY FRAMEWORK · NEXT.JS · REACT · WEB API · JWT · CLEAN ARCH · EF CORE · TYPESCRIPT · TAILWIND ·
+        - generic [ref=e21]: ASP.NET CORE · C# · SQL SERVER · ENTITY FRAMEWORK · NEXT.JS · REACT · WEB API · JWT · CLEAN ARCH · EF CORE · TYPESCRIPT · TAILWIND · ASP.NET CORE · C# · SQL SERVER · ENTITY FRAMEWORK · NEXT.JS · REACT · WEB API · JWT · CLEAN ARCH · EF CORE · TYPESCRIPT · TAILWIND ·
+        - generic [ref=e22]: ASP.NET CORE · C# · SQL SERVER · ENTITY FRAMEWORK · NEXT.JS · REACT · WEB API · JWT · CLEAN ARCH · EF CORE · TYPESCRIPT · TAILWIND · ASP.NET CORE · C# · SQL SERVER · ENTITY FRAMEWORK · NEXT.JS · REACT · WEB API · JWT · CLEAN ARCH · EF CORE · TYPESCRIPT · TAILWIND ·
+        - generic [ref=e23]: ASP.NET CORE · C# · SQL SERVER · ENTITY FRAMEWORK · NEXT.JS · REACT · WEB API · JWT · CLEAN ARCH · EF CORE · TYPESCRIPT · TAILWIND · ASP.NET CORE · C# · SQL SERVER · ENTITY FRAMEWORK · NEXT.JS · REACT · WEB API · JWT · CLEAN ARCH · EF CORE · TYPESCRIPT · TAILWIND ·
+      - generic [ref=e25]:
+        - generic [ref=e26]:
+          - heading "ÜZEYİR" [level=1] [ref=e27]
+          - generic [ref=e28]:
+            - generic [ref=e33]: Open to work
+            - generic [ref=e34]: Computer Engineer
+            - generic [ref=e35]: Full Stack .NET Developer
+            - generic [ref=e36]: İstanbul · Turkey
+        - generic [ref=e37]:
+          - generic [ref=e38]:
+            - link "> projeler_gör()" [ref=e39] [cursor=pointer]:
+              - /url: "#projects"
+            - link "> iletişime_geç()" [ref=e40] [cursor=pointer]:
+              - /url: "#contact"
+            - link "> cv_indir()" [ref=e41] [cursor=pointer]:
+              - /url: /cv/uzeyir-ogur-cv.pdf
+          - heading "ÖĞÜR" [level=1] [ref=e42]
+      - generic [ref=e44]:
+        - generic [ref=e45]: ASP.NET CORE · C# · SQL SERVER · ENTITY FRAMEWORK · NEXT.JS · REACT · WEB API · JWT · CLEAN ARCH · EF CORE · TYPESCRIPT · TAILWIND · ASP.NET CORE · C# · SQL SERVER · ENTITY FRAMEWORK · NEXT.JS · REACT · WEB API · JWT · CLEAN ARCH · EF CORE · TYPESCRIPT · TAILWIND ·
+        - generic [ref=e46]: ASP.NET CORE · C# · SQL SERVER · ENTITY FRAMEWORK · NEXT.JS · REACT · WEB API · JWT · CLEAN ARCH · EF CORE · TYPESCRIPT · TAILWIND · ASP.NET CORE · C# · SQL SERVER · ENTITY FRAMEWORK · NEXT.JS · REACT · WEB API · JWT · CLEAN ARCH · EF CORE · TYPESCRIPT · TAILWIND ·
+        - generic [ref=e47]: ASP.NET CORE · C# · SQL SERVER · ENTITY FRAMEWORK · NEXT.JS · REACT · WEB API · JWT · CLEAN ARCH · EF CORE · TYPESCRIPT · TAILWIND · ASP.NET CORE · C# · SQL SERVER · ENTITY FRAMEWORK · NEXT.JS · REACT · WEB API · JWT · CLEAN ARCH · EF CORE · TYPESCRIPT · TAILWIND ·
+        - generic [ref=e48]: ASP.NET CORE · C# · SQL SERVER · ENTITY FRAMEWORK · NEXT.JS · REACT · WEB API · JWT · CLEAN ARCH · EF CORE · TYPESCRIPT · TAILWIND · ASP.NET CORE · C# · SQL SERVER · ENTITY FRAMEWORK · NEXT.JS · REACT · WEB API · JWT · CLEAN ARCH · EF CORE · TYPESCRIPT · TAILWIND ·
+    - generic [ref=e50]:
+      - paragraph [ref=e51]: // Hakkımda
+      - generic [ref=e52]:
+        - paragraph [ref=e53]: Sadece kod yazmıyorum.
+        - paragraph [ref=e54]: İşleyen sistemler geliştiriyorum.
+      - generic [ref=e55]:
+        - generic [ref=e56]:
+          - paragraph [ref=e57]: Atatürk Üniversitesi Bilgisayar Mühendisliği mezunuyum. Full Stack .NET Developer olarak ASP.NET Core MVC, Web API, Entity Framework Core ve SQL Server teknolojileriyle kurumsal web uygulamaları, dashboardlar ve yönetim panelleri geliştiriyorum.
+          - paragraph [ref=e58]: Temiz mimari, sürdürülebilir kod yapısı ve gerçek iş ihtiyaçlarına uygun çözümler üretmeye odaklanıyorum. Sadece çalışan ekranlar değil, bakımı kolay, genişletilebilir ve profesyonel sistemler üretmeyi önemsiyorum.
+          - paragraph [ref=e59]: Yapay zeka ve otomasyon son dönemdeki en büyük ilgi alanlarımdan. N8n ile karmaşık iş akışları, Claude gibi LLM'lerle AI destekli geliştirme ve Deep Learning temellerini projelere entegre etmek üzerine aktif çalışıyorum.
+        - generic [ref=e60]:
+          - generic [ref=e61]:
+            - generic [ref=e62]:
+              - generic [ref=e63]: "0"
+              - generic [ref=e64]: Proje
+            - generic [ref=e65]:
+              - generic [ref=e67]: 0+
+              - generic [ref=e68]: Yıl
+            - generic [ref=e69]:
+              - generic [ref=e70]: "0"
+              - generic [ref=e71]: Tech katmanı
+          - generic [ref=e72]:
+            - paragraph [ref=e73]: Odak Alanları
+            - generic [ref=e74]:
+              - generic [ref=e77]: Temiz mimari · RESTful API
+              - generic [ref=e80]: Veritabanı tasarımı · ORM
+              - generic [ref=e83]: Dashboard UI · Yönetim panelleri
+              - generic [ref=e86]: Business workflow otomasyonu
+              - generic [ref=e89]: AI destekli geliştirme
+          - generic [ref=e91]:
+            - generic [ref=e92]:
+              - generic [ref=e93]: Logic Board
+              - button "reset()" [ref=e95] [cursor=pointer]
+            - generic [ref=e96]:
+              - button [ref=e97] [cursor=pointer]
+              - button [ref=e98] [cursor=pointer]
+              - button [ref=e99] [cursor=pointer]
+              - button [ref=e100] [cursor=pointer]
+              - button [ref=e101] [cursor=pointer]
+              - button [ref=e102] [cursor=pointer]
+              - button [ref=e103] [cursor=pointer]
+              - button [ref=e104] [cursor=pointer]
+              - button [ref=e105] [cursor=pointer]
+            - paragraph [ref=e106]: "Sıra: X"
+    - generic [ref=e108]:
+      - paragraph [ref=e109]: // Teknoloji Yığını
+      - generic [ref=e110]:
+        - generic [ref=e112]:
+          - generic [ref=e115]: UI LAYER
+          - generic [ref=e116]:
+            - generic [ref=e117]: JavaScript ·
+            - generic [ref=e118]: TypeScript ·
+            - generic [ref=e119]: React ·
+            - generic [ref=e120]: Next.js ·
+            - generic [ref=e121]: Tailwind CSS ·
+            - generic [ref=e122]: HTML / CSS
+        - generic [ref=e124]:
+          - generic [ref=e127]: API LAYER
+          - generic [ref=e128]:
+            - generic [ref=e129]: ASP.NET Core ·
+            - generic [ref=e130]: Web API ·
+            - generic [ref=e131]: REST ·
+            - generic [ref=e132]: JWT ·
+            - generic [ref=e133]: Swagger / OpenAPI ·
+            - generic [ref=e134]: Minimal API
+        - generic [ref=e136]:
+          - generic [ref=e139]: LOGIC LAYER
+          - generic [ref=e140]:
+            - generic [ref=e141]: C# ·
+            - generic [ref=e142]: Clean Architecture ·
+            - generic [ref=e143]: Repository Pattern ·
+            - generic [ref=e144]: UnitOfWork ·
+            - generic [ref=e145]: SOLID ·
+            - generic [ref=e146]: DTO / AutoMapper
+        - generic [ref=e148]:
+          - generic [ref=e151]: DATA LAYER
+          - generic [ref=e152]:
+            - generic [ref=e153]: SQL Server ·
+            - generic [ref=e154]: SQLite ·
+            - generic [ref=e155]: Entity Framework Core ·
+            - generic [ref=e156]: LINQ ·
+            - generic [ref=e157]: Migrations ·
+            - generic [ref=e158]: Stored Procedures
+        - generic [ref=e160]:
+          - generic [ref=e163]: TOOLS LAYER
+          - generic [ref=e164]:
+            - generic [ref=e165]: Git ·
+            - generic [ref=e166]: GitHub ·
+            - generic [ref=e167]: Visual Studio ·
+            - generic [ref=e168]: VS Code ·
+            - generic [ref=e169]: Swagger UI ·
+            - generic [ref=e170]: IIS
+        - generic [ref=e172]:
+          - generic [ref=e175]: AI WORKFLOW
+          - generic [ref=e176]:
+            - generic [ref=e177]: Claude Code ·
+            - generic [ref=e178]: N8n ·
+            - generic [ref=e179]: AI-assisted dev ·
+            - generic [ref=e180]: Prompt Engineering ·
+            - generic [ref=e181]: Deep Learning (temel) ·
+            - generic [ref=e182]: Otomasyon
+    - generic [ref=e183]:
+      - generic: EXPAND →
+      - generic [ref=e184]:
+        - generic [ref=e185]:
+          - paragraph [ref=e186]: // Selected Systems
+          - paragraph [ref=e187]: .NET, SQL ve AI destekli geliştirme süreçleriyle inşa edilmiş dashboardlar, yönetim panelleri ve iş odaklı sistemler.
+        - generic [ref=e188]:
+          - generic [ref=e191] [cursor=pointer]:
+            - generic [ref=e192]: "01"
+            - generic [ref=e193]: ParamNet
+            - generic [ref=e194]: →
+          - generic [ref=e197] [cursor=pointer]:
+            - generic [ref=e198]: "02"
+            - generic [ref=e199]: AnkaVM Spor Akademi
+            - generic [ref=e200]: →
+          - generic [ref=e203] [cursor=pointer]:
+            - generic [ref=e204]: "03"
+            - generic [ref=e205]: Gold Price Tracker
+            - generic [ref=e206]: →
+          - generic [ref=e209] [cursor=pointer]:
+            - generic [ref=e210]: "04"
+            - generic [ref=e211]: Vehicle Inventory
+            - generic [ref=e212]: →
+          - generic [ref=e215] [cursor=pointer]:
+            - generic [ref=e216]: "05"
+            - generic [ref=e217]: Ticket System
+            - generic [ref=e218]: →
+    - generic [ref=e220]:
+      - paragraph [ref=e221]: // Çalışma Geçmişi
+      - generic [ref=e222]:
+        - generic [ref=e223]:
+          - generic [ref=e225]: "DEPLOY LOG #01"
+          - generic [ref=e227]:
+            - paragraph [ref=e228]: GMR GENÇ METAL RAFİNERİ A.Ş.
+            - paragraph [ref=e229]: Computer Engineer / Full Stack .NET Developer
+          - generic [ref=e230]:
+            - generic [ref=e231]: Ocak 2026 – Devam Ediyor
+            - generic [ref=e236]: ACTIVE
+          - generic [ref=e237]:
+            - generic [ref=e238]:
+              - generic [ref=e239]: "[✓]"
+              - generic [ref=e240]: .NET tabanlı kurumsal uygulama geliştirme
+            - generic [ref=e241]:
+              - generic [ref=e242]: "[✓]"
+              - generic [ref=e243]: ASP.NET Core MVC ve Web API yapıları oluşturma
+            - generic [ref=e244]:
+              - generic [ref=e245]: "[✓]"
+              - generic [ref=e246]: Entity Framework Core ile veri işlemleri
+            - generic [ref=e247]:
+              - generic [ref=e248]: "[✓]"
+              - generic [ref=e249]: SQL Server üzerinde tablo, ilişki ve sorgu yapıları
+            - generic [ref=e250]:
+              - generic [ref=e251]: "[✓]"
+              - generic [ref=e252]: Dashboard ve yönetim paneli ekranları geliştirme
+            - generic [ref=e253]:
+              - generic [ref=e254]: "[✓]"
+              - generic [ref=e255]: Git/GitHub ile proje versiyon kontrolü
+            - generic [ref=e256]:
+              - generic [ref=e257]: "[✓]"
+              - generic [ref=e258]: Şirket içi teknik destek süreçlerine katkı
+          - generic [ref=e260]: "Stack: ASP.NET Core · C# · SQL Server · Entity Framework Core · MVC · Web API · Git"
+        - generic [ref=e261]:
+          - generic [ref=e263]: "DEPLOY LOG #02"
+          - generic [ref=e265]:
+            - paragraph [ref=e266]: Web Beyaz
+            - paragraph [ref=e267]: Stajyer Mühendis
+          - generic [ref=e268]:
+            - generic [ref=e269]: Ağustos 2025 – Ocak 2026
+            - generic [ref=e273]: COMPLETED
+          - generic [ref=e274]:
+            - generic [ref=e275]:
+              - generic [ref=e276]: "[✓]"
+              - generic [ref=e277]: .NET tabanlı kurumsal uygulama geliştirme
+            - generic [ref=e278]:
+              - generic [ref=e279]: "[✓]"
+              - generic [ref=e280]: ASP.NET Core MVC ve Web API yapıları oluşturma
+            - generic [ref=e281]:
+              - generic [ref=e282]: "[✓]"
+              - generic [ref=e283]: Entity Framework Core ile veri işlemleri
+            - generic [ref=e284]:
+              - generic [ref=e285]: "[✓]"
+              - generic [ref=e286]: SQL Server üzerinde tablo, ilişki ve sorgu yapıları
+            - generic [ref=e287]:
+              - generic [ref=e288]: "[✓]"
+              - generic [ref=e289]: Dashboard ve yönetim paneli ekranları geliştirme
+            - generic [ref=e290]:
+              - generic [ref=e291]: "[✓]"
+              - generic [ref=e292]: Git/GitHub ile proje versiyon kontrolü
+            - generic [ref=e293]:
+              - generic [ref=e294]: "[✓]"
+              - generic [ref=e295]: Şirket içi teknik destek süreçlerine katkı
+          - generic [ref=e297]: "Stack: ASP.NET Core · C# · SQL Server · Entity Framework Core · MVC · Web API · Git"
+        - generic [ref=e298]:
+          - generic [ref=e300]: EDUCATION LOG
+          - generic [ref=e302]:
+            - paragraph [ref=e303]: Atatürk Üniversitesi
+            - paragraph [ref=e304]: Lisans — Bilgisayar Mühendisliği
+            - paragraph [ref=e305]: 2020 – 2025 · Mezun
+    - generic [ref=e307]:
+      - paragraph [ref=e308]: // İletişim
+      - generic [ref=e309]:
+        - generic [ref=e310]:
+          - paragraph [ref=e311]: $ contact --mode=interactive
+          - generic [ref=e312]:
+            - link "> mail send uzeyirogur52@outlook.com" [ref=e313] [cursor=pointer]:
+              - /url: mailto:uzeyirogur52@outlook.com
+              - generic [ref=e314]: "> mail send"
+              - generic [ref=e316]: uzeyirogur52@outlook.com
+            - link "> github open github.com/uzeyirogur" [ref=e317] [cursor=pointer]:
+              - /url: https://github.com/uzeyirogur
+              - generic [ref=e318]: "> github open"
+              - generic [ref=e320]: github.com/uzeyirogur
+            - link "> linkedin linkedin/uzeyirogur" [ref=e321] [cursor=pointer]:
+              - /url: https://linkedin.com/in/uzeyirogur
+              - generic [ref=e322]: "> linkedin"
+              - generic [ref=e324]: linkedin/uzeyirogur
+            - link "> cv download uzeyir-ogur-cv.pdf" [ref=e325] [cursor=pointer]:
+              - /url: /cv/uzeyir-ogur-cv.pdf
+              - generic [ref=e326]: "> cv download"
+              - generic [ref=e328]: uzeyir-ogur-cv.pdf
+          - paragraph [ref=e329]: // Bir sistem birlikte inşa edelim.
+        - generic [ref=e330]:
+          - paragraph [ref=e331]: VEYA MESAJ BIRAK
+          - generic [ref=e332]:
+            - textbox "Ad Soyad" [ref=e333]
+            - textbox "E-posta" [ref=e334]
+            - textbox "Mesajınız" [ref=e335]
+            - button "Gönder" [ref=e336] [cursor=pointer]:
+              - img [ref=e337]
+              - text: Gönder
+  - contentinfo [ref=e340]:
+    - generic [ref=e342]:
+      - generic [ref=e343]:
+        - link "ÜÖ Üzeyir Öğür" [ref=e344] [cursor=pointer]:
+          - /url: "#hero"
+          - generic [ref=e345]: ÜÖ
+          - generic [ref=e346]: Üzeyir Öğür
+        - paragraph [ref=e347]: © 2026 Üzeyir Öğür. Tüm hakları saklıdır.
+        - paragraph [ref=e348]: Next.js · TypeScript · Tailwind CSS
+      - generic [ref=e349]:
+        - link [ref=e350] [cursor=pointer]:
+          - /url: https://github.com/uzeyirogur
+          - img [ref=e351]
+        - link [ref=e354] [cursor=pointer]:
+          - /url: https://linkedin.com/in/uzeyirogur
+          - img [ref=e355]
+        - link [ref=e359] [cursor=pointer]:
+          - /url: https://x.com/OgurUzeyir
+          - img [ref=e360]
+      - button "Yukarı" [ref=e362] [cursor=pointer]:
+        - text: Yukarı
+        - img [ref=e364]

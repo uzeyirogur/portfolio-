@@ -1,0 +1,79 @@
+// =============================================================================
+// Ticker Strip — gold chip items on dark grid background
+// =============================================================================
+
+.ticker {
+  position: relative;
+  height: 52px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+
+  // Dark base + subtle grid texture
+  background-color: #06060A;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.038) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.038) 1px, transparent 1px);
+  background-size: 22px 22px;
+
+  border-top:    1px solid rgba(200, 150, 40, 0.25);
+  border-bottom: 1px solid rgba(200, 150, 40, 0.25);
+
+  // Edge fade
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 5%,
+    black 95%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 5%,
+    black 95%,
+    transparent 100%
+  );
+}
+
+.track {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  white-space: nowrap;
+  will-change: transform;
+}
+
+.copy {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.group {
+  display: flex;
+  align-items: center;
+}
+
+.item {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: 500;
+  letter-spacing: var(--tracking-wider);
+  white-space: nowrap;
+
+  // Gold chip
+  background-color: #C8960A;
+  color: #09090C;
+  padding: 3px 12px;
+  margin-inline: var(--space-m);
+  border-radius: 2px;
+}
+
+.sep {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  color: rgba(255, 255, 255, 0.18);
+  user-select: none;
+  flex-shrink: 0;
+}

@@ -1,0 +1,298 @@
+- generic [ref=e3]:
+  - link "DVLPR" [ref=e5] [cursor=pointer]:
+    - /url: "#about"
+    - generic [ref=e6]:
+      - img [ref=e7]
+      - heading "DVLPR" [level=1] [ref=e11]
+  - generic [ref=e14]:
+    - generic [ref=e16]:
+      - generic [ref=e18]:
+        - generic [ref=e19]:
+          - heading "S e n i o r F r o n t - E n d S o f t w a r e E n g i n e e r" [level=1] [ref=e20]:
+            - generic [ref=e21]:
+              - generic [ref=e22]: S
+              - generic [ref=e23]: e
+              - generic [ref=e24]: "n"
+              - generic [ref=e25]: i
+              - generic [ref=e26]: o
+              - generic [ref=e27]: r
+            - generic [ref=e28]:
+              - generic [ref=e29]: F
+              - generic [ref=e30]: r
+              - generic [ref=e31]: o
+              - generic [ref=e32]: "n"
+              - generic [ref=e33]: t
+              - generic [ref=e34]: "-"
+              - generic [ref=e35]: E
+              - generic [ref=e36]: "n"
+              - generic [ref=e37]: d
+            - generic [ref=e38]:
+              - generic [ref=e39]: S
+              - generic [ref=e40]: o
+              - generic [ref=e41]: f
+              - generic [ref=e42]: t
+              - generic [ref=e43]: w
+              - generic [ref=e44]: a
+              - generic [ref=e45]: r
+              - generic [ref=e46]: e
+            - generic [ref=e47]:
+              - generic [ref=e48]: E
+              - generic [ref=e49]: "n"
+              - generic [ref=e50]: g
+              - generic [ref=e51]: i
+              - generic [ref=e52]: "n"
+              - generic [ref=e53]: e
+              - generic [ref=e54]: e
+              - generic [ref=e55]: r
+          - paragraph [ref=e56]: Crafting modern, accessible, and secure web experiences. I build elegant interfaces, solve complex design challenges, and bring ideas to life through clean, scalable code.
+          - link "About me" [ref=e57] [cursor=pointer]:
+            - /url: "#about"
+            - text: About me
+            - img [ref=e58]
+        - img [ref=e63]
+      - img [ref=e1990]
+    - generic [ref=e2015]:
+      - generic [ref=e2017]:
+        - heading "H i , I ' m T o d o r W e b D e v e l o p e r JavaScript Enthusiast / Creative Problem Solver" [level=1] [ref=e2018]:
+          - generic [ref=e2019]:
+            - generic [ref=e2020]: H
+            - generic [ref=e2021]: i
+            - generic [ref=e2022]: ","
+          - generic [ref=e2023]:
+            - generic [ref=e2024]: I
+            - generic [ref=e2025]: "'"
+            - generic [ref=e2026]: m
+            - generic [ref=e2027]: T
+            - generic [ref=e2028]: o
+            - generic [ref=e2029]: d
+            - generic [ref=e2030]: o
+            - generic [ref=e2031]: r
+          - generic [ref=e2032]:
+            - generic [ref=e2033]: W
+            - generic [ref=e2034]: e
+            - generic [ref=e2035]: b
+            - generic [ref=e2036]: D
+            - generic [ref=e2037]: e
+            - generic [ref=e2038]: v
+            - generic [ref=e2039]: e
+            - generic [ref=e2040]: l
+            - generic [ref=e2041]: o
+            - generic [ref=e2042]: p
+            - generic [ref=e2043]: e
+            - generic [ref=e2044]: r
+          - paragraph [ref=e2045]: JavaScript Enthusiast / Creative Problem Solver
+        - generic [ref=e2046]:
+          - paragraph [ref=e2047]: Professionally connected to the web development world.
+          - generic [ref=e2048]: I’m a detail-oriented engineer who enjoys building thoughtful, high-quality user experiences.
+          - generic [ref=e2049]: I’m passionate about solving problems, collaborating with great people, and continuously learning.
+          - paragraph [ref=e2050]: Outside of work, you’ll find me boxing, exploring the outdoors, or diving into a good video game — and, of course, experimenting with new tech.
+        - img "Todor Dimov" [ref=e2051]
+      - img [ref=e2054]
+    - generic [ref=e2080]:
+      - generic [ref=e2082]:
+        - generic [ref=e2083]:
+          - heading "A problem is an opportunity to do your best." [level=2] [ref=e2084]
+          - heading "S k i l l s & E x p e r i e n c e" [level=1] [ref=e2085]:
+            - generic [ref=e2086]: S
+            - generic [ref=e2087]: k
+            - generic [ref=e2088]: i
+            - generic [ref=e2089]: l
+            - generic [ref=e2090]: l
+            - generic [ref=e2091]: s
+            - generic [ref=e2092]: "&"
+            - generic [ref=e2093]: E
+            - generic [ref=e2094]: x
+            - generic [ref=e2095]: p
+            - generic [ref=e2096]: e
+            - generic [ref=e2097]: r
+            - generic [ref=e2098]: i
+            - generic [ref=e2099]: e
+            - generic [ref=e2100]: "n"
+            - generic [ref=e2101]: c
+            - generic [ref=e2102]: e
+          - paragraph [ref=e2103]: I specialize in crafting engaging and high-quality client-side web applications.
+          - paragraph [ref=e2104]: My experience includes HTML, CSS, and JavaScript, building projects with React and Vue, developing custom features and plugins, creating animations, and coding interactive layouts. I also have full-stack experience, including working with WordPress, Node.js, and C#.
+          - paragraph [ref=e2105]:
+            - text: For a deeper look at my work and experience, visit my
+            - link "Linkedin" [ref=e2106] [cursor=pointer]:
+              - /url: https://www.linkedin.com/in/tdrdimov/
+        - generic [ref=e2107]:
+          - generic [ref=e2108]:
+            - img [ref=e2109]
+            - paragraph [ref=e2111]: JavaScript
+          - generic [ref=e2112]:
+            - img [ref=e2113]
+            - paragraph [ref=e2115]: React
+          - generic [ref=e2116]:
+            - img [ref=e2117]
+            - paragraph [ref=e2121]: Vue
+          - generic [ref=e2122]:
+            - img [ref=e2123]
+            - paragraph [ref=e2125]: Node
+          - generic [ref=e2126]:
+            - img [ref=e2127]
+            - paragraph [ref=e2129]: WordPress
+          - generic [ref=e2130]:
+            - img [ref=e2131]
+            - paragraph [ref=e2133]: PHP
+          - generic [ref=e2134]:
+            - img [ref=e2135]
+            - paragraph [ref=e2137]: SASS
+          - generic [ref=e2138]:
+            - img [ref=e2139]
+            - paragraph [ref=e2141]: CSS3
+          - generic [ref=e2142]:
+            - img [ref=e2143]
+            - paragraph [ref=e2145]: Bootstrap
+          - generic [ref=e2146]:
+            - img [ref=e2147]
+            - paragraph [ref=e2149]: HTML5
+          - generic [ref=e2150]:
+            - img [ref=e2151]
+            - paragraph [ref=e2153]: Git
+          - generic [ref=e2154]:
+            - img [ref=e2155]
+            - paragraph [ref=e2157]: Super-powers
+          - generic [ref=e2158]:
+            - img [ref=e2159]
+            - paragraph [ref=e2161]: Visual Studio
+          - generic [ref=e2162]:
+            - img [ref=e2163]
+            - paragraph [ref=e2165]: Figma
+      - img [ref=e2168]
+    - generic [ref=e2192]:
+      - generic [ref=e2194]:
+        - generic [ref=e2199]:
+          - img "sphere decor" [ref=e2200]
+          - img "sphere decor" [ref=e2201]
+          - img "sphere decor" [ref=e2202]
+          - generic [ref=e2204]:
+            - heading "P o r t f o l i o & P r e v i o u s P r o j e c t s" [level=1] [ref=e2205]:
+              - generic [ref=e2206]:
+                - generic [ref=e2207]: P
+                - generic [ref=e2208]: o
+                - generic [ref=e2209]: r
+                - generic [ref=e2210]: t
+                - generic [ref=e2211]: f
+                - generic [ref=e2212]: o
+                - generic [ref=e2213]: l
+                - generic [ref=e2214]: i
+                - generic [ref=e2215]: o
+                - generic [ref=e2216]: "&"
+                - generic [ref=e2217]: P
+                - generic [ref=e2218]: r
+                - generic [ref=e2219]: e
+                - generic [ref=e2220]: v
+                - generic [ref=e2221]: i
+                - generic [ref=e2222]: o
+                - generic [ref=e2223]: u
+                - generic [ref=e2224]: s
+                - generic [ref=e2225]: P
+                - generic [ref=e2226]: r
+                - generic [ref=e2227]: o
+                - generic [ref=e2228]: j
+                - generic [ref=e2229]: e
+                - generic [ref=e2230]: c
+                - generic [ref=e2231]: t
+                - generic [ref=e2232]: s
+            - paragraph [ref=e2233]:
+              - text: I’ve built a variety of projects tailored to different aspects of each client’s business. If you’d like to see more examples beyond what’s showcased here, feel free to
+              - link "get in touch" [ref=e2234] [cursor=pointer]:
+                - /url: "#contact"
+              - text: — I’d be happy to share.
+            - link "See Projects" [ref=e2236] [cursor=pointer]:
+              - /url: "#portfolio/slide2"
+              - text: See Projects
+              - img [ref=e2237]
+        - generic [ref=e2244]:
+          - generic [ref=e2248]:
+            - heading "e-Commerce Application" [level=2] [ref=e2249]
+            - heading "C r o w n C l o t h i n g" [level=1] [ref=e2250]:
+              - generic [ref=e2251]:
+                - generic [ref=e2252]: C
+                - generic [ref=e2253]: r
+                - generic [ref=e2254]: o
+                - generic [ref=e2255]: w
+                - generic [ref=e2256]: "n"
+                - generic [ref=e2257]: C
+                - generic [ref=e2258]: l
+                - generic [ref=e2259]: o
+                - generic [ref=e2260]: t
+                - generic [ref=e2261]: h
+                - generic [ref=e2262]: i
+                - generic [ref=e2263]: "n"
+                - generic [ref=e2264]: g
+            - generic [ref=e2265]:
+              - paragraph [ref=e2266]: Online store for selling apparel & foot wear.
+              - paragraph [ref=e2267]:
+                - strong [ref=e2268]: "Built with:"
+                - text: React, Redux, Node, JavaScript, SASS, Custom Stripe Integration, Firebase (NoSQL Database, Cloud Functions, Cloud Storage, Hosting).
+            - generic [ref=e2269]:
+              - generic [ref=e2270]:
+                - link "View the code" [ref=e2271] [cursor=pointer]:
+                  - /url: https://github.com/tdrdimov/ecom-react
+                  - text: View the code
+                  - img [ref=e2272]
+                - link "Visit the app" [ref=e2275] [cursor=pointer]:
+                  - /url: https://crwn-react-6b805.web.app/
+                  - text: Visit the app
+                  - img [ref=e2276]
+              - img "Group" [ref=e2279]
+          - img "project mockup" [ref=e2289]
+        - generic [ref=e2294]:
+          - img [ref=e2297]
+          - generic [ref=e2343]:
+            - heading "Fitness & Wellness Coaching Platform" [level=2] [ref=e2344]
+            - heading "F i t & H e a l t h y" [level=1] [ref=e2345]:
+              - generic [ref=e2346]:
+                - generic [ref=e2347]: F
+                - generic [ref=e2348]: i
+                - generic [ref=e2349]: t
+                - generic [ref=e2350]: "&"
+                - generic [ref=e2351]: H
+                - generic [ref=e2352]: e
+                - generic [ref=e2353]: a
+                - generic [ref=e2354]: l
+                - generic [ref=e2355]: t
+                - generic [ref=e2356]: h
+                - generic [ref=e2357]: "y"
+            - generic [ref=e2358]:
+              - paragraph [ref=e2359]: Server rendered, progressive web application for online fitness & health coaching. Providing workout programs, nutritions plans, workout logs, follow up with client's progress and more.
+              - paragraph [ref=e2360]:
+                - strong [ref=e2361]: "Built with:"
+                - text: NuxtJs, VueJs, JavaScript, Firebase (NoSQL Database, Cloud Functions, Cloud Storage, Hosting), SASS.
+            - generic [ref=e2362]:
+              - link "Visit the app" [ref=e2363] [cursor=pointer]:
+                - /url: https://fitnhealthy.us
+                - text: Visit the app
+                - img [ref=e2364]
+              - img [ref=e2368]
+      - list [ref=e2378]:
+        - listitem [ref=e2379]:
+          - link "firstSlide" [ref=e2380] [cursor=pointer]:
+            - /url: "#"
+            - generic [ref=e2381]: firstSlide
+        - listitem [ref=e2383]:
+          - link "secondSlide" [ref=e2384] [cursor=pointer]:
+            - /url: "#"
+            - generic [ref=e2385]: secondSlide
+        - listitem [ref=e2387]:
+          - link "slide3" [ref=e2388] [cursor=pointer]:
+            - /url: "#"
+            - generic [ref=e2389]: slide3
+    - generic [ref=e2392]:
+      - generic [ref=e2396]:
+        - paragraph [ref=e2397]: What would you do if a software expert was just a click away?
+        - generic [ref=e2398]: Whether you want to start a new project or just say hello, I’d love to hear from you.
+        - generic [ref=e2399]:
+          - text: You can also follow me on
+          - link "Instagram" [ref=e2400] [cursor=pointer]:
+            - /url: https://www.instagram.com/pro.dvlpr/
+          - text: .
+          - heading "tdrdimov@gmail.com" [level=1] [ref=e2401]:
+            - link "tdrdimov@gmail.com" [ref=e2402] [cursor=pointer]:
+              - /url: mailto:tdrdimov@gmail.com
+      - img [ref=e2408]
+      - img [ref=e2435]
+  - link "Contact" [ref=e2460] [cursor=pointer]:
+    - /url: "#contact"

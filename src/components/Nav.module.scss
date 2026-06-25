@@ -1,0 +1,238 @@
+// =============================================================================
+// Navigation — Phase 2
+// Fixed, floating, no background. Adapts text color per section theme.
+// Border-bottom appears after 50px scroll.
+// =============================================================================
+
+// ---------------------------------------------------------------------------
+// Shell
+// ---------------------------------------------------------------------------
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-nav);
+  border-bottom: 1px solid transparent;
+  transition:
+    border-color var(--duration-normal) ease,
+    color var(--duration-normal) ease;
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: var(--content-pad);
+}
+
+// ---------------------------------------------------------------------------
+// Theme variants — controlled by section detection via IntersectionObserver
+// ---------------------------------------------------------------------------
+
+.navDark {
+  --nav-text:       var(--dark-primary);
+  --nav-text-muted: var(--dark-body);
+  --nav-border:     var(--dark-border);
+}
+
+.navLight {
+  --nav-text:       var(--light-primary);
+  --nav-text-muted: var(--light-body);
+  --nav-border:     var(--light-border);
+}
+
+.navGrey {
+  --nav-text:       var(--grey-primary);
+  --nav-text-muted: var(--grey-body);
+  --nav-border:     var(--grey-border);
+}
+
+// ---------------------------------------------------------------------------
+// Scrolled state
+// ---------------------------------------------------------------------------
+
+.navScrolled {
+  border-bottom-color: var(--nav-border);
+}
+
+// ---------------------------------------------------------------------------
+// Logomark
+// ---------------------------------------------------------------------------
+
+.logo {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: var(--nav-text);
+  transition: color var(--duration-fast) ease;
+
+  &:hover {
+    color: var(--gold);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Desktop links
+// ---------------------------------------------------------------------------
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-l);
+}
+
+.link {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: 500;
+  letter-spacing: var(--tracking-wider);
+  color: var(--nav-text-muted);
+  transition: color var(--duration-fast) ease;
+
+  &:hover {
+    color: var(--nav-text);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Hamburger button — mobile only
+// ---------------------------------------------------------------------------
+
+.hamburger {
+  display: none;
+  flex-shrink: 0;
+  width: 28px;
+  height: 20px;
+  position: relative;
+  padding: 0;
+  background: none;
+  border: none;
+
+  span {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background-color: var(--nav-text);
+    left: 0;
+    transition:
+      top 260ms var(--ease-in-out),
+      bottom 260ms var(--ease-in-out),
+      transform 260ms var(--ease-in-out);
+
+    &:first-child { top: 2px; }
+    &:last-child  { bottom: 2px; }
+  }
+}
+
+.hamburgerOpen span {
+  &:first-child {
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+  }
+  &:last-child {
+    bottom: 50%;
+    transform: translateY(50%) rotate(-45deg);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Mobile overlay — dark fullscreen menu
+// Sibling of .nav in DOM so it renders above the header
+// ---------------------------------------------------------------------------
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  /* One level below the header so ÜÖ logo + × button stay visible and clickable */
+  z-index: calc(var(--z-nav) - 1);
+  background-color: var(--dark-bg);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-inline: var(--content-pad);
+  padding-bottom: 10vh;
+  animation: overlayIn 300ms var(--ease-out) both;
+}
+
+.overlayLinks {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-xs);
+}
+
+.overlayLink {
+  font-family: var(--font-display);
+  font-size: clamp(42px, 11vw, 72px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: var(--tracking-tight);
+  color: var(--dark-primary);
+  opacity: 0;
+  transform: translateY(24px);
+  animation: linkIn 420ms var(--ease-out) both;
+  transition: color var(--duration-fast) ease;
+
+  &:hover {
+    color: var(--gold);
+  }
+
+  &:nth-child(1) { animation-delay: 60ms; }
+  &:nth-child(2) { animation-delay: 110ms; }
+  &:nth-child(3) { animation-delay: 160ms; }
+  &:nth-child(4) { animation-delay: 210ms; }
+}
+
+.overlayFooter {
+  position: absolute;
+  bottom: var(--space-m);
+  left: var(--content-pad);
+  font-family: var(--font-mono);
+  font-size: var(--text-mono);
+  color: var(--dark-muted);
+  letter-spacing: var(--tracking-wide);
+}
+
+// ---------------------------------------------------------------------------
+// Keyframes
+// ---------------------------------------------------------------------------
+
+@keyframes overlayIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes linkIn {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Responsive breakpoints
+// ---------------------------------------------------------------------------
+
+@media (max-width: 768px) {
+  .links {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

@@ -1,0 +1,204 @@
+// =============================================================================
+// Contact Section — Closing scene
+// Dark cinematic. Strong typographic CTA, large email, footer strip.
+// =============================================================================
+
+.contact {
+  background-color: var(--dark-bg);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.inner {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  max-width: var(--max-width);
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: var(--content-pad);
+  padding-block: var(--section-pad);
+}
+
+// ── Label row ─────────────────────────────────────────────────────────────────
+.labelRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-m);
+  margin-bottom: clamp(64px, 9vw, 128px);
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: 400;
+  letter-spacing: var(--tracking-wider);
+  color: var(--dark-muted);
+  white-space: nowrap;
+}
+
+.labelRule {
+  flex: 1;
+  height: 1px;
+  background-color: var(--dark-border);
+}
+
+.labelIndex {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: 400;
+  letter-spacing: var(--tracking-wide);
+  color: var(--dark-muted);
+}
+
+// ── CTA block ─────────────────────────────────────────────────────────────────
+.ctaBlock {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-m);
+  padding-bottom: var(--space-xl);
+}
+
+.headline {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--text-display);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--dark-primary);
+  margin: 0;
+  will-change: clip-path;
+}
+
+.availability {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: 400;
+  letter-spacing: var(--tracking-wider);
+  color: var(--dark-muted);
+  margin: 0;
+}
+
+.subtext {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(14px, 1.3vw, 18px);
+  line-height: 1.5;
+  color: var(--dark-body);
+  margin: 0;
+  opacity: 0.72;
+}
+
+.email {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-s);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: clamp(18px, 2.2vw, 32px);
+  color: var(--dark-body);
+  text-decoration: none;
+  border-bottom: 1px solid var(--dark-border);
+  padding-bottom: 4px;
+  width: fit-content;
+  transition: color 240ms ease, border-color 240ms ease;
+  will-change: opacity, transform;
+
+  &:hover {
+    color: var(--dark-primary);
+    border-color: var(--dark-body);
+  }
+}
+
+.emailArrow {
+  color: var(--gold);
+  flex-shrink: 0;
+  transition: transform 240ms ease;
+
+  .email:hover & {
+    transform: translateX(4px);
+  }
+}
+
+// ── Footer strip ──────────────────────────────────────────────────────────────
+.footer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-m);
+  padding-top: var(--space-m);
+  border-top: 1px solid var(--dark-border);
+  will-change: opacity;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-s);
+  }
+}
+
+.footerLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.footerName {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(14px, 1.2vw, 18px);
+  letter-spacing: var(--tracking-tight);
+  color: var(--dark-primary);
+}
+
+.footerRole {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: 400;
+  letter-spacing: var(--tracking-wide);
+  color: var(--dark-muted);
+}
+
+.footerLinks {
+  display: flex;
+  gap: var(--space-m);
+}
+
+.footerLink {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: 400;
+  letter-spacing: var(--tracking-wide);
+  color: var(--dark-muted);
+  text-decoration: none;
+  transition: color 200ms ease;
+
+  &:hover {
+    color: var(--dark-primary);
+  }
+}
+
+.footerCopy {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: 400;
+  letter-spacing: var(--tracking-wide);
+  color: var(--dark-muted);
+  white-space: nowrap;
+}
+
+// ── Responsive ─────────────────────────────────────────────────────────────────
+@media (max-width: 600px) {
+  .headline {
+    font-size: clamp(32px, 8.5vw, 56px);
+    overflow-wrap: break-word;
+  }
+
+  .email {
+    font-size: clamp(13px, 3.8vw, 20px);
+    word-break: break-all;
+  }
+}

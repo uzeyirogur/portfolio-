@@ -1,0 +1,121 @@
+// =============================================================================
+// CLEAR OUTPUT — Design Tokens
+// All color, typography, and spacing values live here as CSS custom properties.
+// =============================================================================
+
+:root {
+
+  // ---------------------------------------------------------------------------
+  // DARK REGISTER  (Hero, Case Study, Contact, Footer)
+  // ---------------------------------------------------------------------------
+  --dark-bg:        #090907;
+  --dark-surface:   #111110;
+  --dark-border:    #2E2E2B;
+  --dark-muted:     #6E6E68;
+  --dark-body:      #A8A8A2;
+  --dark-primary:   #F0EDE6;
+
+  // ---------------------------------------------------------------------------
+  // LIGHT REGISTER  (Statement, Work, Experience)
+  // ---------------------------------------------------------------------------
+  --light-bg:       #F5F2ED;
+  --light-surface:  #ECEAE4;
+  --light-border:   #D6D2C8;
+  --light-muted:    #9A9590;
+  --light-body:     #3A3832;
+  --light-primary:  #1A1916;
+
+  // ---------------------------------------------------------------------------
+  // GREY REGISTER  (Stack section)
+  // ---------------------------------------------------------------------------
+  --grey-bg:        #E8E5DF;
+  --grey-surface:   #DEDAD3;
+  --grey-border:    #C8C4BC;
+  --grey-body:      #5A5650;
+  --grey-primary:   #1A1916;
+
+  // ---------------------------------------------------------------------------
+  // UNIVERSAL ACCENT  (Gold — one global accent, used sparingly)
+  // ---------------------------------------------------------------------------
+  --gold:           #C89B3C;
+  --gold-deep:      #A67C28;
+  --gold-subtle:    rgba(200, 155, 60, 0.12);
+
+  // ---------------------------------------------------------------------------
+  // PER-PROJECT ACCENTS  (Work section only — hover left-stripe + label)
+  // ---------------------------------------------------------------------------
+  --accent-paramnet:  #7FBA00;
+  --accent-gold:      #E8B84B;
+  --accent-vehicle:   #4A90D9;
+  --accent-anka:      #E07B35;
+  --accent-ticket:    #C94040;
+
+  // ---------------------------------------------------------------------------
+  // TYPOGRAPHY
+  // ---------------------------------------------------------------------------
+  --font-display: 'Syne', 'Arial', sans-serif;
+  --font-serif:   'Fraunces', 'Georgia', serif;
+  --font-mono:    'JetBrains Mono', 'Courier New', monospace;
+  --font-body:    'DM Sans', 'Helvetica Neue', sans-serif;
+
+  // Type scale (fluid, clamp-based)
+  --text-display:  clamp(72px, 11vw, 160px);
+  --text-h1:       clamp(40px, 5.5vw, 80px);
+  --text-h2:       clamp(28px, 3.5vw, 52px);
+  --text-project:  clamp(28px, 3.8vw, 56px);
+  --text-serif:    clamp(22px, 2.6vw, 38px);
+  --text-body:     clamp(15px, 1.2vw, 17px);
+  --text-label:    13px;
+  --text-mono:     12px;
+
+  --leading-tight:  0.92;
+  --leading-snug:   1.1;
+  --leading-normal: 1.5;
+  --leading-loose:  1.7;
+
+  --tracking-tight:  -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide:   0.08em;
+  --tracking-wider:  0.18em;
+
+  // ---------------------------------------------------------------------------
+  // SPACING  (8px base)
+  // ---------------------------------------------------------------------------
+  --space-xs:  8px;
+  --space-s:   16px;
+  --space-m:   32px;
+  --space-l:   64px;
+  --space-xl:  128px;
+  --space-xxl: 256px;
+
+  // Section vertical padding
+  --section-pad: clamp(80px, 10vw, 160px);
+
+  // ---------------------------------------------------------------------------
+  // LAYOUT
+  // ---------------------------------------------------------------------------
+  --max-width:    1440px;
+  --content-pad:  clamp(24px, 5vw, 80px);
+
+  // ---------------------------------------------------------------------------
+  // MOTION
+  // ---------------------------------------------------------------------------
+  --ease-out:     cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out:  cubic-bezier(0.87, 0, 0.13, 1);
+  --ease-spring:  cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  --duration-fast:    150ms;
+  --duration-normal:  300ms;
+  --duration-slow:    600ms;
+  --duration-cinema:  900ms;
+
+  // ---------------------------------------------------------------------------
+  // Z-INDEX  (explicit stack — no z-index: 9999)
+  // ---------------------------------------------------------------------------
+  --z-base:    0;
+  --z-content: 10;
+  --z-lab:     50;
+  --z-cursor:  100;
+  --z-nav:     200;
+  --z-loader:  300;
+}

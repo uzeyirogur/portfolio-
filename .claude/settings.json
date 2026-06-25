@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "playwright": {
+      "command": "C:\\Users\\HP\\AppData\\Roaming\\npm\\playwright-mcp.cmd"
+    },
+    "context7": {
+      "command": "C:\\Users\\HP\\AppData\\Roaming\\npm\\context7-mcp.cmd"
+    }
+  }
+}

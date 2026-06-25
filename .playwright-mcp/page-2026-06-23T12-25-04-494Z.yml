@@ -1,0 +1,19 @@
+- generic [active] [ref=e1]:
+  - banner "Site navigation" [ref=e2]:
+    - generic [ref=e3]:
+      - link "Üzeyir Öğür — back to top" [ref=e4] [cursor=pointer]:
+        - /url: "#"
+        - text: ÜÖ
+      - navigation "Primary" [ref=e5]:
+        - link "İŞLER" [ref=e6] [cursor=pointer]:
+          - /url: "#work"
+        - link "YETKİNLİK" [ref=e7] [cursor=pointer]:
+          - /url: "#stack"
+        - link "HAKKIMDA" [ref=e8] [cursor=pointer]:
+          - /url: "#about"
+        - link "İLETİŞİM" [ref=e9] [cursor=pointer]:
+          - /url: "#contact"
+      - button "Open navigation" [ref=e10]
+  - generic [ref=e12]:
+    - heading "404" [level=1] [ref=e13]
+    - heading "This page could not be found." [level=2] [ref=e15]

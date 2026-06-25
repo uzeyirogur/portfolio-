@@ -1,0 +1,289 @@
+- generic [active] [ref=e1]:
+  - banner "Site navigation" [ref=e2]:
+    - generic [ref=e3]:
+      - link "Üzeyir Öğür — back to top" [ref=e4]:
+        - /url: "#"
+        - text: ÜÖ
+      - navigation "Primary" [ref=e5]:
+        - link "WORK" [ref=e6]:
+          - /url: "#work"
+        - link "STACK" [ref=e7]:
+          - /url: "#stack"
+        - link "ABOUT" [ref=e8]:
+          - /url: "#about"
+        - link "CONTACT" [ref=e9]:
+          - /url: "#contact"
+  - main [ref=e17]:
+    - region "Introduction" [ref=e18]:
+      - generic [ref=e19]:
+        - generic [ref=e20]:
+          - generic [ref=e23]: AVAILABLE FOR WORK
+          - generic [ref=e24]: ISTANBUL, TR
+        - generic [ref=e26]:
+          - generic [ref=e27]: ÜZEYİR
+          - generic [ref=e28]: ÖĞÜR
+        - generic [ref=e30]:
+          - generic [ref=e31]: FULL STACK .NET DEVELOPER
+          - generic [ref=e32]: /
+          - generic [ref=e33]: COMPUTER ENGINEER
+    - generic "Technology stack and availability" [ref=e34]:
+      - generic [ref=e35]:
+        - generic [ref=e36]:
+          - generic [ref=e37]:
+            - generic [ref=e38]: FULL STACK .NET DEVELOPER
+            - generic [ref=e39]: —
+          - generic [ref=e40]:
+            - generic [ref=e41]: COMPUTER ENGINEER
+            - generic [ref=e42]: —
+          - generic [ref=e43]:
+            - generic [ref=e44]: ISTANBUL, TR
+            - generic [ref=e45]: —
+          - generic [ref=e46]:
+            - generic [ref=e47]: OPEN TO WORK
+            - generic [ref=e48]: —
+          - generic [ref=e49]:
+            - generic [ref=e50]: .NET 8
+            - generic [ref=e51]: —
+          - generic [ref=e52]:
+            - generic [ref=e53]: NEXT.JS 15
+            - generic [ref=e54]: —
+          - generic [ref=e55]:
+            - generic [ref=e56]: REACT 19
+            - generic [ref=e57]: —
+          - generic [ref=e58]:
+            - generic [ref=e59]: TYPESCRIPT
+            - generic [ref=e60]: —
+          - generic [ref=e61]:
+            - generic [ref=e62]: POSTGRESQL
+            - generic [ref=e63]: —
+          - generic [ref=e64]:
+            - generic [ref=e65]: AZURE
+            - generic [ref=e66]: —
+          - generic [ref=e67]:
+            - generic [ref=e68]: DOCKER
+            - generic [ref=e69]: —
+          - generic [ref=e70]:
+            - generic [ref=e71]: GIT
+            - generic [ref=e72]: —
+        - generic [ref=e73]:
+          - generic [ref=e74]:
+            - generic [ref=e75]: FULL STACK .NET DEVELOPER
+            - generic [ref=e76]: —
+          - generic [ref=e77]:
+            - generic [ref=e78]: COMPUTER ENGINEER
+            - generic [ref=e79]: —
+          - generic [ref=e80]:
+            - generic [ref=e81]: ISTANBUL, TR
+            - generic [ref=e82]: —
+          - generic [ref=e83]:
+            - generic [ref=e84]: OPEN TO WORK
+            - generic [ref=e85]: —
+          - generic [ref=e86]:
+            - generic [ref=e87]: .NET 8
+            - generic [ref=e88]: —
+          - generic [ref=e89]:
+            - generic [ref=e90]: NEXT.JS 15
+            - generic [ref=e91]: —
+          - generic [ref=e92]:
+            - generic [ref=e93]: REACT 19
+            - generic [ref=e94]: —
+          - generic [ref=e95]:
+            - generic [ref=e96]: TYPESCRIPT
+            - generic [ref=e97]: —
+          - generic [ref=e98]:
+            - generic [ref=e99]: POSTGRESQL
+            - generic [ref=e100]: —
+          - generic [ref=e101]:
+            - generic [ref=e102]: AZURE
+            - generic [ref=e103]: —
+          - generic [ref=e104]:
+            - generic [ref=e105]: DOCKER
+            - generic [ref=e106]: —
+          - generic [ref=e107]:
+            - generic [ref=e108]: GIT
+            - generic [ref=e109]: —
+    - region "Selected Work" [ref=e110]:
+      - generic:
+        - generic:
+          - generic: WORK
+          - generic: WORK
+          - generic: WORK
+          - generic: WORK
+        - generic:
+          - generic: WORK
+          - generic: WORK
+          - generic: WORK
+          - generic: WORK
+        - generic:
+          - generic: WORK
+          - generic: WORK
+          - generic: WORK
+          - generic: WORK
+      - generic [ref=e111]:
+        - generic [ref=e112]:
+          - generic [ref=e113]: SELECTED WORK
+          - generic [ref=e114]: 05 / 05
+        - generic [ref=e115]:
+          - generic [ref=e116]:
+            - generic [ref=e117]:
+              - heading "PARAMNET" [level=2] [ref=e119]
+              - generic [ref=e120]:
+                - generic [ref=e121]: 01 — .NET / DASHBOARD — 2024
+                - paragraph [ref=e122]: Personal Finance & Expense Tracker
+                - generic [ref=e123]:
+                  - generic [ref=e124]: ASP.NET Core
+                  - generic [ref=e125]: Entity Framework Core
+                  - generic [ref=e126]: SQL Server
+                  - generic [ref=e127]: SQLite
+            - img "PARAMNET screenshot" [ref=e130]
+          - generic [ref=e131]:
+            - generic [ref=e132]:
+              - heading [level=2] [ref=e134]: ANKAVM SPOR AKADEMİ
+              - generic [ref=e135]:
+                - generic [ref=e136]: 02 — .NET / BUSINESS APPS — 2024
+                - paragraph [ref=e137]: Sports Academy CMS & Member Management
+                - generic [ref=e138]:
+                  - generic [ref=e139]: ASP.NET Core MVC
+                  - generic [ref=e140]: Web API
+                  - generic [ref=e141]: Entity Framework Core
+                  - generic [ref=e142]: SQL Server
+                - link [ref=e143]:
+                  - /url: https://ankavm.com
+                  - text: → EXPLORE PROJECT
+            - img [ref=e146]
+          - generic [ref=e147]:
+            - generic [ref=e148]:
+              - heading [level=2] [ref=e150]: GOLD PRICE TRACKER
+              - generic [ref=e151]:
+                - generic [ref=e152]: 03 — .NET / API / DASHBOARD — 2024
+                - paragraph [ref=e153]: Live Scraper & Comparative Price Dashboard
+                - generic [ref=e154]:
+                  - generic [ref=e155]: ASP.NET Core
+                  - generic [ref=e156]: SQLite
+                  - generic [ref=e157]: SQL Server
+                  - generic [ref=e158]: Background Service
+            - img [ref=e161]
+          - generic [ref=e162]:
+            - generic [ref=e163]:
+              - heading [level=2] [ref=e165]: VEHICLE INVENTORY
+              - generic [ref=e166]:
+                - generic [ref=e167]: 04 — .NET / BUSINESS APPS — 2024
+                - paragraph [ref=e168]: Fleet & Maintenance Management System
+                - generic [ref=e169]:
+                  - generic [ref=e170]: ASP.NET Core MVC
+                  - generic [ref=e171]: Entity Framework Core
+                  - generic [ref=e172]: SQL Server
+                  - generic [ref=e173]: Bootstrap
+            - img [ref=e176]
+          - generic [ref=e177]:
+            - generic [ref=e178]:
+              - heading [level=2] [ref=e180]: TICKET SYSTEM
+              - generic [ref=e181]:
+                - generic [ref=e182]: 05 — .NET / BUSINESS APPS — 2024
+                - paragraph [ref=e183]: N-Tier Enterprise Support Ticket System
+                - generic [ref=e184]:
+                  - generic [ref=e185]: ASP.NET Core 8
+                  - generic [ref=e186]: Entity Framework Core
+                  - generic [ref=e187]: SQLite
+                  - generic [ref=e188]: JWT
+                - link [ref=e189]:
+                  - /url: https://github.com/uzeyirogur/Ticket-System
+                  - text: → VIEW ON GITHUB
+            - img [ref=e192]
+        - navigation "Project navigation" [ref=e193]:
+          - button "View PARAMNET" [ref=e194]
+          - button "View ANKAVM SPOR AKADEMİ" [ref=e195]
+          - button "View GOLD PRICE TRACKER" [ref=e196]
+          - button "View VEHICLE INVENTORY" [ref=e197]
+          - button "View TICKET SYSTEM" [ref=e198]
+    - region "About" [ref=e199]:
+      - generic [ref=e200]:
+        - generic [ref=e201]:
+          - generic [ref=e202]: ABOUT THE ENGINEER
+          - generic [ref=e204]: "02"
+        - generic [ref=e205]:
+          - generic [ref=e206]:
+            - heading "Enterprise systems, end to end." [level=2] [ref=e207]:
+              - text: Enterprise
+              - text: systems,
+              - text: end to end.
+            - paragraph [ref=e208]: No demos — shipped products.
+          - generic [ref=e209]:
+            - paragraph [ref=e210]: Computer engineer based in Istanbul. I design and build full-stack .NET applications for real business problems — finance tracking, member management, fleet logistics, support tooling.
+            - paragraph [ref=e211]: Clear architecture. Maintainable code. Visible output.
+            - generic [ref=e212]: FULL STACK .NET DEVELOPER / COMPUTER ENGINEER
+        - generic [ref=e213]:
+          - generic [ref=e214]:
+            - generic [ref=e215]: "05"
+            - generic [ref=e216]: PROJECTS SHIPPED
+          - generic [ref=e217]:
+            - generic [ref=e218]: 2+
+            - generic [ref=e219]: YEARS EXPERIENCE
+          - generic [ref=e220]:
+            - generic [ref=e221]: .NET
+            - generic [ref=e222]: CORE PLATFORM
+          - generic [ref=e223]:
+            - generic [ref=e224]: IST
+            - generic [ref=e225]: ISTANBUL, TURKEY
+    - region "Technology Stack" [ref=e226]:
+      - generic [ref=e227]:
+        - generic [ref=e228]:
+          - generic [ref=e229]: TECHNOLOGY STACK
+          - generic [ref=e231]: "03"
+        - generic [ref=e232]:
+          - generic [ref=e233]:
+            - generic [ref=e234]:
+              - generic [ref=e235]: "01"
+              - generic [ref=e236]: RUNTIME
+            - list "RUNTIME technologies" [ref=e238]:
+              - listitem [ref=e239]: ASP.NET Core 8 ·
+              - listitem [ref=e240]: C# 12 ·
+              - listitem [ref=e241]: .NET 8 ·
+              - listitem [ref=e242]: Background Services ·
+              - listitem [ref=e243]: Middleware
+          - generic [ref=e244]:
+            - generic [ref=e245]:
+              - generic [ref=e246]: "02"
+              - generic [ref=e247]: WEB LAYER
+            - list "WEB LAYER technologies" [ref=e249]:
+              - listitem [ref=e250]: MVC ·
+              - listitem [ref=e251]: Web API ·
+              - listitem [ref=e252]: Razor Pages ·
+              - listitem [ref=e253]: JWT Auth ·
+              - listitem [ref=e254]: AutoMapper ·
+              - listitem [ref=e255]: N-Tier Architecture
+          - generic [ref=e256]:
+            - generic [ref=e257]:
+              - generic [ref=e258]: "03"
+              - generic [ref=e259]: DATA ACCESS
+            - list "DATA ACCESS technologies" [ref=e261]:
+              - listitem [ref=e262]: SQL Server ·
+              - listitem [ref=e263]: SQLite ·
+              - listitem [ref=e264]: Entity Framework Core ·
+              - listitem [ref=e265]: LINQ ·
+              - listitem [ref=e266]: T-SQL
+          - generic [ref=e267]:
+            - generic [ref=e268]:
+              - generic [ref=e269]: "04"
+              - generic [ref=e270]: FRONTEND
+            - list "FRONTEND technologies" [ref=e272]:
+              - listitem [ref=e273]: HTML5 ·
+              - listitem [ref=e274]: CSS3 / SCSS ·
+              - listitem [ref=e275]: JavaScript ·
+              - listitem [ref=e276]: Bootstrap 5 ·
+              - listitem [ref=e277]: Chart.js ·
+              - listitem [ref=e278]: DataTables
+          - generic [ref=e279]:
+            - generic [ref=e280]:
+              - generic [ref=e281]: "05"
+              - generic [ref=e282]: TOOLCHAIN
+            - list "TOOLCHAIN technologies" [ref=e284]:
+              - listitem [ref=e285]: Git ·
+              - listitem [ref=e286]: GitHub ·
+              - listitem [ref=e287]: Visual Studio ·
+              - listitem [ref=e288]: VS Code ·
+              - listitem [ref=e289]: Postman ·
+              - listitem [ref=e290]: IIS
+  - button "Open Next.js Dev Tools" [ref=e297] [cursor=pointer]:
+    - img [ref=e298]
+  - alert [ref=e301]

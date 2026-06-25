@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head><style>
+  body { margin: 0; background: #000; }
+  canvas { display: block; }
+  video { display: none; }
+</style></head>
+<body>
+<video id="v" src="/ref-video.mp4" crossorigin="anonymous"></video>
+<canvas id="c"></canvas>
+<div id="info" style="color:white;font-family:monospace;padding:8px;"></div>
+<script>
+const v = document.getElementById('v');
+const c = document.getElementById('c');
+const ctx = c.getContext('2d');
+const info = document.getElementById('info');
+
+v.addEventListener('loadedmetadata', () => {
+  c.width = 1280;
+  c.height = 720;
+  info.textContent = `Duration: ${v.duration.toFixed(2)}s | Size: ${v.videoWidth}x${v.videoHeight}`;
+  // Capture frames at key timestamps
+  window._frames = [];
+  window._captureAt = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 14, 16, 18, 20];
+  window._idx = 0;
+  captureNext();
+});
+
+function captureNext() {
+  if (window._idx >= window._captureAt.length) {
+    info.textContent += ' | DONE';
+    return;
+  }
+  const t = window._captureAt[window._idx];
+  if (t >= v.duration) {
+    window._idx++;
+    captureNext();
+    return;
+  }
+  v.currentTime = t;
+}
+
+v.addEventListener('seeked', () => {
+  const t = window._captureAt[window._idx];
+  c.width = v.videoWidth || 1280;
+  c.height = v.videoHeight || 720;
+  ctx.drawImage(v, 0, 0, c.width, c.height);
+  window._frames.push({ t, data: c.toDataURL('image/jpeg', 0.8) });
+  info.textContent = `Captured frame at ${t}s (${window._idx+1}/${window._captureAt.length})`;
+  window._idx++;
+  setTimeout(captureNext, 50);
+});
+
+v.load();
+</script>
+</body>
+</html>

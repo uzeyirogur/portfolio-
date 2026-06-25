@@ -1,27 +1,38 @@
 // =============================================================================
-// Work Section — light bg, subtle letter texture, project cards zoom-in from depth
+// Work Section — scattered screenshots · letter grid · zoom intro
 // =============================================================================
 
 $crimson: #CC1133;
 $work-bg: #F5F2ED;
 $ink:     #0C0B09;
 
+$card-w:  1060px;
+$card-h:  500px;
+
 .work {
   position: relative;
   background-color: $work-bg;
-  overflow: hidden;
 }
 
-// ── Background letter grid — dark, very subtle texture ────────────────────────
+// Clips only the letter grid — does not affect scatter cards
+.bgClip {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+
+// ── Background letter grid ────────────────────────────────────────────────────
 .bgText {
   position: absolute;
-  inset: -30% -5% -40% -5%;
+  inset: -40% -10% -50% -10%;
   display: flex;
   flex-direction: column;
   gap: 0;
   pointer-events: none;
   user-select: none;
-  will-change: transform;
+  will-change: transform, opacity;
   transform-origin: center center;
   z-index: 0;
 }
@@ -41,15 +52,15 @@ $ink:     #0C0B09;
 .bgWord {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(180px, 22vw, 320px);
+  font-size: clamp(72px, 11vw, 160px);
   letter-spacing: -0.02em;
   color: $ink;
-  opacity: 0.06;
+  opacity: 1;
   white-space: nowrap;
   line-height: 0.9;
 }
 
-// ── Title card — WHITE bg, dark pill, slides up/down ─────────────────────────
+// ── Title card ────────────────────────────────────────────────────────────────
 .titleCard {
   position: absolute;
   inset: 0;
@@ -59,7 +70,8 @@ $ink:     #0C0B09;
   align-items: center;
   justify-content: center;
   pointer-events: none;
-  will-change: transform;
+  will-change: opacity;
+  overflow: hidden;
 
   &::before {
     content: '';
@@ -78,6 +90,8 @@ $ink:     #0C0B09;
   display: flex;
   align-items: center;
   justify-content: center;
+  will-change: transform;
+  transform-origin: center center;
 
   &::before {
     content: '';
@@ -157,35 +171,234 @@ $ink:     #0C0B09;
 .scene {
   position: absolute;
   inset: 0;
-  display: grid;
-  grid-template-columns: 52% 1fr;
-  align-items: center;
-  gap: var(--space-m);
 }
 
-.info {
+// ── Project panel card (desktop) — info left + screenshot right ──────────────
+.projectPanel {
+  display: flex;
+  align-items: stretch;
+  height: 100%;
+  gap: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow:
+    0 48px 110px rgba($ink, 0.24),
+    0 14px 36px rgba($ink, 0.14);
+}
+
+.panelInfo {
+  width: clamp(200px, 22vw, 290px);
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  padding-right: var(--space-m);
+  justify-content: center;
+  gap: 12px;
+  padding: 32px 28px;
+  background-color: $ink;
   overflow: hidden;
-  min-width: 0;
-  position: relative;
 }
 
-.sceneNum {
-  position: absolute;
-  bottom: 0;
-  right: var(--space-m);
+.panelMeta {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: var(--tracking-wide);
+  color: rgba($work-bg, 0.40);
+}
+
+.panelRule {
+  height: 3px;
+  background-color: var(--project-accent, #{$crimson});
+  border: none;
+  flex-shrink: 0;
+  width: 100%;
+}
+
+.panelTitle {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(120px, 18vw, 240px);
-  line-height: 1;
-  letter-spacing: -0.06em;
-  color: $ink;
-  opacity: 0.035;
+  font-size: clamp(15px, 1.6vw, 24px);
+  line-height: 1.15;
+  letter-spacing: var(--tracking-tight);
+  color: $work-bg;
+  word-break: keep-all;
+  overflow-wrap: normal;
+  hyphens: none;
+}
+
+.panelDesc {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(11px, 0.95vw, 13px);
+  line-height: 1.6;
+  color: rgba($work-bg, 0.58);
+}
+
+.panelStack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.panelTag {
+  font-family: var(--font-mono);
+  font-size: var(--text-mono);
+  color: var(--project-accent, #{$crimson});
+  border: 1px solid var(--project-accent, #{$crimson});
+  padding: 3px 8px;
+  border-radius: 2px;
+  opacity: 0.85;
+  white-space: nowrap;
+}
+
+.panelLink {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  color: rgba($work-bg, 0.50);
+  text-decoration: none;
+  border-bottom: 1px solid rgba($work-bg, 0.18);
+  padding-bottom: 2px;
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  transition: color 200ms ease, border-color 200ms ease;
+
+  &:hover {
+    color: var(--project-accent, #{$crimson});
+    border-color: var(--project-accent, #{$crimson});
+  }
+}
+
+.panelScreen {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+
+  .browser {
+    height: 100%;
+    border-radius: 0;
+    box-shadow: none;
+    border-top: 3px solid var(--project-accent, #{$crimson});
+    display: flex;
+    flex-direction: column;
+  }
+
+  .browserScreen {
+    flex: 1;
+    overflow: hidden;
+    line-height: 0;
+  }
+
+  .screenshot {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top left;
+  }
+}
+
+// ── Carousel wrap ─────────────────────────────────────────────────────────────
+.carouselWrap {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   pointer-events: none;
-  user-select: none;
-  z-index: 0;
+  perspective: 900px;
+  perspective-origin: 50% 50%;
+
+  @media (max-width: 768px) { display: none; }
+}
+
+.carousel {
+  position: relative;
+  width: min($card-w, 88vw);
+  height: clamp(320px, 48vh, $card-h);
+  transform-style: preserve-3d;
+}
+
+.carouselCard {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  will-change: opacity, transform;
+  opacity: 0;
+  transform-style: preserve-3d;
+}
+
+// Raw screenshot card (no browser chrome)
+.card {
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow:
+    0 48px 120px rgba(12, 11, 9, 0.20),
+    0 16px 44px rgba(12, 11, 9, 0.12),
+    0 4px 12px rgba(12, 11, 9, 0.06);
+  border-top: 3px solid var(--project-accent, #{$crimson});
+}
+
+.screenshot {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: top left;
+}
+
+.cardCaption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 14px 10px;
+  background-color: $work-bg;
+}
+
+.captionIdx {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: rgba(12, 11, 9, 0.30);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.captionTitle {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 0.10em;
+  color: rgba(12, 11, 9, 0.55);
+  text-transform: uppercase;
+}
+
+// ── Info layer (desktop) — above carousel cards ───────────────────────────────
+.infoLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  max-width: var(--max-width);
+  width: 100%;
+  margin-inline: auto;
+
+  @media (max-width: 768px) { display: none; }
+}
+
+// ── Project info panel ────────────────────────────────────────────────────────
+.info {
+  position: absolute;
+  left: var(--content-pad);
+  bottom: 12%;
+  width: 36%;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  will-change: opacity, transform;
+  pointer-events: auto;
 }
 
 .details { will-change: opacity, transform; }
@@ -216,8 +429,7 @@ $ink:     #0C0B09;
   letter-spacing: var(--tracking-tight);
   color: $ink;
   margin: 0 0 var(--space-s);
-  clip-path: inset(0% 0 0% 0);
-  will-change: clip-path;
+  will-change: opacity, transform;
 }
 
 .subtitle {
@@ -270,27 +482,27 @@ $ink:     #0C0B09;
   }
 }
 
-// ── Poster — perspective container for zoom effect ────────────────────────────
-.poster {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+// ── Mobile-only browser mockup (inside scene) ─────────────────────────────────
+.posterMobile {
+  position: static;
+  width: auto;
+  opacity: 0;
   will-change: transform, opacity;
-  perspective: 1400px;
+
+  .browser { max-width: 100%; }
+
+  @media (min-width: 769px) { display: none; }
 }
 
 .browser {
   width: 100%;
-  max-width: 560px;
   border-radius: 8px;
   overflow: hidden;
   box-shadow:
-    0 60px 140px rgba(12, 11, 9, 0.18),
-    0 20px 48px rgba(12, 11, 9, 0.12),
-    0 6px 16px rgba(12, 11, 9, 0.06);
+    0 24px 60px rgba(12, 11, 9, 0.16),
+    0 6px 18px rgba(12, 11, 9, 0.07);
   border-top: 3px solid var(--project-accent, #{$crimson});
-  will-change: transform, opacity;
-  transform-style: preserve-3d;
+  background-color: #DDD9D2;
 }
 
 .browserChrome {
@@ -320,21 +532,21 @@ $ink:     #0C0B09;
   height: 20px;
   background-color: rgba(12, 11, 9, 0.08);
   border-radius: 3px;
-  border: 1px solid rgba(12, 11, 9, 0.05);
 }
 
 .browserScreen {
-  background-color: var(--light-bg);
+  background-color: $work-bg;
   line-height: 0;
 }
 
-.screenshot {
-  display: block;
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  object-position: top left;
-  aspect-ratio: 16 / 9;
+// ── Mobile info (inside scene) ────────────────────────────────────────────────
+.mobileInfo {
+  opacity: 0;
+  will-change: opacity, transform;
+  display: flex;
+  flex-direction: column;
+
+  @media (min-width: 769px) { display: none; }
 }
 
 // ── Dot navigation ────────────────────────────────────────────────────────────
@@ -373,7 +585,7 @@ $ink:     #0C0B09;
   }
 }
 
-// ── Mobile ────────────────────────────────────────────────────────────────────
+// ── Mobile layout ─────────────────────────────────────────────────────────────
 @media (max-width: 768px) {
   .inner {
     height: auto;
@@ -406,14 +618,19 @@ $ink:     #0C0B09;
     }
   }
 
-  .info { padding-right: 0; order: 2; }
-  .poster { order: 1; justify-content: stretch; }
-  .browser { max-width: 100%; }
+  .posterMobile { order: 1; opacity: 1; }
+  .mobileInfo   { order: 2; opacity: 1; }
+
   .title { font-size: clamp(40px, 11vw, 60px); }
   .bgWord { font-size: clamp(100px, 24vw, 160px); }
-  .sceneNum, .counter, .nav { display: none; }
+  .counter, .nav { display: none; }
 }
 
 @media (max-width: 480px) {
   .title { font-size: clamp(32px, 10vw, 48px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobileInfo { opacity: 1; }
+  .posterMobile { opacity: 1; }
 }

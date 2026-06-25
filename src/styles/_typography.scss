@@ -1,0 +1,79 @@
+// =============================================================================
+// CLEAR OUTPUT — Typography
+// Utility classes for the type system. Fonts loaded via layout.tsx imports.
+// =============================================================================
+
+// --- Display (Syne) ---
+.t-display {
+  font-family: var(--font-display);
+  font-size: var(--text-display);
+  font-weight: 800;
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+}
+
+.t-h1 {
+  font-family: var(--font-display);
+  font-size: var(--text-h1);
+  font-weight: 700;
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+}
+
+.t-h2 {
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  font-weight: 700;
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-tight);
+}
+
+.t-project {
+  font-family: var(--font-display);
+  font-size: var(--text-project);
+  font-weight: 700;
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-tight);
+}
+
+// --- Serif (Fraunces) — manifesto and pull quotes only ---
+.t-serif {
+  font-family: var(--font-serif);
+  font-size: var(--text-serif);
+  font-weight: 300;
+  font-style: italic;
+  line-height: var(--leading-loose);
+  letter-spacing: var(--tracking-normal);
+}
+
+// --- Body (DM Sans) ---
+.t-body {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  font-weight: 400;
+  line-height: var(--leading-loose);
+}
+
+.t-body-medium {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  font-weight: 500;
+  line-height: var(--leading-normal);
+}
+
+// --- Mono (JetBrains Mono) — labels, indices, stack ---
+.t-mono {
+  font-family: var(--font-mono);
+  font-size: var(--text-mono);
+  font-weight: 400;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+}
+
+.t-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: 500;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+}

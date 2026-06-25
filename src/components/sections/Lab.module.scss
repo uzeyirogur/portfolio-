@@ -1,0 +1,288 @@
+// =============================================================================
+// Lab Section — "Interactive Lab"
+// Dark cinematic. Draggable XOX game panel. GSAP Draggable + game state.
+// =============================================================================
+
+.lab {
+  background-color: var(--dark-surface);
+  position: relative;
+  overflow: hidden;
+}
+
+// ── Background atmosphere — subtle, not overwhelming ──────────────────────────
+.bgText {
+  position: absolute;
+  bottom: -8%;
+  right: -3%;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+
+.bgWord {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(120px, 18vw, 260px);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--dark-primary);
+  opacity: 0.028;
+  white-space: nowrap;
+}
+
+// ── Inner layout ──────────────────────────────────────────────────────────────
+.inner {
+  position: relative;
+  z-index: 1;
+  max-width: var(--max-width);
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: var(--content-pad);
+  padding-block: clamp(40px, 5vw, 72px);
+  display: flex;
+  flex-direction: column;
+}
+
+// ── Label row ─────────────────────────────────────────────────────────────────
+.labelRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-m);
+  margin-bottom: clamp(32px, 4vw, 56px);
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: 400;
+  letter-spacing: var(--tracking-wider);
+  color: var(--dark-muted);
+  white-space: nowrap;
+}
+
+.labelRule {
+  flex: 1;
+  height: 1px;
+  background-color: var(--dark-border);
+}
+
+.labelIndex {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: 400;
+  letter-spacing: var(--tracking-wide);
+  color: var(--dark-muted);
+}
+
+// ── Draggable panel ───────────────────────────────────────────────────────────
+.panel {
+  width: clamp(280px, 36vw, 420px);
+  background-color: var(--dark-bg);
+  border: 1px solid var(--dark-border);
+  border-radius: 8px;
+  box-shadow:
+    0 32px 80px rgba(0, 0, 0, 0.6),
+    0 8px 24px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  will-change: transform;
+  align-self: center;
+  margin: auto; // centers in remaining flex space
+}
+
+// ── Window chrome ─────────────────────────────────────────────────────────────
+.chrome {
+  display: flex;
+  align-items: center;
+  gap: var(--space-m);
+  padding: 14px 16px 12px;
+  border-bottom: 1px solid var(--dark-border);
+  cursor: grab;
+  user-select: none;
+
+  &:active { cursor: grabbing; }
+}
+
+.dots {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--dark-border);
+
+  &[data-color='red']    { background-color: #FF5F57; }
+  &[data-color='yellow'] { background-color: #FEBC2E; }
+  &[data-color='green']  { background-color: #28C840; }
+}
+
+.chromeTitle {
+  flex: 1;
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: 400;
+  letter-spacing: var(--tracking-wide);
+  color: var(--dark-muted);
+  text-align: center;
+}
+
+.hint {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: var(--tracking-wider);
+  color: var(--dark-muted);
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+
+// ── Game area ─────────────────────────────────────────────────────────────────
+.gameArea {
+  padding: var(--space-m);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-m);
+}
+
+// Status bar
+.statusBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background-color: var(--dark-surface);
+  border: 1px solid var(--dark-border);
+  border-radius: 3px;
+}
+
+.statusLabel {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: var(--tracking-wider);
+  color: var(--dark-muted);
+}
+
+.statusValue {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: 400;
+  letter-spacing: var(--tracking-wide);
+  color: var(--dark-primary);
+}
+
+.statusWin {
+  color: var(--gold);
+}
+
+// Board
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+.cell {
+  aspect-ratio: 1;
+  background-color: var(--dark-surface);
+  border: 1px solid var(--dark-border);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  transition: background-color 140ms ease, border-color 140ms ease;
+
+  &:hover:not(:disabled) {
+    background-color: rgba(255, 255, 255, 0.04);
+    border-color: var(--dark-body);
+  }
+
+  &:disabled {
+    cursor: default;
+  }
+}
+
+.cellWin {
+  background-color: rgba(200, 155, 60, 0.1);
+  border-color: var(--gold);
+}
+
+.mark {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(24px, 4vw, 36px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+
+  &[data-mark='X'] { color: var(--dark-primary); }
+  &[data-mark='O'] { color: var(--gold); }
+}
+
+// Footer: scores + restart
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.scores {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.scoreLabel {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: var(--tracking-wide);
+  color: var(--dark-muted);
+}
+
+.scoreValue {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 20px;
+  color: var(--dark-primary);
+  min-width: 20px;
+  text-align: center;
+}
+
+.scoreSep {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  color: var(--dark-border);
+}
+
+.restartBtn {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: 400;
+  letter-spacing: var(--tracking-wide);
+  color: var(--dark-body);
+  background: transparent;
+  border: 1px solid var(--dark-border);
+  padding: 6px 16px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: color 180ms ease, border-color 180ms ease;
+
+  &:hover {
+    color: var(--dark-primary);
+    border-color: var(--dark-body);
+  }
+}
+
+// ── Responsive ─────────────────────────────────────────────────────────────────
+@media (max-width: 600px) {
+  .panel {
+    width: 100%;
+    max-width: 360px;
+  }
+
+  .mark {
+    font-size: clamp(28px, 8vw, 36px);
+  }
+}

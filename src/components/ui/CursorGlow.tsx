@@ -1,98 +1,74 @@
 'use client'
+
 import { useEffect, useRef } from 'react'
+import styles from './CursorGlow.module.scss'
 
 export default function CursorGlow() {
   const dotRef  = useRef<HTMLDivElement>(null)
   const ringRef = useRef<HTMLDivElement>(null)
-  const glowRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (typeof window === 'undefined') return
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-    if (window.innerWidth < 1024) return
+    // only on fine-pointer (mouse) devices
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return
 
-    document.body.classList.add('custom-cursor')
+    let x = -100, y = -100
+    let rx = -100, ry = -100
+    let isPointer = false
 
-    const s = { mx: -999, my: -999, rx: -999, ry: -999, hovering: false }
+    const onMove = (e: MouseEvent) => {
+      x = e.clientX
+      y = e.clientY
 
-    const onMove = (e: MouseEvent) => { s.mx = e.clientX; s.my = e.clientY }
-    const onOver = (e: MouseEvent) => {
-      const el = e.target as HTMLElement
-      s.hovering = !!el.closest('a,button,[role="button"],input,textarea,select,[tabindex]')
+      const target = e.target as Element
+      const hover  = !!target?.closest('a, button, [role="button"], [tabindex]')
+      if (hover !== isPointer) {
+        isPointer = hover
+        ringRef.current?.classList.toggle(styles.hovered, hover)
+        dotRef.current?.classList.toggle(styles.hovered, hover)
+      }
     }
 
-    window.addEventListener('mousemove', onMove, { passive: true })
-    document.addEventListener('mouseover', onOver)
+    const onEnter = () => {
+      dotRef.current?.classList.add(styles.visible)
+      ringRef.current?.classList.add(styles.visible)
+    }
+    const onLeave = () => {
+      dotRef.current?.classList.remove(styles.visible)
+      ringRef.current?.classList.remove(styles.visible)
+    }
 
-    const lerp = (a: number, b: number, t: number) => a + (b - a) * t
+    document.addEventListener('mousemove',  onMove,  { passive: true })
+    document.addEventListener('mouseenter', onEnter)
+    document.addEventListener('mouseleave', onLeave)
+
     let raf: number
-
     const tick = () => {
-      const { mx, my, hovering } = s
-
-      if (dotRef.current && mx !== -999) {
-        dotRef.current.style.transform = `translate3d(${mx - 5}px,${my - 5}px,0)`
-        dotRef.current.style.opacity = '1'
+      // dot: instant
+      if (dotRef.current) {
+        dotRef.current.style.transform = `translate(${x}px, ${y}px)`
       }
-
-      s.rx = lerp(s.rx, mx, 0.12)
-      s.ry = lerp(s.ry, my, 0.12)
-
-      if (ringRef.current && mx !== -999) {
-        const size = hovering ? 56 : 36
-        ringRef.current.style.transform = `translate3d(${s.rx - size / 2}px,${s.ry - size / 2}px,0)`
-        ringRef.current.style.width  = `${size}px`
-        ringRef.current.style.height = `${size}px`
-        ringRef.current.style.borderColor = hovering ? 'rgba(232,0,58,0.8)' : 'rgba(232,0,58,0.35)'
-        ringRef.current.style.boxShadow   = hovering
-          ? '0 0 20px rgba(232,0,58,0.15)'
-          : 'none'
+      // ring: lerp (lag effect)
+      rx += (x - rx) * 0.14
+      ry += (y - ry) * 0.14
+      if (ringRef.current) {
+        ringRef.current.style.transform = `translate(${rx}px, ${ry}px)`
       }
-
-      if (glowRef.current && mx !== -999) {
-        glowRef.current.style.background = `radial-gradient(circle 400px at ${mx}px ${my}px, rgba(232,0,58,0.04) 0%, transparent 100%)`
-      }
-
       raf = requestAnimationFrame(tick)
     }
-    raf = requestAnimationFrame(tick)
+    tick()
 
     return () => {
+      document.removeEventListener('mousemove',  onMove)
+      document.removeEventListener('mouseenter', onEnter)
+      document.removeEventListener('mouseleave', onLeave)
       cancelAnimationFrame(raf)
-      window.removeEventListener('mousemove', onMove)
-      document.removeEventListener('mouseover', onOver)
-      document.body.classList.remove('custom-cursor')
     }
   }, [])
 
   return (
     <>
-      <div
-        ref={dotRef}
-        className="pointer-events-none fixed top-0 left-0 z-[9999] rounded-full"
-        style={{
-          width: 10, height: 10,
-          background: '#E8003A',
-          boxShadow: '0 0 10px rgba(232,0,58,0.6)',
-          willChange: 'transform',
-          opacity: 0,
-          transition: 'opacity 0.2s',
-        }}
-      />
-      <div
-        ref={ringRef}
-        className="pointer-events-none fixed top-0 left-0 z-[9998] rounded-full"
-        style={{
-          border: '1.5px solid rgba(232,0,58,0.35)',
-          willChange: 'transform',
-          transition: 'width 0.22s ease, height 0.22s ease, border-color 0.15s, box-shadow 0.15s',
-        }}
-      />
-      <div
-        ref={glowRef}
-        className="pointer-events-none fixed inset-0 z-[1]"
-        aria-hidden
-      />
+      <div ref={dotRef}  className={styles.dot}  aria-hidden="true" />
+      <div ref={ringRef} className={styles.ring} aria-hidden="true" />
     </>
   )
 }

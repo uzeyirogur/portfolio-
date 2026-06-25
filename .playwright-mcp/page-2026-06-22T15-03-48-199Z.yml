@@ -1,0 +1,56 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - paragraph [ref=e3]: tap to enter
+    - heading "5 %" [level=1] [ref=e4]:
+      - generic [ref=e5]: "5"
+      - generic [ref=e6]: "%"
+  - generic [ref=e7]:
+    - heading "matt" [level=1] [ref=e8]
+    - heading "bierman" [level=1] [ref=e9]
+    - generic [ref=e10]:
+      - paragraph [ref=e11]:
+        - text: senior frontend engineer at
+        - link "sigma computing" [ref=e12]:
+          - /url: https://sigmacomputing.com
+      - paragraph [ref=e13]: based in nyc
+  - generic [ref=e16]:
+    - generic [ref=e19]:
+      - link "matt@bierman.io" [ref=e21]:
+        - /url: mailto:matt@bierman.io
+      - link "matt@bierman.io" [ref=e23]:
+        - /url: mailto:matt@bierman.io
+    - generic [ref=e24]:
+      - generic [ref=e25]:
+        - img [ref=e27]
+        - generic [ref=e29]:
+          - paragraph [ref=e30]: © 2024, made with
+          - img [ref=e32]
+      - generic [ref=e34]:
+        - link "LinkedIn" [ref=e35]:
+          - /url: https://linkedin.com/in/biermanm
+          - img [ref=e36]
+          - generic [ref=e38]: LinkedIn
+        - link "GitHub" [ref=e39]:
+          - /url: https://github.com/BiermanM
+          - img [ref=e40]
+          - generic [ref=e42]: GitHub
+        - link "Working Not Working" [ref=e43]:
+          - /url: https://workingnotworking.com/108158-matthew
+          - img [ref=e44]
+          - generic [ref=e46]: Working Not Working
+  - generic [ref=e49]:
+    - generic [ref=e50]:
+      - heading "cinespace" [level=2] [ref=e51]
+      - paragraph [ref=e52]: Fullstack development for the redefining rebrand of one of the largest sound stage and facilities operators in the world. Cinespace supports top productions throughout the entertainment industry. Created in collaboration with And Company.
+    - generic [ref=e53]:
+      - heading "spotlight" [level=2] [ref=e54]
+      - paragraph [ref=e55]: Fullstack development for the illuminating rebrand of the largest casting resource platform in the UK. Spotlight connects performers with roles in theatre, television, and film productions. Created in collaboration with And Company.
+    - generic [ref=e56]:
+      - heading "the 2022 podcast trends report by siriusxm" [level=2] [ref=e57]
+      - paragraph [ref=e58]: Frontend development for SiriusXM's first interactive website highlighting the latest trends for podcast listeners, creators, and advertisers. Created in collaboration with Inkling Agency and work x work.
+    - generic [ref=e59]:
+      - paragraph [ref=e61]: click me!
+      - generic [ref=e62]:
+        - img [ref=e63]
+        - img [ref=e65]
+        - img [ref=e67]
