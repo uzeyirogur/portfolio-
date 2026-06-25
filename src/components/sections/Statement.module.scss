@@ -1,151 +1,141 @@
 // =============================================================================
-// Statement — 3D tilt pillar cards, dark cinematic
+// Statement — 300vh scroll-pinned section, 3 full-viewport panels
+// Each pillar gets its own dramatic full-screen moment
 // =============================================================================
 
+// 400vh: sticky sticks for 300vh (400-100), each panel gets 100vh
 .statement {
-  background-color: #06060A;
-  padding-block: var(--section-pad);
+  height: 400vh;
   position: relative;
-  overflow: hidden;
+}
 
+// Sticky wrapper: stays locked at top while user scrolls 300vh
+.sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #1C1A18;
+}
+
+// Each panel: absolute, full-viewport — each has its own bg gradient for variety
+.panel {
+  position: absolute;
+  inset: 0;
+  background-color: #1C1A18;
+  will-change: transform, opacity;
+
+  // Two-layer glow: strong accent bloom centered in right column + warm floor left
   &::before {
     content: '';
     position: absolute;
     inset: 0;
-    background-image:
-      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
-    background-size: 60px 60px;
+    background:
+      radial-gradient(ellipse 90% 110% at 70% 50%, rgba(204, 17, 51, 0.40) 0%, rgba(204, 17, 51, 0.08) 45%, transparent 62%),
+      radial-gradient(ellipse 50% 60% at 0% 100%, rgba(200, 140, 10, 0.16) 0%, transparent 60%);
     pointer-events: none;
-    mask-image: radial-gradient(ellipse 100% 100% at 50% 50%, black 20%, transparent 80%);
-    -webkit-mask-image: radial-gradient(ellipse 100% 100% at 50% 50%, black 20%, transparent 80%);
+    z-index: 0;
+  }
+
+  // Divider line between columns
+  &::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      var(--accent, #CC1133) 30%,
+      var(--accent, #CC1133) 70%,
+      transparent 100%
+    );
+    opacity: 0.4;
+    pointer-events: none;
+    z-index: 1;
   }
 }
 
-.inner {
+// Two-column grid: 50% content | 50% number
+.panelGrid {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 50% 50%;
   max-width: var(--max-width);
   margin-inline: auto;
   padding-inline: var(--content-pad);
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
-// ── Label row ──────────────────────────────────────────────────────────────────
+// ── Left column ────────────────────────────────────────────────────────────────
+
+.left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-block: clamp(56px, 7vw, 96px);
+  border-right: 1px solid var(--dark-border);
+  padding-right: clamp(24px, 3vw, 48px);
+  overflow: hidden;
+  min-width: 0;
+}
+
 .topRow {
   display: flex;
   align-items: center;
   gap: var(--space-m);
-  margin-bottom: clamp(52px, 7vw, 96px);
 }
 
 .eyebrow {
   font-family: var(--font-mono);
   font-size: var(--text-label);
   letter-spacing: var(--tracking-wider);
-  color: rgba(255,255,255,0.28);
+  color: var(--dark-muted);
   white-space: nowrap;
 }
 
 .rule {
   flex: 1;
   height: 1px;
-  background-color: rgba(255,255,255,0.07);
+  background-color: var(--dark-border);
 }
 
 .idx {
   font-family: var(--font-mono);
   font-size: var(--text-label);
   letter-spacing: var(--tracking-wide);
-  color: rgba(255,255,255,0.22);
+  color: var(--dark-muted);
 }
 
-// ── 3-column grid ──────────────────────────────────────────────────────────────
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: clamp(16px, 2.5vw, 32px);
-}
-
-// ── Card wrapper: perspective context ──────────────────────────────────────────
-.cardWrap {
-  perspective: 900px;
-  perspective-origin: center center;
-}
-
-// ── Card ───────────────────────────────────────────────────────────────────────
-.card {
-  position: relative;
-  background: linear-gradient(
-    145deg,
-    rgba(22, 22, 28, 0.95) 0%,
-    rgba(12, 12, 16, 0.98) 100%
-  );
-  border: 1px solid rgba(255,255,255,0.07);
-  border-top: 2px solid var(--card-accent, #C8960A);
-  border-radius: 12px;
-  padding: clamp(28px, 3.5vw, 52px) clamp(22px, 2.8vw, 40px);
+.content {
   display: flex;
   flex-direction: column;
-  gap: 0;
-  transform-style: preserve-3d;
-  will-change: transform;
-  cursor: default;
-  box-shadow:
-    0 0 0 1px rgba(255,255,255,0.04),
-    0 20px 60px rgba(0,0,0,0.5),
-    0 0 40px rgba(0,0,0,0.3);
-  transition: box-shadow 300ms ease;
-
-  &:hover {
-    box-shadow:
-      0 0 0 1px rgba(255,255,255,0.08),
-      0 30px 80px rgba(0,0,0,0.65),
-      0 0 60px rgba(0,0,0,0.4),
-      0 0 30px color-mix(in srgb, var(--card-accent, #C8960A) 15%, transparent);
-  }
+  gap: var(--space-m);
 }
 
-// Glowing top accent line
-.cardGlow {
-  position: absolute;
-  top: -2px;
-  left: 10%;
-  right: 10%;
-  height: 2px;
-  background: var(--card-accent, #C8960A);
-  filter: blur(6px);
-  opacity: 0.7;
-  border-radius: 50%;
-  pointer-events: none;
-}
-
-// ── Number ─────────────────────────────────────────────────────────────────────
-.num {
+.tag {
+  display: inline-block;
   font-family: var(--font-mono);
-  font-size: var(--text-label);
-  letter-spacing: var(--tracking-wider);
-  color: var(--card-accent, #C8960A);
-  margin-bottom: 18px;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  color: var(--accent, #CC1133);
+  border: 1px solid var(--accent, #CC1133);
+  padding: 5px 10px;
+  width: fit-content;
+  opacity: 0.8;
 }
 
-// ── Divider ────────────────────────────────────────────────────────────────────
-.divider {
-  width: 28px;
-  height: 2px;
-  background-color: var(--card-accent, #C8960A);
-  margin-bottom: clamp(18px, 2.5vw, 28px);
-  opacity: 0.7;
-}
-
-// ── Title ──────────────────────────────────────────────────────────────────────
 .title {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(26px, 3vw, 48px);
-  line-height: var(--leading-tight);
-  letter-spacing: var(--tracking-tight);
-  color: #F5F0E8;
-  margin: 0 0 clamp(14px, 2vw, 24px);
+  font-size: clamp(36px, 4vw, 60px);
+  line-height: 0.93;
+  letter-spacing: -0.035em;
+  color: var(--dark-primary);
+  margin: 0;
   display: flex;
   flex-direction: column;
 }
@@ -154,36 +144,108 @@
   display: block;
 }
 
-// ── Body ───────────────────────────────────────────────────────────────────────
 .body {
   font-family: var(--font-body);
-  font-size: clamp(13px, 1.1vw, 15px);
-  line-height: var(--leading-loose);
-  color: rgba(255,255,255,0.38);
+  font-size: clamp(14px, 1.3vw, 17px);
+  line-height: 1.75;
+  color: var(--dark-body);
   margin: 0;
-  margin-top: auto;
+  max-width: 400px;
 }
 
-// Fake depth layer (translateZ shadow)
-.cardShadowLayer {
+// Progress dots
+.dots {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--dark-border);
+  transition: background-color 300ms ease, transform 300ms ease;
+}
+
+.dotActive {
+  background-color: var(--accent, #CC1133);
+  transform: scale(1.4);
+}
+
+// ── Right column ───────────────────────────────────────────────────────────────
+
+.right {
+  position: relative;
+  overflow: hidden;
+}
+
+// Giant outlined number — anchored to right edge, bleeds off screen (clipped by .sticky)
+.numBig {
   position: absolute;
-  inset: 4px;
-  border-radius: 10px;
-  background: transparent;
-  border: 1px solid rgba(255,255,255,0.03);
-  transform: translateZ(-12px);
+  right: -4%;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(180px, 24vw, 400px);
+  line-height: 1;
+  letter-spacing: -0.06em;
+  color: transparent;
+  -webkit-text-stroke: 2px var(--accent, #CC1133);
+  opacity: 0.55;
+  user-select: none;
   pointer-events: none;
+  white-space: nowrap;
+  transition: opacity 500ms ease;
+  will-change: opacity;
+  z-index: 1;
+}
+
+.panel:hover .numBig {
+  opacity: 0.80;
+}
+
+// Vertical accent line at the right edge
+.accentLine {
+  position: absolute;
+  right: 0;
+  top: 10%;
+  bottom: 10%;
+  width: 2px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--accent, #CC1133) 40%,
+    var(--accent, #CC1133) 60%,
+    transparent
+  );
+  opacity: 0.5;
 }
 
 // ── Responsive ─────────────────────────────────────────────────────────────────
+
 @media (max-width: 900px) {
-  .grid {
+  .panelGrid {
     grid-template-columns: 1fr;
+  }
+
+  .right {
+    display: none;
+  }
+
+  .left {
+    border-right: none;
+    padding-right: 0;
   }
 }
 
-@media (max-width: 600px) {
-  .cardWrap {
-    perspective: none;
+@media (max-width: 480px) {
+  .statement {
+    height: 350vh;
+  }
+
+  .title {
+    font-size: clamp(44px, 12vw, 68px);
   }
 }

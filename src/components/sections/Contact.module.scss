@@ -1,6 +1,5 @@
 // =============================================================================
-// Contact Section — Closing scene
-// Dark cinematic. Strong typographic CTA, large email, footer strip.
+// Contact Section — Dramatic closing scene
 // =============================================================================
 
 .contact {
@@ -8,8 +7,88 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  position: relative;
+  overflow: hidden;
 }
 
+// ── Ambient: glowing red orb ───────────────────────────────────────────────────
+.orb {
+  position: absolute;
+  width: 70vw;
+  height: 70vw;
+  border-radius: 50%;
+  bottom: -20%;
+  right: -15%;
+  background: radial-gradient(
+    ellipse,
+    rgba(204, 17, 51, 0.22) 0%,
+    rgba(204, 17, 51, 0.07) 45%,
+    transparent 70%
+  );
+  filter: blur(60px);
+  pointer-events: none;
+  animation: orbPulse 8s ease-in-out infinite;
+  z-index: 0;
+}
+
+@keyframes orbPulse {
+  0%, 100% { transform: scale(1);    opacity: 1; }
+  50%       { transform: scale(1.15); opacity: 0.7; }
+}
+
+// ── Ambient: concentric radar rings ───────────────────────────────────────────
+.rings {
+  position: absolute;
+  bottom: -30%;
+  right: -10%;
+  width: min(800px, 90vw);
+  height: min(800px, 90vw);
+  pointer-events: none;
+  z-index: 0;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 1px solid rgba(204, 17, 51, 0.10);
+    animation: radarPing 5s ease-out infinite;
+  }
+
+  &::after {
+    inset: 15%;
+    border-color: rgba(204, 17, 51, 0.08);
+    animation-delay: -2.5s;
+  }
+}
+
+@keyframes radarPing {
+  0%   { transform: scale(0.6); opacity: 0; }
+  30%  { opacity: 1; }
+  100% { transform: scale(1.2); opacity: 0; }
+}
+
+// ── Ambient: ghost text ────────────────────────────────────────────────────────
+.bgWord {
+  position: absolute;
+  right: -2%;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(80px, 14vw, 200px);
+  line-height: 0.88;
+  letter-spacing: -0.04em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.04);
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+  text-align: right;
+}
+
+// ── Inner ─────────────────────────────────────────────────────────────────────
 .inner {
   flex: 1;
   display: flex;
@@ -19,6 +98,8 @@
   margin-inline: auto;
   padding-inline: var(--content-pad);
   padding-block: var(--section-pad);
+  position: relative;
+  z-index: 1;
 }
 
 // ── Label row ─────────────────────────────────────────────────────────────────
@@ -26,13 +107,12 @@
   display: flex;
   align-items: center;
   gap: var(--space-m);
-  margin-bottom: clamp(64px, 9vw, 128px);
+  margin-bottom: clamp(64px, 9vw, 120px);
 }
 
 .label {
   font-family: var(--font-mono);
   font-size: var(--text-label);
-  font-weight: 400;
   letter-spacing: var(--tracking-wider);
   color: var(--dark-muted);
   white-space: nowrap;
@@ -47,7 +127,6 @@
 .labelIndex {
   font-family: var(--font-mono);
   font-size: var(--text-label);
-  font-weight: 400;
   letter-spacing: var(--tracking-wide);
   color: var(--dark-muted);
 }
@@ -73,54 +152,94 @@
   will-change: clip-path;
 }
 
+// ── Availability badge ─────────────────────────────────────────────────────────
 .availability {
   font-family: var(--font-mono);
   font-size: var(--text-label);
-  font-weight: 400;
   letter-spacing: var(--tracking-wider);
   color: var(--dark-muted);
   margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-.subtext {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: clamp(14px, 1.3vw, 18px);
-  line-height: 1.5;
-  color: var(--dark-body);
-  margin: 0;
-  opacity: 0.72;
+.dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #28C840;
+  box-shadow: 0 0 8px 2px rgba(40, 200, 64, 0.5);
+  flex-shrink: 0;
+  animation: dotPulse 2.2s ease-in-out infinite;
 }
 
+@keyframes dotPulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.35; }
+}
+
+// ── Liquid-fill email CTA ──────────────────────────────────────────────────────
 .email {
   display: inline-flex;
   align-items: center;
   gap: var(--space-s);
   font-family: var(--font-body);
   font-weight: 500;
-  font-size: clamp(18px, 2.2vw, 32px);
+  font-size: clamp(18px, 2.4vw, 36px);
   color: var(--dark-body);
   text-decoration: none;
-  border-bottom: 1px solid var(--dark-border);
-  padding-bottom: 4px;
+  position: relative;
+  padding: 10px 0;
   width: fit-content;
-  transition: color 240ms ease, border-color 240ms ease;
   will-change: opacity, transform;
+  transition: color 0ms 0ms; // handled by GSAP
 
-  &:hover {
-    color: var(--dark-primary);
-    border-color: var(--dark-body);
+  // Bottom line that fills with color on hover
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: var(--dark-border);
+    transition: background-color 350ms ease;
+  }
+
+  &:hover::after {
+    background-color: #CC1133;
   }
 }
 
+// Gold fill that slides in from left
+.emailFill {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #CC1133 0%, #A30D27 100%);
+  transform-origin: left center;
+  transform: scaleX(0);
+  z-index: 0;
+  border-radius: 2px;
+}
+
 .emailArrow {
-  color: var(--gold);
+  color: #CC1133;
   flex-shrink: 0;
-  transition: transform 240ms ease;
+  position: relative;
+  z-index: 1;
+  transition: transform 300ms ease, color 300ms ease;
 
   .email:hover & {
-    transform: translateX(4px);
+    transform: translateX(6px);
+    color: #F5F0E8;
   }
+}
+
+.emailText {
+  position: relative;
+  z-index: 1;
 }
 
 // ── Footer strip ──────────────────────────────────────────────────────────────
@@ -157,7 +276,6 @@
 .footerRole {
   font-family: var(--font-mono);
   font-size: var(--text-label);
-  font-weight: 400;
   letter-spacing: var(--tracking-wide);
   color: var(--dark-muted);
 }
@@ -170,35 +288,31 @@
 .footerLink {
   font-family: var(--font-mono);
   font-size: var(--text-label);
-  font-weight: 400;
   letter-spacing: var(--tracking-wide);
   color: var(--dark-muted);
   text-decoration: none;
   transition: color 200ms ease;
 
-  &:hover {
-    color: var(--dark-primary);
-  }
+  &:hover { color: var(--dark-primary); }
 }
 
 .footerCopy {
   font-family: var(--font-mono);
   font-size: var(--text-label);
-  font-weight: 400;
   letter-spacing: var(--tracking-wide);
   color: var(--dark-muted);
   white-space: nowrap;
 }
 
-// ── Responsive ─────────────────────────────────────────────────────────────────
+// ── Responsive ────────────────────────────────────────────────────────────────
 @media (max-width: 600px) {
   .headline {
     font-size: clamp(32px, 8.5vw, 56px);
     overflow-wrap: break-word;
   }
-
   .email {
     font-size: clamp(13px, 3.8vw, 20px);
     word-break: break-all;
   }
+  .bgWord { display: none; }
 }

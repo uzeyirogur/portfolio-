@@ -1,295 +1,157 @@
 // =============================================================================
-// Stack Section — "Yetkinlik Matrisi"
-// Grey background, dark terminal panel inside. System manifest aesthetic.
-// Rows = tech "modules", tags = styled chips with left accent bar.
+// Stack — infinite marquee rows, dark, typographic impact
 // =============================================================================
 
 .stack {
   background-color: var(--grey-bg);
-  padding-block: var(--section-pad);
+  padding-top: var(--section-pad);
+  padding-bottom: 0;
+  overflow: hidden;
 }
 
-.inner {
+// Header block
+.header {
   max-width: var(--max-width);
   margin-inline: auto;
   padding-inline: var(--content-pad);
+  margin-bottom: clamp(48px, 6vw, 80px);
+  will-change: opacity, transform;
 }
 
-// ── Label row ─────────────────────────────────────────────────────────────────
 .labelRow {
   display: flex;
   align-items: center;
   gap: var(--space-m);
-  margin-bottom: clamp(48px, 7vw, 96px);
+  margin-bottom: var(--space-m);
 }
 
 .label {
   font-family: var(--font-mono);
   font-size: var(--text-label);
-  font-weight: 400;
   letter-spacing: var(--tracking-wider);
   color: var(--grey-body);
   white-space: nowrap;
 }
 
-.labelRule {
+.rule {
   flex: 1;
   height: 1px;
   background-color: var(--grey-border);
 }
 
-.labelIndex {
+.idx {
   font-family: var(--font-mono);
   font-size: var(--text-label);
-  font-weight: 400;
   letter-spacing: var(--tracking-wide);
   color: var(--grey-body);
 }
 
-// ── Terminal panel ─────────────────────────────────────────────────────────────
-.terminal {
-  background-color: var(--dark-bg);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow:
-    0 40px 100px rgba(0, 0, 0, 0.22),
-    0 8px 24px rgba(0, 0, 0, 0.15);
-  will-change: opacity, transform;
+.desc {
+  font-family: var(--font-body);
+  font-size: clamp(15px, 1.4vw, 20px);
+  color: var(--grey-body);
+  margin: 0;
+  max-width: 420px;
 }
 
-// ── Terminal chrome ────────────────────────────────────────────────────────────
-.termChrome {
+// Marquee rows container
+.rows {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--grey-border);
+}
+
+// Each row wrapper — hover slows the tween
+.rowWrap {
+  overflow: hidden;
+  border-bottom: 1px solid var(--grey-border);
+  padding-block: clamp(10px, 1.8vw, 18px);
+  transition: background-color 300ms ease;
+  cursor: default;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.03);
+  }
+}
+
+// The actual scrolling element
+.row {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  will-change: transform;
+}
+
+// Individual tech item
+.item {
+  font-family: var(--font-mono);
+  font-size: clamp(26px, 3.8vw, 58px);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: rgba(26, 25, 22, 0.35);
+  display: inline-flex;
+  align-items: center;
+  padding-inline: clamp(18px, 2.2vw, 44px);
+  user-select: none;
+  transition: color 200ms ease;
+
+  &:hover {
+    color: #CC1133;
+  }
+
+  // Every 4th item rendered as outlined text
+  &.itemOutline {
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(26, 25, 22, 0.18);
+
+    &:hover {
+      color: transparent;
+      -webkit-text-stroke-color: #CC1133;
+    }
+  }
+}
+
+.sep {
+  color: rgba(204, 17, 51, 0.35);
+  margin-left: clamp(18px, 2.2vw, 44px);
+  font-size: 0.55em;
+  flex-shrink: 0;
+}
+
+// Category label footer
+.catRow {
   display: flex;
   align-items: center;
   gap: var(--space-m);
-  padding: 14px 20px 12px;
-  background-color: rgba(255, 255, 255, 0.03);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-  user-select: none;
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: var(--content-pad);
+  padding-block: var(--space-m);
+  border-top: 1px solid var(--grey-border);
 }
 
-.termDots {
-  display: flex;
-  gap: 7px;
-  flex-shrink: 0;
-}
-
-.termDot {
-  width: 11px;
-  height: 11px;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.12);
-}
-
-.termTitle {
-  flex: 1;
+.catLabel {
   font-family: var(--font-mono);
   font-size: var(--text-label);
-  font-weight: 400;
-  letter-spacing: var(--tracking-wide);
-  color: rgba(240, 237, 230, 0.35);
-  text-align: center;
-}
-
-.termStatus {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: var(--tracking-wide);
-  color: #7FBA00;
-  opacity: 0.85;
-  flex-shrink: 0;
-}
-
-// ── Module rows ────────────────────────────────────────────────────────────────
-.modules {
-  display: flex;
-  flex-direction: column;
-}
-
-.module {
-  display: grid;
-  grid-template-columns: clamp(200px, 28%, 300px) 1fr;
-  gap: 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  position: relative;
-  will-change: opacity, transform;
-  cursor: pointer;
-  transition: background-color 200ms ease;
-
-  &:hover {
-    background-color: rgba(255, 255, 255, 0.02);
-  }
-
-  // Left accent bar uses the --accent CSS var passed per row
-  &::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background-color: var(--accent, #C89B3C);
-    opacity: 0.35;
-    transition: opacity 220ms ease;
-  }
-
-  &.moduleActive {
-    background-color: rgba(255, 255, 255, 0.03);
-
-    &::before {
-      opacity: 1;
-      width: 3px;
-    }
-
-    .moduleCategory {
-      color: var(--accent, #C89B3C);
-    }
-
-    .tag {
-      color: rgba(240, 237, 230, 0.85);
-      border-color: rgba(255, 255, 255, 0.16);
-    }
-  }
-
-  &:last-child {
-    border-bottom: none;
-  }
-}
-
-// ── Module meta (left column) ──────────────────────────────────────────────────
-.moduleMeta {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding: clamp(16px, 2.5vw, 24px) var(--space-m) clamp(16px, 2.5vw, 24px) clamp(20px, 2.5vw, 28px);
-  border-right: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.moduleIndex {
-  font-family: var(--font-mono);
-  font-size: 10px;
   letter-spacing: var(--tracking-wider);
-  color: rgba(240, 237, 230, 0.25);
-}
-
-.moduleNames {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.moduleCategory {
-  font-family: var(--font-mono);
-  font-size: var(--text-label);
-  font-weight: 400;
-  letter-spacing: var(--tracking-wider);
-  color: var(--dark-primary);
-}
-
-.moduleLabel {
-  font-family: var(--font-body);
-  font-size: clamp(12px, 1.1vw, 14px);
-  color: rgba(240, 237, 230, 0.35);
-}
-
-// Thin accent bar (decorative fill, color inherited from --accent)
-.moduleBar {
-  margin-top: var(--space-xs);
-  height: 2px;
-  background-color: rgba(255, 255, 255, 0.06);
-  border-radius: 1px;
-  overflow: hidden;
-  width: 80%;
-  max-width: 120px;
-}
-
-.moduleBarFill {
-  height: 100%;
-  width: 100%;
-  background-color: var(--accent, #C89B3C);
-  opacity: 0.5;
-  transform-origin: left;
-}
-
-// ── Tech tags (right column) ───────────────────────────────────────────────────
-.tags {
-  list-style: none;
-  padding: clamp(16px, 2.5vw, 24px) var(--space-m);
-  margin: 0;
-  display: flex;
-  flex-wrap: wrap;
-  align-content: center;
-  gap: 8px;
-}
-
-.tag {
-  font-family: var(--font-mono);
-  font-size: clamp(11px, 1.1vw, 13px);
-  font-weight: 400;
-  letter-spacing: 0.03em;
-  color: rgba(240, 237, 230, 0.65);
-  background-color: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 4px 10px;
-  border-radius: 3px;
-  white-space: nowrap;
-  transition: color 180ms ease, border-color 180ms ease;
-
-  &:hover {
-    color: var(--dark-primary);
-    border-color: rgba(255, 255, 255, 0.18);
-  }
-}
-
-// ── Terminal footer ────────────────────────────────────────────────────────────
-.termFooter {
+  color: var(--grey-body);
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 12px 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.07);
-  background-color: rgba(255, 255, 255, 0.02);
+  gap: var(--space-m);
 }
 
-.termCmd {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.05em;
-  color: rgba(200, 155, 60, 0.6);
+.catSep {
+  color: rgba(204, 17, 51, 0.4);
 }
 
-.termCursor {
-  width: 6px;
-  height: 13px;
-  background-color: rgba(200, 155, 60, 0.5);
-  display: inline-block;
-  animation: blink 1s step-end infinite;
-}
-
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0; }
-}
-
-// ── Responsive ─────────────────────────────────────────────────────────────────
-@media (max-width: 768px) {
-  .module {
-    grid-template-columns: 1fr;
+// Responsive
+@media (max-width: 600px) {
+  .item {
+    font-size: clamp(20px, 6.5vw, 36px);
   }
 
-  .moduleMeta {
-    border-right: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    padding-bottom: 12px;
+  .catRow {
+    flex-wrap: wrap;
+    gap: var(--space-s);
   }
-
-  .tags {
-    padding-top: 12px;
-  }
-}
-
-@media (max-width: 480px) {
-  .termStatus { display: none; }
-  .termTitle  { text-align: left; }
 }

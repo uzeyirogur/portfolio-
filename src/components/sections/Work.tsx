@@ -65,6 +65,7 @@ export default function Work() {
   const mobileInfoRefs = useRef<(HTMLDivElement | null)[]>(Array(N).fill(null))
   const sceneRefs      = useRef<(HTMLDivElement | null)[]>(Array(N).fill(null))
   const dotRefs        = useRef<(HTMLButtonElement | null)[]>(Array(N).fill(null))
+  const titleLetterRefs = useRef<(HTMLSpanElement | null)[]>(Array(8).fill(null))
 
 
   useGSAP(() => {
@@ -73,26 +74,27 @@ export default function Work() {
     const mm = gsap.matchMedia()
 
     mm.add('(min-width: 769px)', () => {
-      const CARD_OUT   = 0.08
-      const CARD_IN    = 0.92
-      const PROJ_START = 0.20
-      const PROJ_END   = 0.80
-      const SEG        = (PROJ_END - PROJ_START) / N
+      const CARD_OUT    = 0.20
+      const CARD_IN     = 0.92
+      const PROJ_START  = 0.20
+      const PROJ_END    = 0.80
+      const SEG         = (PROJ_END - PROJ_START) / N
 
-      // Each card's lifecycle within its own segment [0..1]:
-      // [0, ENTER_END]          → rotate in from right (3D)
-      // [ENTER_END, EXIT_START] → dwell (fully visible, stationary)
-      // [EXIT_START, SHOW_END]  → rotate out to left (3D)
-      // [SHOW_END, 1]           → gap (all invisible — no overlap possible)
-      const ENTER_END  = 0.25
-      const EXIT_START = 0.62
-      const SHOW_END   = 0.88
+      const ENTER_END   = 0.25
+      const EXIT_START  = 0.62
+      const SHOW_END    = 0.88
+
+      // Letter spin constants
+      const N_L         = 8
+      const STAGGER     = 0.12   // total stagger spread across scroll
+      const SPIN        = 0.09   // each letter's spin duration in scroll units
 
       const cl = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v))
       const lp = (a: number, b: number, t: number) => a + (b - a) * cl(t, 0, 1)
 
       if (titleCardRef.current) gsap.set(titleCardRef.current, { opacity: 1 })
       if (bgTextRef.current) gsap.set(bgTextRef.current, { opacity: 0, scale: 2.4, x: 0 })
+      titleLetterRefs.current.forEach(l => { if (l) gsap.set(l, { rotationY: 0, opacity: 1 }) })
 
       cardRefs.current.forEach((card) => {
         if (!card) return
@@ -109,12 +111,48 @@ export default function Work() {
         onUpdate(self) {
           const p = self.progress
 
+          // ── Title card background ──
           if (titleCardRef.current) {
             let op = 0
-            if (p <= CARD_OUT)     op = 1 - p / CARD_OUT
+            if (p <= 0.18)       op = 1
+            else if (p <= 0.22)  op = 1 - (p - 0.18) / 0.04
             else if (p >= CARD_IN) op = (p - CARD_IN) / (1 - CARD_IN)
             titleCardRef.current.style.opacity = String(cl(op, 0, 1))
           }
+
+          // ── PROJELER letters: stagger Y-rotation ──
+          titleLetterRefs.current.forEach((letter, i) => {
+            if (!letter) return
+            let rotY: number, op: number
+
+            if (p < CARD_OUT) {
+              // Exit: letter 0 spins first, letter 7 last
+              const start = (i / N_L) * STAGGER
+              const end   = start + SPIN
+              const t     = cl((p - start) / (end - start), 0, 1)
+              rotY = t * 90
+              op   = 1 - t
+            } else if (p >= CARD_IN) {
+              // Enter: letter 7 returns first, letter 0 last (reverse stagger)
+              const ri    = N_L - 1 - i
+              const rStart = CARD_IN + (ri / N_L) * 0.06
+              const rEnd   = rStart + 0.055
+              const t      = cl((p - rStart) / (rEnd - rStart), 0, 1)
+              rotY = 90 * (1 - t)
+              op   = t
+            } else {
+              rotY = 90
+              op   = 0
+            }
+
+            gsap.to(letter, {
+              rotationY: rotY,
+              opacity:   op,
+              duration:  0.18,
+              ease:      'power2.inOut',
+              overwrite: 'auto',
+            })
+          })
 
           if (bgTextRef.current) {
             let bgOp = 0, bgSc = 1.0, bgX = 0
@@ -152,18 +190,15 @@ export default function Work() {
           cardRefs.current.forEach((card, i) => {
             if (!card) return
             const segStart = PROJ_START + i * SEG
-            const t = (p - segStart) / SEG  // 0..1 within this card's segment
+            const t = (p - segStart) / SEG
 
             let op: number, rotY: number, txPct: number, tz: number, sc: number
 
             if (t < 0) {
-              // Not yet — parked right
               op = 0; rotY = 70; txPct = 12; tz = -120; sc = 0.88
             } else if (t > 1) {
-              // Already gone — parked left
               op = 0; rotY = -70; txPct = -12; tz = -120; sc = 0.88
             } else if (t <= ENTER_END) {
-              // 3D rotate in from right
               const e = t / ENTER_END
               op    = lp(0,    1.0,  e)
               rotY  = lp(70,   0,    e)
@@ -171,10 +206,8 @@ export default function Work() {
               tz    = lp(-120, 0,    e)
               sc    = lp(0.88, 1.0,  e)
             } else if (t <= EXIT_START) {
-              // Dwell — fully visible, stationary
               op = 1; rotY = 0; txPct = 0; tz = 0; sc = 1.0
             } else if (t <= SHOW_END) {
-              // 3D rotate out to left
               const e = (t - EXIT_START) / (SHOW_END - EXIT_START)
               op    = lp(1.0,  0,    e)
               rotY  = lp(0,    -70,  e)
@@ -182,7 +215,6 @@ export default function Work() {
               tz    = lp(0,    -120, e)
               sc    = lp(1.0,  0.88, e)
             } else {
-              // Gap — all hidden, background visible before next card enters
               op = 0; rotY = -70; txPct = -12; tz = -120; sc = 0.88
             }
 
@@ -260,12 +292,13 @@ export default function Work() {
       <div ref={titleCardRef} className={styles.titleCard} aria-hidden="true">
         <div className={styles.titlePillOuter}>
           <div className={styles.titlePill}>
-            {'PROJELER'.split('').map((c, i) => <span key={i}>{c}</span>)}
+            {'PROJELER'.split('').map((c, i) => (
+              <span key={i} ref={el => { titleLetterRefs.current[i] = el }}>{c}</span>
+            ))}
           </div>
         </div>
       </div>
 
-      {/* ── Scattered screenshot cards (desktop only) ── */}
       {/* ── Project panel cards (desktop) ── */}
       <div className={styles.carouselWrap} aria-hidden="true">
         <div ref={carouselRef} className={styles.carousel}>

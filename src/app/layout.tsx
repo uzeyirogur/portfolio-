@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { siteConfig } from '@/data/site'
 import Providers from '@/components/Providers'
 import CursorGlow from '@/components/ui/CursorGlow'
+import ScrollProgress from '@/components/ScrollProgress'
 
 // Fonts via @fontsource — self-hosted, no external requests
 import '@fontsource/syne/700.css'
@@ -55,6 +56,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" suppressHydrationWarning>
       <body>
         <CursorGlow />
+        <ScrollProgress />
         <Providers>{children}</Providers>
       </body>
     </html>

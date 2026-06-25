@@ -1,86 +1,84 @@
 'use client'
 
-import { useRef, useCallback } from 'react'
+import { useRef } from 'react'
 import { useGSAP } from '@gsap/react'
-import { gsap } from '@/scripts/gsap'
+import { gsap, ScrollTrigger } from '@/scripts/gsap'
 import styles from './Statement.module.scss'
 
 const PILLARS = [
   {
     num: '01',
-    title: 'Kurumsal\nYazılım',
+    title: ['Kurumsal', 'Yazılım'],
     body: '.NET ekosisteminde sıfırdan kurumsal sistemler. Katmanlı mimari, net sorumluluk, uzun vadeli bakım.',
-    accent: '#C8960A',
+    accent: '#CC1133',
+    tag: 'BACKEND',
   },
   {
     num: '02',
-    title: 'Görünür\nÇıktı',
-    body: 'Demo değil, gerçek kullanıcılar için çalışan sistemler. Staging\'den production\'a minimum sürtünme.',
-    accent: '#CC1133',
+    title: ['Görünür', 'Çıktı'],
+    body: 'Demo değil, gerçek kullanıcılar için çalışan sistemler. Production\'a minimum sürtünme ile geçiş.',
+    accent: '#C8960A',
+    tag: 'DELIVERY',
   },
   {
     num: '03',
-    title: 'Temiz\nKod',
+    title: ['Temiz', 'Kod'],
     body: 'SOLID prensipleri, DRY yapı, test edilebilir katmanlar. Bugün yazılan kod yarın da okunabilir.',
-    accent: '#C8960A',
+    accent: '#F0EDE6',
+    tag: 'QUALITY',
   },
 ]
 
 export default function Statement() {
-  const sectionRef  = useRef<HTMLElement>(null)
-  const cardRefs    = useRef<(HTMLDivElement | null)[]>([])
+  const sectionRef    = useRef<HTMLElement>(null)
+  const panelRefs     = useRef<(HTMLDivElement | null)[]>(Array(PILLARS.length).fill(null))
+  const currentPanel  = useRef(0)
 
-  // 3D tilt on mouse move
-  const onMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>, i: number) => {
-    const card = cardRefs.current[i]
-    if (!card) return
-    const rect   = card.getBoundingClientRect()
-    const cx     = rect.left + rect.width  / 2
-    const cy     = rect.top  + rect.height / 2
-    const dx     = (e.clientX - cx) / (rect.width  / 2)   // -1 .. 1
-    const dy     = (e.clientY - cy) / (rect.height / 2)   // -1 .. 1
-    gsap.to(card, {
-      rotateY:  dx * 14,
-      rotateX: -dy * 10,
-      scale:    1.03,
-      duration: 0.35,
-      ease:     'power2.out',
-      transformPerspective: 900,
-    })
-  }, [])
-
-  const onMouseLeave = useCallback((i: number) => {
-    const card = cardRefs.current[i]
-    if (!card) return
-    gsap.to(card, {
-      rotateY: 0, rotateX: 0, scale: 1,
-      duration: 0.6, ease: 'elastic.out(1, 0.5)',
-      transformPerspective: 900,
-    })
-  }, [])
-
-  // Scroll reveal — cards fly in from 3D depth
   useGSAP(() => {
     if (!sectionRef.current) return
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
-    const cards = cardRefs.current.filter(Boolean)
+    // All panels except first start off-screen below
+    panelRefs.current.forEach((p, i) => {
+      if (!p || i === 0) return
+      gsap.set(p, { yPercent: 100 })
+    })
 
-    gsap.fromTo(cards,
-      { opacity: 0, z: -160, rotateY: 25, scale: 0.88 },
-      {
-        opacity: 1, z: 0, rotateY: 0, scale: 1,
-        duration: 0.9,
-        stagger: 0.18,
-        ease: 'power3.out',
-        transformPerspective: 900,
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top 65%',
-          once: true,
-        },
+    const showPanel = (idx: number) => {
+      if (idx === currentPanel.current) return
+      const forward  = idx > currentPanel.current
+      const entering = panelRefs.current[idx]
+      const leaving  = panelRefs.current[currentPanel.current]
+      if (!entering) return
+
+      gsap.fromTo(entering,
+        { yPercent: forward ? 100 : -15, opacity: forward ? 1 : 0 },
+        { yPercent: 0, opacity: 1, duration: 0.85, ease: 'power3.inOut' }
+      )
+      if (leaving) {
+        gsap.to(leaving, {
+          yPercent: forward ? -15 : 100,
+          opacity: forward ? 0 : 1,
+          duration: 0.85,
+          ease: 'power3.inOut',
+        })
       }
-    )
+      currentPanel.current = idx
+    }
+
+    // Section is 400vh; sticky sticks for 300vh (400-100).
+    // Each panel gets 100vh → triggers at 25% and 50% of section height.
+    ScrollTrigger.create({
+      trigger: sectionRef.current,
+      start: '25% top',
+      onEnter:     () => showPanel(1),
+      onLeaveBack: () => showPanel(0),
+    })
+    ScrollTrigger.create({
+      trigger: sectionRef.current,
+      start: '50% top',
+      onEnter:     () => showPanel(2),
+      onLeaveBack: () => showPanel(1),
+    })
   }, { scope: sectionRef })
 
   return (
@@ -91,48 +89,56 @@ export default function Statement() {
       id="about"
       aria-label="Yaklaşım"
     >
-      <div className={styles.inner}>
+      <div className={styles.sticky}>
+        {PILLARS.map((p, i) => (
+          <div
+            key={p.num}
+            ref={el => { panelRefs.current[i] = el }}
+            className={styles.panel}
+            style={{ '--accent': p.accent } as React.CSSProperties}
+          >
+            <div className={styles.panelGrid}>
 
-        <div className={styles.topRow}>
-          <span className={styles.eyebrow}>YAKLAŞIM</span>
-          <div className={styles.rule} aria-hidden="true" />
-          <span className={styles.idx}>02</span>
-        </div>
+              {/* ── Left: content ───────────────────── */}
+              <div className={styles.left}>
+                <div className={styles.topRow}>
+                  <span className={styles.eyebrow}>YAKLAŞIM</span>
+                  <div className={styles.rule} aria-hidden="true" />
+                  <span className={styles.idx}>{p.num}</span>
+                </div>
 
-        <div className={styles.grid}>
-          {PILLARS.map((p, i) => (
-            <div
-              key={p.num}
-              className={styles.cardWrap}
-            >
-              <div
-                ref={el => { cardRefs.current[i] = el }}
-                className={styles.card}
-                onMouseMove={e => onMouseMove(e, i)}
-                onMouseLeave={() => onMouseLeave(i)}
-                style={{ '--card-accent': p.accent } as React.CSSProperties}
-              >
-                {/* Glowing top edge */}
-                <div className={styles.cardGlow} aria-hidden="true" />
+                <div className={styles.content}>
+                  <span className={styles.tag}>{p.tag}</span>
 
-                <span className={styles.num}>{p.num}</span>
-                <div className={styles.divider} aria-hidden="true" />
+                  <h2 className={styles.title}>
+                    {p.title.map((line, j) => (
+                      <span key={j} className={styles.titleLine}>{line}</span>
+                    ))}
+                  </h2>
 
-                <h2 className={styles.title}>
-                  {p.title.split('\n').map((line, j) => (
-                    <span key={j} className={styles.titleLine}>{line}</span>
+                  <p className={styles.body}>{p.body}</p>
+                </div>
+
+                {/* Pillar dots nav */}
+                <div className={styles.dots} aria-hidden="true">
+                  {PILLARS.map((_, di) => (
+                    <span
+                      key={di}
+                      className={`${styles.dot} ${di === i ? styles.dotActive : ''}`}
+                    />
                   ))}
-                </h2>
-
-                <p className={styles.body}>{p.body}</p>
-
-                {/* 3D "depth" layer behind card */}
-                <div className={styles.cardShadowLayer} aria-hidden="true" />
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
 
+              {/* ── Right: huge number ──────────────── */}
+              <div className={styles.right} aria-hidden="true">
+                <span className={styles.numBig}>{p.num}</span>
+                <div className={styles.accentLine} />
+              </div>
+
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   )

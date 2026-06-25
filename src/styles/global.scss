@@ -9,6 +9,21 @@
 @use 'animations';
 
 // ---------------------------------------------------------------------------
+// Base — prevent horizontal scroll bleed from any overflowing element
+// ---------------------------------------------------------------------------
+
+html {
+  overflow-x: clip; // clip ≠ hidden — doesn't create scroll container, doesn't break position:sticky
+  background-color: #090907;
+}
+
+body {
+  overflow-x: clip;
+  background-color: #090907;
+  width: 100%;
+}
+
+// ---------------------------------------------------------------------------
 // Section register system
 // Each section declares its background register via data-theme attribute.
 // ---------------------------------------------------------------------------

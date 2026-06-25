@@ -1,63 +1,65 @@
 // =============================================================================
-// Work Section — scattered screenshots · letter grid · zoom intro
+// Work — light theme, letter-grid bg, 3D carousel with browser mockups
 // =============================================================================
 
-$crimson: #CC1133;
-$work-bg: #F5F2ED;
-$ink:     #0C0B09;
+$bg:      #F7F5F2;
+$surface: #FFFFFF;
+$border:  rgba(0, 0, 0, 0.08);
+$muted:   rgba(0, 0, 0, 0.35);
+$body:    rgba(0, 0, 0, 0.55);
+$ink:     rgba(0, 0, 0, 0.88);
 
-$card-w:  1060px;
-$card-h:  500px;
+$card-w: 1040px;
+$card-h: 520px;
 
+// ── Section ───────────────────────────────────────────────────────────────────
 .work {
   position: relative;
-  background-color: $work-bg;
-}
-
-// Clips only the letter grid — does not affect scatter cards
-.bgClip {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  z-index: 0;
-  pointer-events: none;
+  background-color: $bg;
 }
 
 // ── Background letter grid ────────────────────────────────────────────────────
+.bgClip {
+  position: absolute;
+  inset: 0;
+  overflow-x: clip;
+  overflow-y: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
 .bgText {
   position: absolute;
-  inset: -40% -10% -50% -10%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   gap: 0;
-  pointer-events: none;
-  user-select: none;
-  will-change: transform, opacity;
-  transform-origin: center center;
-  z-index: 0;
+  opacity: 0;
+  will-change: opacity, transform;
 }
 
 .bgRow {
   display: flex;
   gap: 0;
-  line-height: 1;
-  flex-shrink: 0;
+  white-space: nowrap;
 }
 
-.bgShift0 { margin-left: 0; }
-.bgShift1 { margin-left: -8%; }
-.bgShift2 { margin-left: 5%; }
-.bgShift3 { margin-left: -4%; }
+.bgShift0 { margin-left:    0px; }
+.bgShift1 { margin-left:  -80px; }
+.bgShift2 { margin-left:  -40px; }
+.bgShift3 { margin-left: -120px; }
 
 .bgWord {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(72px, 11vw, 160px);
-  letter-spacing: -0.02em;
-  color: $ink;
-  opacity: 1;
-  white-space: nowrap;
-  line-height: 0.9;
+  font-size: clamp(80px, 12vw, 160px);
+  line-height: 0.88;
+  letter-spacing: -0.04em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(0, 0, 0, 0.07);
+  user-select: none;
 }
 
 // ── Title card ────────────────────────────────────────────────────────────────
@@ -65,66 +67,242 @@ $card-h:  500px;
   position: absolute;
   inset: 0;
   z-index: 20;
-  background-color: $work-bg;
+  background-color: $bg;
   display: flex;
   align-items: center;
   justify-content: center;
   pointer-events: none;
   will-change: opacity;
-  overflow: hidden;
-
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
-    background-size: 80px 80px;
-  }
 }
 
 .titlePillOuter {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  will-change: transform;
-  transform-origin: center center;
-
-  &::before {
-    content: '';
-    position: absolute;
-    inset: -26px -28px;
-    border: 1px solid rgba(12, 11, 9, 0.2);
-    border-radius: 999px;
-    pointer-events: none;
-  }
+  padding: 8px;
+  border: 1px solid $border;
+  border-radius: 4px;
 }
 
 .titlePill {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  background-color: $ink;
-  border-radius: 999px;
-  width: 104px;
-  padding: 52px 0;
+  gap: clamp(8px, 2vw, 24px);
+  padding: clamp(20px, 3vw, 40px) clamp(32px, 5vw, 72px);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  perspective: 900px;
 
   span {
     font-family: var(--font-display);
     font-weight: 800;
-    font-size: 24px;
-    letter-spacing: 0.1em;
-    color: $work-bg;
-    line-height: 1;
+    font-size: clamp(60px, 10vw, 140px);
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    color: transparent;
+    -webkit-text-stroke: 1.5px rgba(0, 0, 0, 0.75);
+    display: inline-block;
+    will-change: transform, opacity;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
   }
 }
 
-// ── Inner container ───────────────────────────────────────────────────────────
+// ── Carousel (desktop) ────────────────────────────────────────────────────────
+.carouselWrap {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  perspective: 1100px;
+  perspective-origin: 50% 50%;
+
+  @media (max-width: 768px) { display: none; }
+}
+
+.carousel {
+  position: relative;
+  width: min($card-w, 90vw);
+  height: clamp(340px, 52vh, $card-h);
+  transform-style: preserve-3d;
+}
+
+.carouselCard {
+  position: absolute;
+  inset: 0;
+  will-change: opacity, transform;
+  opacity: 0;
+  transform-style: preserve-3d;
+  pointer-events: auto;
+}
+
+// ── Project panel ─────────────────────────────────────────────────────────────
+.projectPanel {
+  display: grid;
+  grid-template-columns: 36% 64%;
+  height: 100%;
+  background: $surface;
+  border: 1px solid rgba(0, 0, 0, 0.10);
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.06),
+    0 24px 60px rgba(0, 0, 0, 0.12),
+    0 60px 120px rgba(0, 0, 0, 0.08);
+}
+
+// ── Left: info column ─────────────────────────────────────────────────────────
+.panelInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: clamp(28px, 3.5vw, 48px);
+  border-right: 1px solid $border;
+  justify-content: center;
+}
+
+.panelMeta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  color: $muted;
+}
+
+.panelRule {
+  width: 32px;
+  height: 2px;
+  background: var(--project-accent, #CC1133);
+  border: none;
+  flex-shrink: 0;
+}
+
+.panelTitle {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(22px, 2.4vw, 38px);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  color: $ink;
+  margin: 0;
+}
+
+.panelDesc {
+  font-family: var(--font-body);
+  font-size: clamp(12px, 1vw, 14px);
+  line-height: 1.75;
+  color: $body;
+  margin: 0;
+}
+
+.panelStack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.panelTag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--project-accent, #CC1133);
+  border: 1px solid var(--project-accent, #CC1133);
+  padding: 4px 10px;
+  opacity: 0.75;
+}
+
+.panelLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: $muted;
+  text-decoration: none;
+  border-bottom: 1px solid $border;
+  padding-bottom: 2px;
+  width: fit-content;
+  margin-top: 4px;
+  transition: color 200ms ease, border-color 200ms ease;
+
+  &:hover {
+    color: var(--project-accent, #CC1133);
+    border-color: var(--project-accent, #CC1133);
+  }
+}
+
+// ── Right: browser mockup ─────────────────────────────────────────────────────
+.panelScreen {
+  position: relative;
+  overflow: hidden;
+  background: #E8E4DF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.browser {
+  width: 100%;
+  height: 100%;
+  border-radius: 6px 6px 4px 4px;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px rgba(0,0,0,0.10),
+    0 8px 24px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+}
+
+.browserChrome {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+  height: 32px;
+  background: #E2DDD8;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+
+  // per-project accent top border
+  border-top: 2px solid var(--project-accent, #CC1133);
+}
+
+.browserDots {
+  display: flex;
+  gap: 5px;
+  flex-shrink: 0;
+
+  span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.15);
+  }
+}
+
+.browserUrl {
+  flex: 1;
+  height: 16px;
+  background: rgba(0,0,0,0.08);
+  border-radius: 3px;
+  margin: 0 8px;
+}
+
+.browserScreen {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.screenshot {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top left;
+  display: block;
+}
+
+// ── Inner layout ──────────────────────────────────────────────────────────────
 .inner {
   position: relative;
   z-index: 1;
@@ -149,19 +327,18 @@ $card-h:  500px;
 .headerLabel {
   font-family: var(--font-mono);
   font-size: var(--text-label);
-  font-weight: 400;
   letter-spacing: var(--tracking-wider);
-  color: rgba(12, 11, 9, 0.45);
+  color: $muted;
 }
 
 .counter {
   font-family: var(--font-mono);
   font-size: var(--text-label);
-  font-weight: 400;
   letter-spacing: var(--tracking-wide);
-  color: rgba(12, 11, 9, 0.35);
+  color: $muted;
 }
 
+// ── Stage (mobile scenes) ─────────────────────────────────────────────────────
 .stage {
   position: relative;
   flex: 1;
@@ -173,271 +350,58 @@ $card-h:  500px;
   inset: 0;
 }
 
-// ── Project panel card (desktop) — info left + screenshot right ──────────────
-.projectPanel {
-  display: flex;
-  align-items: stretch;
-  height: 100%;
-  gap: 0;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow:
-    0 48px 110px rgba($ink, 0.24),
-    0 14px 36px rgba($ink, 0.14);
-}
-
-.panelInfo {
-  width: clamp(200px, 22vw, 290px);
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 12px;
-  padding: 32px 28px;
-  background-color: $ink;
-  overflow: hidden;
-}
-
-.panelMeta {
-  font-family: var(--font-mono);
-  font-size: var(--text-label);
-  letter-spacing: var(--tracking-wide);
-  color: rgba($work-bg, 0.40);
-}
-
-.panelRule {
-  height: 3px;
-  background-color: var(--project-accent, #{$crimson});
-  border: none;
-  flex-shrink: 0;
-  width: 100%;
-}
-
-.panelTitle {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(15px, 1.6vw, 24px);
-  line-height: 1.15;
-  letter-spacing: var(--tracking-tight);
-  color: $work-bg;
-  word-break: keep-all;
-  overflow-wrap: normal;
-  hyphens: none;
-}
-
-.panelDesc {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: clamp(11px, 0.95vw, 13px);
-  line-height: 1.6;
-  color: rgba($work-bg, 0.58);
-}
-
-.panelStack {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-}
-
-.panelTag {
-  font-family: var(--font-mono);
-  font-size: var(--text-mono);
-  color: var(--project-accent, #{$crimson});
-  border: 1px solid var(--project-accent, #{$crimson});
-  padding: 3px 8px;
-  border-radius: 2px;
-  opacity: 0.85;
-  white-space: nowrap;
-}
-
-.panelLink {
-  font-family: var(--font-mono);
-  font-size: var(--text-label);
-  color: rgba($work-bg, 0.50);
-  text-decoration: none;
-  border-bottom: 1px solid rgba($work-bg, 0.18);
-  padding-bottom: 2px;
-  width: fit-content;
-  display: inline-flex;
-  align-items: center;
-  transition: color 200ms ease, border-color 200ms ease;
-
-  &:hover {
-    color: var(--project-accent, #{$crimson});
-    border-color: var(--project-accent, #{$crimson});
-  }
-}
-
-.panelScreen {
-  flex: 1;
-  min-width: 0;
-  overflow: hidden;
-
-  .browser {
-    height: 100%;
-    border-radius: 0;
-    box-shadow: none;
-    border-top: 3px solid var(--project-accent, #{$crimson});
-    display: flex;
-    flex-direction: column;
-  }
-
-  .browserScreen {
-    flex: 1;
-    overflow: hidden;
-    line-height: 0;
-  }
-
-  .screenshot {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: top left;
-  }
-}
-
-// ── Carousel wrap ─────────────────────────────────────────────────────────────
-.carouselWrap {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
-  perspective: 900px;
-  perspective-origin: 50% 50%;
-
-  @media (max-width: 768px) { display: none; }
-}
-
-.carousel {
-  position: relative;
-  width: min($card-w, 88vw);
-  height: clamp(320px, 48vh, $card-h);
-  transform-style: preserve-3d;
-}
-
-.carouselCard {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  will-change: opacity, transform;
-  opacity: 0;
-  transform-style: preserve-3d;
-}
-
-// Raw screenshot card (no browser chrome)
-.card {
-  width: 100%;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow:
-    0 48px 120px rgba(12, 11, 9, 0.20),
-    0 16px 44px rgba(12, 11, 9, 0.12),
-    0 4px 12px rgba(12, 11, 9, 0.06);
-  border-top: 3px solid var(--project-accent, #{$crimson});
-}
-
-.screenshot {
-  display: block;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  object-position: top left;
-}
-
-.cardCaption {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8px 14px 10px;
-  background-color: $work-bg;
-}
-
-.captionIdx {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  color: rgba(12, 11, 9, 0.30);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
-.captionTitle {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  font-weight: 400;
-  letter-spacing: 0.10em;
-  color: rgba(12, 11, 9, 0.55);
-  text-transform: uppercase;
-}
-
-// ── Info layer (desktop) — above carousel cards ───────────────────────────────
-.infoLayer {
-  position: absolute;
-  inset: 0;
-  z-index: 10;
-  pointer-events: none;
-  max-width: var(--max-width);
-  width: 100%;
-  margin-inline: auto;
-
-  @media (max-width: 768px) { display: none; }
-}
-
-// ── Project info panel ────────────────────────────────────────────────────────
-.info {
-  position: absolute;
-  left: var(--content-pad);
-  bottom: 12%;
-  width: 36%;
-  display: flex;
-  flex-direction: column;
+// ── Mobile poster ─────────────────────────────────────────────────────────────
+.posterMobile {
   opacity: 0;
   will-change: opacity, transform;
-  pointer-events: auto;
+  overflow: hidden;
+  border-radius: 4px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.10);
+
+  @media (min-width: 769px) { display: none; }
 }
 
-.details { will-change: opacity, transform; }
+// ── Mobile info ───────────────────────────────────────────────────────────────
+.mobileInfo {
+  opacity: 0;
+  will-change: opacity, transform;
+  display: flex;
+  flex-direction: column;
+  padding-top: var(--space-m);
 
-.projectMeta {
-  font-family: var(--font-mono);
-  font-size: var(--text-label);
-  font-weight: 400;
-  letter-spacing: var(--tracking-wide);
-  color: rgba(12, 11, 9, 0.42);
-  margin-bottom: var(--space-s);
+  @media (min-width: 769px) { display: none; }
 }
 
 .rule {
-  width: 100%;
-  height: 3px;
-  background-color: var(--project-accent, #{$crimson});
-  transform-origin: left center;
-  margin-bottom: var(--space-m);
-  will-change: transform;
+  width: 32px;
+  height: 2px;
+  background: var(--project-accent, #CC1133);
+  margin-block: var(--space-s);
 }
 
 .title {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(44px, 5.5vw, 84px);
+  font-size: clamp(32px, 9vw, 52px);
   line-height: var(--leading-tight);
   letter-spacing: var(--tracking-tight);
   color: $ink;
   margin: 0 0 var(--space-s);
-  will-change: opacity, transform;
+}
+
+.projectMeta {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: var(--tracking-wide);
+  color: $muted;
+  margin-bottom: var(--space-s);
 }
 
 .subtitle {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: clamp(15px, 1.4vw, 20px);
+  font-family: var(--font-body);
+  font-size: clamp(13px, 1.3vw, 16px);
   line-height: var(--leading-snug);
-  color: rgba(12, 11, 9, 0.6);
+  color: $body;
   margin-bottom: var(--space-m);
 }
 
@@ -451,102 +415,28 @@ $card-h:  500px;
 .tag {
   font-family: var(--font-mono);
   font-size: var(--text-mono);
-  font-weight: 400;
   letter-spacing: var(--tracking-wide);
-  color: var(--project-accent, #{$crimson});
-  border: 1px solid var(--project-accent, #{$crimson});
+  color: var(--project-accent, #CC1133);
+  border: 1px solid var(--project-accent, #CC1133);
   padding: 4px 10px;
-  border-radius: 2px;
-  opacity: 0.85;
-  white-space: nowrap;
+  opacity: 0.8;
 }
 
 .link {
   font-family: var(--font-mono);
   font-size: var(--text-label);
-  font-weight: 400;
   letter-spacing: var(--tracking-wide);
-  color: rgba(12, 11, 9, 0.55);
+  color: $muted;
   text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding-block: 2px;
-  border-bottom: 1px solid rgba(12, 11, 9, 0.15);
-  transition: color 220ms ease, border-color 220ms ease;
+  border-bottom: 1px solid $border;
+  padding-bottom: 2px;
   width: fit-content;
+  transition: color 200ms ease, border-color 200ms ease;
 
   &:hover {
-    color: var(--project-accent, #{$crimson});
-    border-color: var(--project-accent, #{$crimson});
+    color: var(--project-accent, #CC1133);
+    border-color: var(--project-accent, #CC1133);
   }
-}
-
-// ── Mobile-only browser mockup (inside scene) ─────────────────────────────────
-.posterMobile {
-  position: static;
-  width: auto;
-  opacity: 0;
-  will-change: transform, opacity;
-
-  .browser { max-width: 100%; }
-
-  @media (min-width: 769px) { display: none; }
-}
-
-.browser {
-  width: 100%;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow:
-    0 24px 60px rgba(12, 11, 9, 0.16),
-    0 6px 18px rgba(12, 11, 9, 0.07);
-  border-top: 3px solid var(--project-accent, #{$crimson});
-  background-color: #DDD9D2;
-}
-
-.browserChrome {
-  background-color: #DDD9D2;
-  padding: 10px 14px 8px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  border-bottom: 1px solid rgba(12, 11, 9, 0.08);
-}
-
-.browserDots {
-  display: flex;
-  gap: 6px;
-  flex-shrink: 0;
-
-  span {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: rgba(12, 11, 9, 0.2);
-  }
-}
-
-.browserUrl {
-  flex: 1;
-  height: 20px;
-  background-color: rgba(12, 11, 9, 0.08);
-  border-radius: 3px;
-}
-
-.browserScreen {
-  background-color: $work-bg;
-  line-height: 0;
-}
-
-// ── Mobile info (inside scene) ────────────────────────────────────────────────
-.mobileInfo {
-  opacity: 0;
-  will-change: opacity, transform;
-  display: flex;
-  flex-direction: column;
-
-  @media (min-width: 769px) { display: none; }
 }
 
 // ── Dot navigation ────────────────────────────────────────────────────────────
@@ -559,10 +449,10 @@ $card-h:  500px;
 }
 
 .dot {
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
-  border: 1px solid rgba(12, 11, 9, 0.25);
+  border: 1px solid rgba(0, 0, 0, 0.22);
   background-color: transparent;
   cursor: pointer;
   padding: 0;
@@ -570,17 +460,17 @@ $card-h:  500px;
   transition: background-color 240ms ease, border-color 240ms ease, transform 240ms ease;
 
   &[data-active='true'] {
-    background-color: $ink;
-    border-color: $ink;
+    background-color: rgba(0, 0, 0, 0.75);
+    border-color: rgba(0, 0, 0, 0.75);
     transform: scale(1.5);
   }
 
   &:hover:not([data-active='true']) {
-    border-color: rgba(12, 11, 9, 0.5);
+    border-color: rgba(0, 0, 0, 0.45);
   }
 
   &:focus-visible {
-    outline: 1px solid $ink;
+    outline: 1px solid rgba(0, 0, 0, 0.5);
     outline-offset: 3px;
   }
 }
@@ -606,31 +496,22 @@ $card-h:  500px;
     gap: var(--space-m);
     padding-block: var(--space-xl) var(--space-l);
 
-    &:first-child { padding-top: var(--space-m); }
-
     &:not(:last-child)::after {
       content: '';
       display: block;
       width: 100%;
       height: 1px;
-      background-color: rgba(12, 11, 9, 0.08);
+      background-color: $border;
       margin-top: var(--space-l);
     }
   }
 
   .posterMobile { order: 1; opacity: 1; }
   .mobileInfo   { order: 2; opacity: 1; }
-
-  .title { font-size: clamp(40px, 11vw, 60px); }
-  .bgWord { font-size: clamp(100px, 24vw, 160px); }
   .counter, .nav { display: none; }
 }
 
-@media (max-width: 480px) {
-  .title { font-size: clamp(32px, 10vw, 48px); }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .mobileInfo { opacity: 1; }
+  .mobileInfo   { opacity: 1; }
   .posterMobile { opacity: 1; }
 }
